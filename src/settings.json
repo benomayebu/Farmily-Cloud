@@ -1,0 +1,25 @@
+{
+    // Exclude files from watching
+    "files": {
+      "watcherExclude": {
+        // Ignore Git objects
+        "**/.git/objects/**": true,
+        // Ignore subtree cache
+        "**/.git/subtree-cache/**": true,
+        // Ignore node_modules folders
+        "**/node_modules/*/**": true
+      }
+    },
+    // Configure live server
+    "liveServer": {
+      "settings": {
+        // Set root to public folder
+        "root": "public"
+      }
+    },
+    // Configure code actions
+    "editor.codeActionsOnSave": {
+      // Fix all ESLint errors on save
+      "source.fixAll.eslint": true
+    }
+  }
