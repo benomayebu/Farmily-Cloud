@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="foodTraceabilityApp">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Farmer Dashboard - Farmily</title>
+  <link rel="icon" href="/public/favicon.ico" type="image/x-icon">
+  <link rel="stylesheet" href="/public/css/dashboard.css">
+  
+  <!-- AngularJS and Web3.js scripts -->
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular-route.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/web3@1.5.2/dist/web3.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrious/4.0.2/qrious.min.js"></script>
+<!-- QR Code library -->
+<script src="https://cdn.jsdelivr.net/npm/qrcode@1.4.4/build/qrcode.min.js"></script>
+  
+  
+  <!-- Font Awesome for icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+  
+  <!-- Application scripts -->
+  <script src="/public/js/farmerApp.js"></script>
+  <script src="/public/js/farmer-service.js"></script>
+  <script src="/public/js/farmer-controller.js"></script>
+  <script src="/public/js/Web3Service.js"></script>
+</head>
+<body ng-controller="FarmerController" ng-class="{'dark-mode': theme === 'dark'}">
+  <header>
+    <h1>Farmily - Farmer Dashboard</h1>
+    <nav>
+      <ul>
+        <li><a href="#/products" ng-click="setActiveTab('products')" ng-class="{'active': activeTab === 'products'}">Products</a></li>
+        <li><a href="#/insights" ng-click="setActiveTab('insights')" ng-class="{'active': activeTab === 'insights'}">Insights</a></li>
+        <li><a href="#/history" ng-click="setActiveTab('history')" ng-class="{'active': activeTab === 'history'}">History</a></li>
+        <li><a href="#/transfers" ng-click="setActiveTab('transfers')" ng-class="{'active': activeTab === 'transfers'}">Transfers</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <!-- Blockchain Status -->
+    <wallet-status></wallet-status>
+
+    <!-- Main content area -->
+    <div ng-view></div>
+
+    <!-- Success and Error Messages -->
+    <message-display></message-display>
+  </main>
+
+  <footer>
+    <p>&copy; 2024 Farmily. All rights reserved.</p>
+    <user-controls></user-controls>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Food Traceability Platform</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 20px;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .nav-tabs {
+            border-bottom: 1px solid #ddd;
+        }
+        .nav-tabs .nav-item {
+            margin-bottom: -1px;
+        }
+        .nav-tabs .nav-link {
+            border: 1px solid #ddd;
+            border-radius: 5px 5px 0 0;
+            padding: 10px 20px;
+        }
+        .nav-tabs .nav-link.active {
+            background-color: #fff;
+            border-color: #ddd #ddd #fff;
+        }
+        .tab-content {
+            padding: 20px;
+        }
+        .tab-content .tab-pane {
+            padding: 20px;
+        }
+        .form-control {
+            border-radius: 5px;
+        }
+        .btn {
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Food Traceability Platform</h1>
+        <ul class="nav nav-tabs" id="myTab" role="tablist">
+            <li class="nav-item" role="presentation">
+                <a class="nav-link active" id="farmer-tab" data-toggle="tab" href="#farmer" role="tab" aria-controls="farmer" aria-selected="true">Farmer</a>
+            </li>
+            <li class="nav-item" role="presentation">
+                <a class="nav-link" id="distributor-tab" data-toggle="tab" href="#distributor" role="tab" aria-controls="distributor" aria-selected="false">Distributor</a>
+            </li>
+            <li class="nav-item" role="presentation">
+                <a class="nav-link" id="retailer-tab" data-toggle="tab" href="#retailer" role="tab" aria-controls="retailer" aria-selected="false">Retailer</a>
+            </li>
+            <li class="nav-item" role="presentation">
+                <a class="nav-link" id="consumer-tab" data-toggle="tab" href="#consumer" role="tab" aria-controls="consumer" aria-selected="false">Consumer</a>
+            </li>
+        </ul>
+        <div class="tab-content" id="myTabContent">
+            <div class="tab-pane fade show active" id="farmer" role="tabpanel" aria-labelledby="farmer-tab">
+                <h2>Farmer Dashboard</h2>
+                <form>
+                    <div class="form-group">
+                        <label for="product-name">Product Name:</label>
+                        <input type="text" class="form-control" id="product-name" placeholder="Enter product name">
+                    </div>
+                    <div class="form-group">
+                        <label for="product-type">Product Type:</label>
+                        <select class="form-control" id="product-type">
+                            <option value="">Select product type</option>
+                            <option value="organic">Organic</option>
+                            <option value="fair-trade">Fair Trade</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="production-date">Production Date:</label>
+                        <input type="date" class="form-control" id="production-date" placeholder="Enter production date">
+                    </div>
+                    <div class="form-group">
+                        <label for="batch-number">Batch Number:</label>
+                        <input type="text" class="form-control" id="batch-number" placeholder="Enter batch number">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Register Product</button>
+                </form>
+                <h2>Update Production Status</h2>
+                <form>
+                    <div class="form-group">
+                        <label for="production-status">Production Status:</label>
+                        <select class="form-control" id="production-status">
+                            <option value="">Select production status</option>
+                            <option value="planting">Planting</option>
+                            <option value="harvesting">Harvesting</option>
+                            <option value="processing">Processing</option>
+                            <option value="packaging">Packaging</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Update Status</button>
+                </form>
+                <h2>Transfer of Ownership</h2>
+                <form>
+                    <div class="form-group">
+                        <label for="new-owner">New Owner:</label>
+                        <input type="text" class="form-control" id="new-owner" placeholder="Enter new owner's address">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Transfer Ownership</button>
+                </form>
+                <h2>Transaction History</h2>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Product</th>
+                            <th>Transaction Type</th>
+                            <th>Date</th>
+                            <th>Owner</th>
+                        </tr>
+                    </thead>
+                    <tbody id="transaction-history">
+                        <!-- transaction history will be displayed here -->
+                    </tbody>
+                </table>
+            </div>
+            <div class="tab-pane fade" id="distributor" role="tabpanel" aria-labelledby="distributor-tab">
+                <h2>Distributor Dashboard</h2>
+                <!-- distributor dashboard content -->
+            </div>
+            <div class="tab-pane fade" id="retailer" role="tabpanel" aria-labelledby="retailer-tab">
+                <h2>Retailer Dashboard</h2>
+                <!-- retailer dashboard content -->
+            </div>
+            <div class="tab-pane fade" id="consumer" role="tabpanel" aria-labelledby="consumer-tab">
+                <h2>Consumer Dashboard</h2>
+                <form>
+                    <div class="form-group">
+                        <label for="product-search">Search for Products:</label>
+                        <input type="text" class="form-control" id="product-search" placeholder="Enter product name or batch number">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Search</button>
+                </form>
+                <h2>Product History</h2>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Product</th>
+                            <th>Origin</th>
+                            <th>Production Date</th>
+                            <th>Batch Number</th>
+                        </tr>
+                    </thead>
+                    <tbody id="product-history">
+                        <!-- product history will be displayed here -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script>
+        // JavaScript code will go here
+        // For example, you can use Web3.js to interact with the Ethereum blockchain
+        // and update the UI accordingly
+    </script>
+</body>
+</html>
