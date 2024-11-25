@@ -14,7 +14,7 @@ const app = Vue.createApp({
       this.isLoading = true;
       this.errorMessage = '';
       try {
-        const response = await fetch('http://localhost:3000/api/login', {
+        const response = await fetch('/api/login', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
@@ -48,19 +48,19 @@ const app = Vue.createApp({
     redirectUser(userType) {
       switch(userType.toLowerCase()) {
         case 'farmer':
-          window.location.href = '/public/farmer-dashboard.html';
+          window.location.href = '/farmer-dashboard.html';
           break;
         case 'distributor':
-          window.location.href = '/public/distributor-dashboard.html';
+          window.location.href = '/distributor-dashboard.html';
           break;
         case 'retailer':
-          window.location.href = '/public/retailer-dashboard.html';
+          window.location.href = '/retailer-dashboard.html';
           break;
         case 'consumer':
-          window.location.href = '/public/consumer-dashboard.html';
+          window.location.href = '/consumer-dashboard.html';
           break;
         default:
-          window.location.href = '/public/dashboard.html';
+          window.location.href = '/dashboard.html';
       }
     }
   },
