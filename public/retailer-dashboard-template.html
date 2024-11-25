@@ -193,113 +193,66 @@
   </div>
 
   <!-- Notifications Section -->
-<div class="notifications-container" ng-if="notifications.length > 0">
-  <h3>Notifications</h3>
-  <ul class="notification-list">
-    <li ng-repeat="notification in notifications | orderBy:'-timestamp'" class="notification-item">
-      <span class="notification-message">{{notification.message}}</span>
-      <span class="notification-timestamp">{{notification.timestamp | date:'medium'}}</span>
-      <button ng-click="dismissNotification($index)" class="dismiss-btn">Dismiss</button>
-    </li>
-  </ul>
-</div>
+  <div class="notifications" ng-if="notifications.length > 0">
+    <h3>Notifications</h3>
+    <ul>
+      <li ng-repeat="notification in notifications">
+        {{notification.message}}
+        <button ng-click="dismissNotification($index)">Dismiss</button>
+      </li>
+    </ul>
+  </div>
 
   <!-- Product Details Modal -->
-<div class="modal" id="productDetailsModal" ng-if="selectedProduct">
-  <div class="modal-content">
-    <span class="close" ng-click="closeProductDetails()">&times;</span>
-    <h3>Product Details</h3>
-    
-    <!-- Basic Product Information -->
-    <div class="product-info">
-      <h4>Basic Information</h4>
-      <p><strong>Type:</strong> {{selectedProduct.type || 'N/A'}}</p>
-      <p><strong>Batch Number:</strong> {{selectedProduct.batchNumber || 'N/A'}}</p>
-      <p><strong>Quantity:</strong> {{selectedProduct.quantity || 'N/A'}}</p>
-      <p><strong>Status:</strong> {{selectedProduct.status || 'N/A'}}</p>
-      <p><strong>Price:</strong> {{selectedProduct.price || 'N/A'}} ETH</p>
+  <div class="modal" id="productDetailsModal" ng-if="selectedProduct">
+    <div class="modal-content">
+      <span class="close" ng-click="closeProductDetails()">&times;</span>
+      <h3>Product Details</h3>
+      <div class="product-info">
+        <p><strong>Type:</strong> {{selectedProduct.type}}</p>
+        <p><strong>Batch Number:</strong> {{selectedProduct.batchNumber}}</p>
+        <p><strong>Quantity:</strong> {{selectedProduct.quantity}}</p>
+        <p><strong>Status:</strong> {{selectedProduct.status}}</p>
+        <p><strong>Storage Conditions:</strong> {{selectedProduct.storageConditions || 'N/A'}}</p>
+        <p><strong>Retail Price:</strong> {{selectedProduct.retailPrice || 'N/A'}}</p>
+        <p><strong>Shelf Life:</strong> {{selectedProduct.shelfLife || 'N/A'}} days</p>
+        <p><strong>Display Location:</strong> {{selectedProduct.displayLocation || 'N/A'}}</p>
+        <h4>Original Producer Information</h4>
+        <p><strong>Name:</strong> {{selectedProduct.originalOwner.username}}</p>
+        <p><strong>Location:</strong> {{selectedProduct.originalOwner.location}}</p>
+      </div>
       
-      <!-- Storage and Handling Information -->
-      <h4>Storage and Handling</h4>
-      <p><strong>Storage Conditions:</strong> {{selectedProduct.storageConditions || 'N/A'}}</p>
-      <p><strong>Retail Price:</strong> {{selectedProduct.retailPrice || 'N/A'}}</p>
-      <p><strong>Shelf Life:</strong> {{selectedProduct.shelfLife || 'N/A'}} days</p>
-      <p><strong>Display Location:</strong> {{selectedProduct.displayLocation || 'N/A'}}</p>
+      <!-- Real-Time Tracking and Traceability buttons -->
+      <div class="product-actions">
+        <button class="btn btn-info" ng-click="openRealTimeTracking()">
+          Open Real-Time Tracking
+        </button>
+        <button class="btn btn-info" ng-click="showTraceability()">
+          Show Traceability
+        </button>
+      </div>
       
-      <!-- Blockchain Information -->
-      <h4>Blockchain Details</h4>
-      <p><strong>Blockchain ID:</strong> {{selectedProduct.blockchainId || 'N/A'}}</p>
-      <p><strong>Blockchain Status:</strong> {{selectedProduct.blockchainStatus || 'N/A'}}</p>
-      
-      <!-- Transportation Information -->
-      <h4>Transportation Details</h4>
-      <p><strong>Transportation Mode:</strong> {{selectedProduct.transportationMode || 'N/A'}}</p>
-      <p><strong>Transportation Details:</strong> {{selectedProduct.transportationDetails || 'N/A'}}</p>
-      <p><strong>Estimated Delivery Date:</strong> {{selectedProduct.estimatedDeliveryDate | date:'medium' || 'N/A'}}</p>
-      
-      <!-- Product Certifications -->
-      <h4>Certifications</h4>
-      <p><strong>Certifications:</strong> {{selectedProduct.certifications.join(', ') || 'None'}}</p>
-      
-      <!-- Stakeholder Information -->
-      <h4>Stakeholder Information</h4>
-      
-      <!-- Farmer Information -->
-      <h5>Farmer</h5>
-      <p><strong>Name:</strong> {{selectedProduct.farmer.username || 'N/A'}}</p>
-      <p><strong>Location:</strong> {{selectedProduct.farmer.location || 'N/A'}}</p>
-      
-      <!-- Distributor Information -->
-      <h5>Distributor</h5>
-      <p><strong>Name:</strong> {{selectedProduct.distributor.username || 'N/A'}}</p>
-      <p><strong>Location:</strong> {{selectedProduct.distributor.location || 'N/A'}}</p>
-      
-      <!-- Retailer (Current Owner) Information -->
-      <h5>Retailer (Current Owner)</h5>
-      <p><strong>Name:</strong> {{selectedProduct.currentOwner.username || 'N/A'}}</p>
-      <p><strong>Location:</strong> {{selectedProduct.currentOwner.location || 'N/A'}}</p>
-    </div>
-      
-    <!-- Product Actions -->
-    <div class="product-actions">
-      <!-- Button to open real-time tracking -->
-      <button class="btn btn-info" ng-click="openRealTimeTracking()">
-        Open Real-Time Tracking
-      </button>
-      <!-- Button to show traceability information -->
-      <button class="btn btn-info" ng-click="showTraceability()">
-        Show Traceability
-      </button>
-    </div>
-      
-    <!-- QR Code Section -->
-    <div class="qr-code-section">
-      <h4>Product QR Code</h4>
-      <!-- Button to generate or regenerate QR code -->
-      <button class="btn btn-secondary" ng-click="generateQRCode(selectedProduct)" ng-disabled="isGeneratingQR">
-        {{showQRCode ? 'Regenerate QR Code' : 'Generate QR Code'}}
-      </button>
-      <!-- QR Code display area -->
-      <div ng-if="showQRCode" class="qr-code-display">
-        <img ng-src="{{qrCodeUrl}}" alt="Product QR Code" ng-if="qrCodeUrl">
-        <p ng-if="isGeneratingQR">Generating QR Code...</p>
-        <p class="error-message" ng-if="qrCodeError">{{qrCodeError}}</p>
+      <div class="qr-code-section">
+        <h4>Product QR Code</h4>
+        <button class="btn btn-secondary" ng-click="generateQRCode(selectedProduct)" ng-disabled="isGeneratingQR">
+          {{showQRCode ? 'Regenerate QR Code' : 'Generate QR Code'}}
+        </button>
+        <div ng-if="showQRCode" class="qr-code-display">
+          <img ng-src="{{qrCodeUrl}}" alt="Product QR Code" ng-if="qrCodeUrl">
+          <p ng-if="isGeneratingQR">Generating QR Code...</p>
+          <p class="error-message" ng-if="qrCodeError">{{qrCodeError}}</p>
+        </div>
+      </div>
+      <div class="blockchain-sync-status">
+        <span ng-class="{'synced': selectedProduct.isSynced, 'out-of-sync': !selectedProduct.isSynced}">
+          {{selectedProduct.isSynced ? 'Synced with Blockchain' : 'Out of Sync'}}
+        </span>
+        <button ng-click="syncProductWithBlockchain(selectedProduct._id)" ng-disabled="selectedProduct.isSynced">
+          Sync Now
+        </button>
       </div>
     </div>
-    
-    <!-- Blockchain Sync Status -->
-    <div class="blockchain-sync-status">
-      <!-- Display sync status -->
-      <span ng-class="{'synced': selectedProduct.isSynced, 'out-of-sync': !selectedProduct.isSynced}">
-        {{selectedProduct.isSynced ? 'Synced with Blockchain' : 'Out of Sync'}}
-      </span>
-      <!-- Button to sync product with blockchain -->
-      <button ng-click="syncProductWithBlockchain(selectedProduct._id)" ng-disabled="selectedProduct.isSynced">
-        Sync Now
-      </button>
-    </div>
   </div>
-</div>
 
   <!-- Update Product Form Modal -->
   <div class="modal" id="updateProductModal" ng-if="showUpdateProductForm">

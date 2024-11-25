@@ -1,301 +1,239 @@
 <!-- consumer-dashboard-template.html -->
-<!-- This template represents the main dashboard view for consumers in the food traceability platform -->
-
-<div class="consumer-dashboard">
-  <!-- Header section with wallet status -->
-  <header class="dashboard-header">
-    <h1>Consumer Dashboard</h1>
-    <div class="wallet-status">
-      <h2>Wallet Status</h2>
-      <!-- Display wallet connection status -->
-      <p>Status: <span ng-class="{'connected': isWalletConnected, 'disconnected': !isWalletConnected}">
-        {{isWalletConnected ? 'Connected' : 'Disconnected'}}
-      </span></p>
-      <!-- Display wallet address and balance if connected -->
-      <p ng-if="isWalletConnected">Address: {{walletAddress | limitTo:10}}...</p>
-      <p ng-if="isWalletConnected">Balance: {{walletBalance}} ETH</p>
-      <!-- Button to connect wallet if not connected -->
-      <button class="btn btn-primary" ng-if="!isWalletConnected" ng-click="connectWallet()">
-        {{isConnecting ? 'Connecting...' : 'Connect Wallet'}}
-      </button>
-      <!-- Button to disconnect wallet if connected -->
-      <button class="btn btn-secondary" ng-if="isWalletConnected" ng-click="disconnectWallet()">Disconnect Wallet</button>
-    </div>
-  </header>
-
-  <!-- Main navigation for different dashboard sections -->
-  <nav class="dashboard-nav">
-    <ul class="nav-tabs">
-      <li ng-class="{'active': activeTab === 'my-products'}">
-        <a href ng-click="setActiveTab('my-products')">My Products</a>
-      </li>
-      <li ng-class="{'active': activeTab === 'transfers'}">
-        <a href ng-click="setActiveTab('transfers')">Pending Transfers</a>
-      </li>
-      <li ng-class="{'active': activeTab === 'scan-product'}">
-        <a href ng-click="setActiveTab('scan-product')">Scan Product</a>
-      </li>
-      <li ng-class="{'active': activeTab === 'product-history'}">
-        <a href ng-click="setActiveTab('product-history')">Product History</a>
-      </li>
-    </ul>
-  </nav>
-
-  <!-- Main content area based on selected tab -->
-  <main class="dashboard-content">
-    <!-- My Products Section -->
-    <section ng-if="activeTab === 'my-products'" class="tab-content">
-      <h2>My Products</h2>
-      <div class="product-list">
-        <table class="product-table">
-          <thead>
-            <tr>
-              <th>Type</th>
-              <th>Batch Number</th>
-              <th>Quantity</th>
-              <th>Status</th>
-              <th>Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr ng-repeat="product in products">
-              <td>{{product.type}}</td>
-              <td>{{product.batchNumber}}</td>
-              <td>{{product.quantity}}</td>
-              <td>{{product.status}}</td>
-              <td>
-                <button class="btn btn-info" ng-click="showProductDetails(product._id)">Details</button>
-                <button class="btn btn-secondary" ng-click="openRealTimeTracking(product)">Track</button>
-              </td>
-            </tr>
-          </tbody>
-        </table>
+<div class="consumer-dashboard" ng-controller="ConsumerController">
+    <!-- Header section with wallet status -->
+    <header class="dashboard-header">
+      <h1>Consumer Dashboard</h1>
+      <div class="wallet-status">
+        <h2>Wallet Status</h2>
+        <!-- Display wallet connection status -->
+        <p>Status: <span ng-class="{'connected': isWalletConnected, 'disconnected': !isWalletConnected}">
+          {{isWalletConnected ? 'Connected' : 'Disconnected'}}
+        </span></p>
+        <!-- Display wallet address and balance if connected -->
+        <p ng-if="isWalletConnected">Address: {{walletAddress | limitTo:10}}...</p>
+        <p ng-if="isWalletConnected">Balance: {{walletBalance}} ETH</p>
+        <!-- Wallet connection/disconnection buttons -->
+        <button class="btn btn-primary" ng-if="!isWalletConnected" ng-click="connectWallet()">
+          {{isConnecting ? 'Connecting...' : 'Connect Wallet'}}
+        </button>
+        <button class="btn btn-secondary" ng-if="isWalletConnected" ng-click="disconnectWallet()">Disconnect Wallet</button>
       </div>
-    </section>
-
-    <!-- Pending Transfers Section -->
-    <section ng-if="activeTab === 'transfers'" class="tab-content">
-      <h2>Pending Transfers</h2>
-      <div class="pending-transfers">
-        <table class="transfer-table">
+    </header>
+  
+    <!-- Main navigation -->
+    <nav class="dashboard-nav">
+      <ul class="nav-tabs">
+        <li ng-class="{'active': activeTab === 'my-products'}"><a href ng-click="setActiveTab('my-products')">My Products</a></li>
+        <li ng-class="{'active': activeTab === 'scan-product'}"><a href ng-click="setActiveTab('scan-product')">Scan Product</a></li>
+        <li ng-class="{'active': activeTab === 'product-history'}"><a href ng-click="setActiveTab('product-history')">Product History</a></li>
+        <li ng-class="{'active': activeTab === 'transfers'}"><a href ng-click="setActiveTab('transfers')">Pending Transfers</a></li>
+      </ul>
+    </nav>
+  
+    <!-- Main content area -->
+    <main class="dashboard-content">
+      <!-- My Products Section -->
+      <section ng-if="activeTab === 'my-products'" class="tab-content">
+        <h2>My Products</h2>
+        <div class="product-list">
+          <table class="product-table">
+            <thead>
+              <tr>
+                <th>Type</th>
+                <th>Batch Number</th>
+                <th>Quantity</th>
+                <th>Purchase Date</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr ng-repeat="product in myProducts">
+                <td>{{product.type}}</td>
+                <td>{{product.batchNumber}}</td>
+                <td>{{product.quantity}}</td>
+                <td>{{product.purchaseDate | date:'medium'}}</td>
+                <td>
+                  <button class="btn btn-info" ng-click="showProductDetails(product._id)">Details</button>
+                  <button class="btn btn-primary" ng-click="viewProductJourney(product._id)">View Journey</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+  
+      <!-- Scan Product Section -->
+      <section ng-if="activeTab === 'scan-product'" class="tab-content">
+        <h2>Scan Product</h2>
+        <div class="scan-product">
+          <!-- QR Code scanner component -->
+          <qr-scanner on-scan="onQrCodeScanned(result)"></qr-scanner>
+          <p>or</p>
+          <input type="text" ng-model="manualProductId" placeholder="Enter Product ID">
+          <button class="btn btn-primary" ng-click="lookupProduct(manualProductId)">Lookup Product</button>
+        </div>
+        <!-- Scanned Product Details -->
+        <div ng-if="scannedProduct" class="scanned-product-details">
+          <h3>Scanned Product Details</h3>
+          <p><strong>Type:</strong> {{scannedProduct.type}}</p>
+          <p><strong>Batch Number:</strong> {{scannedProduct.batchNumber}}</p>
+          <p><strong>Origin:</strong> {{scannedProduct.origin}}</p>
+          <p><strong>Production Date:</strong> {{scannedProduct.productionDate | date:'medium'}}</p>
+          <button class="btn btn-info" ng-click="verifyAuthenticity(scannedProduct._id)">Verify Authenticity</button>
+          <button class="btn btn-primary" ng-click="viewProductJourney(scannedProduct._id)">View Journey</button>
+        </div>
+      </section>
+  
+      <!-- Product History Section -->
+      <section ng-if="activeTab === 'product-history'" class="tab-content">
+        <h2>Product History</h2>
+        <table class="history-table">
           <thead>
             <tr>
-              <th>Product</th>
-              <th>From</th>
-              <th>Quantity</th>
               <th>Date</th>
+              <th>Product</th>
               <th>Action</th>
+              <th>From</th>
+              <th>To</th>
+              <th>Quantity</th>
             </tr>
           </thead>
           <tbody>
-            <tr ng-repeat="transfer in pendingTransfers">
-              <td>{{transfer.product.type}} - {{transfer.product.batchNumber}}</td>
-              <td>{{transfer.fromUser.username}}</td>
-              <td>{{transfer.quantity}}</td>
-              <td>{{transfer.createdAt | date:'medium'}}</td>
-              <td>
-                <button class="btn btn-success" ng-click="acceptTransfer(transfer._id)">Accept</button>
-              </td>
+            <tr ng-repeat="item in productHistory">
+              <td>{{item.date | date:'medium'}}</td>
+              <td>{{item.product.type}} ({{item.product.batchNumber}})</td>
+              <td>{{item.action}}</td>
+              <td>{{item.from}}</td>
+              <td>{{item.to}}</td>
+              <td>{{item.quantity}}</td>
             </tr>
           </tbody>
         </table>
+      </section>
+  
+      <!-- Pending Transfers Section -->
+<section ng-if="activeTab === 'transfers'" class="tab-content">
+    <h2>Pending Transfers</h2>
+    <div class="pending-transfers">
+      <table class="transfer-table">
+        <thead>
+          <tr>
+            <th>Product</th>
+            <th>From</th>
+            <th>Quantity</th>
+            <th>Date</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="transfer in pendingTransfers">
+            <td>{{transfer.product.type}} - {{transfer.product.batchNumber}}</td>
+            <td>{{transfer.fromUser.username}}</td>
+            <td>{{transfer.quantity}}</td>
+            <td>{{transfer.createdAt | date:'medium'}}</td>
+            <td>
+              <button class="btn btn-success" ng-click="acceptTransfer(transfer._id)">Accept</button>
+              <button class="btn btn-danger" ng-click="rejectTransfer(transfer._id)">Reject</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+  
+    </main>
+  
+    <!-- Message container for success and error messages -->
+    <div class="message-container">
+      <div class="success-message" ng-show="successMessage">{{successMessage}}</div>
+      <div class="error-message" ng-show="errorMessage">
+        {{errorMessage}}
+        <button ng-click="dismissError()" class="dismiss-btn">Dismiss</button>
       </div>
-    </section>
-
-    <!-- Scan Product Section -->
-    <section ng-if="activeTab === 'scan-product'" class="tab-content">
-      <h2>Scan Product</h2>
-      <div class="qr-scanner">
-        <qr-scanner on-scan="handleQRScan"></qr-scanner>
-      </div>
-      <div class="manual-entry">
-        <h3>Or Enter Product ID Manually</h3>
-        <input type="text" ng-model="manualProductId" placeholder="Enter Product ID">
-        <button class="btn btn-primary" ng-click="getProductInfoManually()">Get Product Info</button>
-      </div>
-    </section>
-
-    <!-- Product History Section -->
-    <section ng-if="activeTab === 'product-history'" class="tab-content">
-      <h2>Product History</h2>
-      <div class="product-selector">
-        <label for="productHistorySelect">Select a product to view its history:</label>
-        <select id="productHistorySelect" ng-model="selectedProductForHistory" ng-change="loadProductHistory(selectedProductForHistory)">
-          <option value="">Select a Product</option>
-          <option ng-repeat="product in products" value="{{product._id}}">{{product.type}} - {{product.batchNumber}}</option>
-        </select>
-      </div>
-      <div class="product-history" ng-if="productHistory.length > 0">
-        <ul>
-          <li ng-repeat="event in productHistory">
-            <span class="date">{{event.date | date:'medium'}}</span>
-            <span class="event-type">{{event.type}}</span>
-            <span class="details">{{event.details}}</span>
-          </li>
-        </ul>
-      </div>
-    </section>
-  </main>
-
-  <!-- Product Details Modal -->
-<!-- This modal displays detailed information about a selected product -->
-<div class="modal" id="productDetailsModal" ng-if="showProductModal">
-  <div class="modal-content">
-    <span class="close" ng-click="closeProductDetails()">&times;</span>
-    <h2>Product Details</h2>
-    
-    <!-- Product information section -->
-    <div ng-if="selectedProduct">
-      <h3>Product Information</h3>
-      <p><strong>ID:</strong> {{selectedProduct.product._id}}</p>
-      <p><strong>Type:</strong> {{selectedProduct.product.type}}</p>
-      <p><strong>Batch Number:</strong> {{selectedProduct.product.batchNumber}}</p>
-      <p><strong>Origin:</strong> {{selectedProduct.product.origin}}</p>
-      <p><strong>Production Date:</strong> {{selectedProduct.product.productionDate | date:'medium'}}</p>
-      <p><strong>Status:</strong> {{selectedProduct.product.status}}</p>
-      <p><strong>Quantity:</strong> {{selectedProduct.product.quantity}}</p>
-      <p><strong>Price:</strong> {{selectedProduct.product.price}} ETH</p>
-      
-      <!-- Farmer information section -->
-      <h3>Farmer Information</h3>
-      <p><strong>Username:</strong> {{selectedProduct.farmer.username}}</p>
-      <p><strong>Location:</strong> {{selectedProduct.farmer.location}}</p>
-      
-      <!-- Distributor information section -->
-      <h3>Distributor Information</h3>
-      <p ng-if="selectedProduct.distributor">
-        <strong>Username:</strong> {{selectedProduct.distributor.username}}<br>
-        <strong>Location:</strong> {{selectedProduct.distributor.location}}
-      </p>
-      <p ng-if="!selectedProduct.distributor">No distributor information available</p>
-      
-      <!-- Retailer information section -->
-      <h3>Retailer Information</h3>
-      <p ng-if="selectedProduct.retailer">
-        <strong>Username:</strong> {{selectedProduct.retailer.username}}<br>
-        <strong>Location:</strong> {{selectedProduct.retailer.location}}
-      </p>
-      <p ng-if="!selectedProduct.retailer">No retailer information available</p>
-      
-      <!-- Blockchain information section -->
-      <h3>Blockchain Information</h3>
-      <p><strong>Blockchain Status:</strong> {{selectedProduct.blockchainStatus}}</p>
-      <p><strong>Blockchain Quantity:</strong> {{selectedProduct.blockchainQuantity}}</p>
-      
-      <!-- Ownership history section -->
-      <h3>Ownership History</h3>
+    </div>
+  
+    <!-- Notifications Section -->
+    <div class="notifications" ng-if="notifications.length > 0">
+      <h3>Notifications</h3>
       <ul>
-        <li ng-repeat="entry in selectedProduct.ownershipHistory">
-          {{entry.username}} ({{entry.userType}}) - {{entry.timestamp | date:'medium'}}
+        <li ng-repeat="notification in notifications">
+          {{notification.message}}
+          <button ng-click="dismissNotification($index)">Dismiss</button>
         </li>
       </ul>
     </div>
-    
-    <!-- Actions section -->
-    <div class="product-actions">
-      <button class="btn btn-info" ng-click="openRealTimeTracking()">
-        Open Real-Time Tracking
-      </button>
-      <button class="btn btn-secondary" ng-click="verifyProductAuthenticity(selectedProduct.product._id)">
-        Verify Authenticity
-      </button>
-      <button class="btn btn-primary" ng-click="generateQRCode()">
-        Generate QR Code
-      </button>
-    </div>
-
-    <!-- QR Code Display -->
-    <div ng-if="showQRCode" class="qr-code-container">
-      <img ng-src="{{qrCodeUrl}}" alt="Product QR Code">
-    </div>
-    
-    <!-- Feedback submission form -->
-    <div class="product-feedback">
-      <h4>Submit Feedback</h4>
-      <form ng-submit="submitFeedback()">
-        <div class="form-group">
-          <label for="rating">Rating:</label>
-          <select id="rating" ng-model="feedback.rating" required>
-            <option value="1">1 - Poor</option>
-            <option value="2">2 - Fair</option>
-            <option value="3">3 - Good</option>
-            <option value="4">4 - Very Good</option>
-            <option value="5">5 - Excellent</option>
-          </select>
+  
+    <!-- Product Details Modal -->
+    <div class="modal" id="productDetailsModal" ng-if="selectedProduct">
+      <div class="modal-content">
+        <span class="close" ng-click="closeProductDetails()">&times;</span>
+        <h3>Product Details</h3>
+        <div class="product-info">
+          <p><strong>Type:</strong> {{selectedProduct.type}}</p>
+          <p><strong>Batch Number:</strong> {{selectedProduct.batchNumber}}</p>
+          <p><strong>Quantity:</strong> {{selectedProduct.quantity}}</p>
+          <p><strong>Origin:</strong> {{selectedProduct.origin}}</p>
+          <p><strong>Production Date:</strong> {{selectedProduct.productionDate | date:'medium'}}</p>
+          <p><strong>Purchase Date:</strong> {{selectedProduct.purchaseDate | date:'medium'}}</p>
+          <h4>Producer Information</h4>
+          <p><strong>Name:</strong> {{selectedProduct.originalOwner.username}}</p>
+          <p><strong>Location:</strong> {{selectedProduct.originalOwner.location}}</p>
         </div>
-        <div class="form-group">
-          <label for="comment">Comment:</label>
-          <textarea id="comment" ng-model="feedback.comment"></textarea>
+        
+        <!-- Product actions -->
+        <div class="product-actions">
+          <button class="btn btn-info" ng-click="verifyAuthenticity(selectedProduct._id)">Verify Authenticity</button>
+          <button class="btn btn-primary" ng-click="viewProductJourney(selectedProduct._id)">View Journey</button>
         </div>
-        <button type="submit" class="btn btn-primary">Submit Feedback</button>
-      </form>
-    </div>
-    
-    <!-- Close button for the modal -->
-    <button ng-click="closeProductDetails()" class="btn btn-secondary mt-3">Close</button>
-  </div>
-</div>
-
-  <!-- Scanned Product Modal -->
-  <div class="modal" id="scannedProductModal" ng-if="showScannedProductModal">
-    <div class="modal-content">
-      <span class="close" ng-click="closeScannedProductModal()">&times;</span>
-      <h3>Scanned Product Information</h3>
-      <div class="product-info" ng-if="scannedProduct">
-        <p><strong>Type:</strong> {{scannedProduct.type}}</p>
-        <p><strong>Batch Number:</strong> {{scannedProduct.batchNumber}}</p>
-        <p><strong>Origin:</strong> {{scannedProduct.origin}}</p>
-        <p><strong>Production Date:</strong> {{scannedProduct.productionDate | date:'medium'}}</p>
-        <p><strong>Status:</strong> {{scannedProduct.status}}</p>
-        <p><strong>Quantity:</strong> {{scannedProduct.quantity}}</p>
         
-        <h4>Farmer Information</h4>
-        <p><strong>Name:</strong> {{scannedProduct.farmer.username}}</p>
-        <p><strong>Location:</strong> {{scannedProduct.farmer.location}}</p>
-        
-        <h4>Distributor Information</h4>
-        <p ng-if="scannedProduct.distributor">
-          <strong>Name:</strong> {{scannedProduct.distributor.username}}<br>
-          <strong>Location:</strong> {{scannedProduct.distributor.location}}
-        </p>
-        <p ng-if="!scannedProduct.distributor">No distributor information available</p>
-        
-        <h4>Retailer Information</h4>
-        <p ng-if="scannedProduct.retailer">
-          <strong>Name:</strong> {{scannedProduct.retailer.username}}<br>
-          <strong>Location:</strong> {{scannedProduct.retailer.location}}
-        </p>
-        <p ng-if="!scannedProduct.retailer">No retailer information available</p>
+        <!-- Feedback section -->
+        <div class="feedback-section">
+          <h4>Submit Feedback</h4>
+          <form ng-submit="submitFeedback(selectedProduct._id)">
+            <div class="form-group">
+              <label for="rating">Rating:</label>
+              <select id="rating" ng-model="feedbackData.rating" required>
+                <option value="1">1 Star</option>
+                <option value="2">2 Stars</option>
+                <option value="3">3 Stars</option>
+                <option value="4">4 Stars</option>
+                <option value="5">5 Stars</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="comment">Comment:</label>
+              <textarea id="comment" ng-model="feedbackData.comment" rows="3"></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit Feedback</button>
+          </form>
+        </div>
       </div>
     </div>
-  </div>
-
-  <!-- Message container for success and error messages -->
-  <div class="message-container">
-    <div class="success-message" ng-show="successMessage">
-      {{successMessage}}
-      <button ng-click="dismissSuccess()" class="dismiss-btn">Dismiss</button>
+  
+    <!-- Product Journey Modal -->
+    <div class="modal" id="productJourneyModal" ng-if="showProductJourney">
+      <div class="modal-content">
+        <span class="close" ng-click="closeProductJourney()">&times;</span>
+        <h2>Product Journey</h2>
+        <div class="journey-timeline">
+          <ul>
+            <li ng-repeat="step in productJourney">
+              <span class="date">{{step.date | date:'medium'}}</span>
+              <span class="status">{{step.status}}</span>
+              <span class="actor">{{step.actor}}</span>
+            </li>
+          </ul>
+        </div>
+      </div>
     </div>
-    <div class="error-message" ng-show="errorMessage">
-      {{errorMessage}}
-      <button ng-click="dismissError()" class="dismiss-btn">Dismiss</button>
-    </div>
+  
+    <!-- Accessibility: Screen reader only notifications -->
+    <div id="notifications" class="sr-only" aria-live="polite"></div>
   </div>
-
-  <!-- Notifications Section -->
-  <div class="notifications" ng-if="notifications.length > 0">
-    <h3>Notifications</h3>
-    <ul>
-      <li ng-repeat="notification in notifications">
-        {{notification.message}}
-        <button ng-click="dismissNotification($index)">Dismiss</button>
-      </li>
-    </ul>
-  </div>
-
-  <!-- Accessibility: Screen reader only notifications -->
-  <div id="notifications" class="sr-only" aria-live="polite"></div>
-
+  
+  <!-- External Dependencies -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+  
   <!-- Search and Filter Section -->
   <div class="search-filter">
     <input type="text" ng-model="searchTerm" ng-change="filterProducts(searchTerm)" placeholder="Search products...">
@@ -304,21 +242,17 @@
       <option value="">Sort by...</option>
       <option value="type">Type</option>
       <option value="batchNumber">Batch Number</option>
+      <option value="purchaseDate">Purchase Date</option>
       <option value="quantity">Quantity</option>
     </select>
     <button ng-click="sortReverse = !sortReverse">
       {{sortReverse ? 'Sort Ascending' : 'Sort Descending'}}
     </button>
   </div>
-
+  
   <!-- Pagination Controls -->
   <div class="pagination" ng-if="totalPages > 1">
     <button ng-click="changePage(currentPage - 1)" ng-disabled="currentPage === 1">Previous</button>
     <span>Page {{currentPage}} of {{totalPages}}</span>
     <button ng-click="changePage(currentPage + 1)" ng-disabled="currentPage === totalPages">Next</button>
   </div>
-</div>
-
-<!-- Scripts for external dependencies -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>

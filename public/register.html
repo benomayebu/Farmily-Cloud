@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="Content-Security-Policy" content="default-src 'self'; connect-src 'self' http://localhost:3000; font-src 'self' https://cdn.scite.ai https://fonts.gstatic.com https://cdnjs.cloudflare.com data:; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://unpkg.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com; img-src 'self' data:;">
     <title>Farmily - Register</title>
-    <link rel="stylesheet" href="/css/auth-styles.css">
+    <link rel="stylesheet" href="/public/css/auth-styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 </head>
 <body>
@@ -15,7 +15,7 @@
             <form @submit.prevent="registerUser" class="auth-form">
                 <header class="auth-form-header">
                     <a href="index.html">
-                        <img src="/images/farmily II.png" alt="Farmily Logo" class="logo logo-small">
+                        <img src="/public/images/farmily II.png" alt="Farmily Logo" class="logo logo-small">
                     </a>
                     <h1>Register for Farmily</h1>
                 </header>
@@ -97,6 +97,6 @@
 
     <!-- Import Vue.js and Registration Script -->
     <script src="https://unpkg.com/vue@3/dist/vue.global.prod.js"></script>
-    <script src="/js/register.js"></script>
+    <script src="/public/js/register.js"></script>
 </body>
 </html>
