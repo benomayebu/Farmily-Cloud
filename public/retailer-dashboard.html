@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="foodTraceabilityApp">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Retailer Dashboard - Farmily</title>
+  <link rel="icon" href="/public/favicon.ico" type="image/x-icon">
+  <link rel="stylesheet" href="/public/css/dashboard.css">
+  
+  <!-- AngularJS and dependencies -->
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular-route.min.js"></script>
+
+  <!-- Web3.js -->
+  <script src="https://cdn.jsdelivr.net/npm/web3@1.5.2/dist/web3.min.js"></script>
+
+  <!-- QR Code library -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+
+  <!-- Socket.IO client library -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.4.1/socket.io.js"></script>
+
+  <!-- jQuery (if needed) -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+
+  <!-- Application scripts -->
+  <script src="/public/js/retailerApp.js"></script>
+  <script src="/public/js/Web3Service.js"></script>
+  <script src="/public/js/retailer-service.js"></script>
+  <script src="/public/js/retailer-controller.js"></script>
+</head>
+<body ng-controller="RetailerController" ng-class="{'dark-mode': theme === 'dark'}">
+  <header>
+    <h1>Farmily - Retailer Dashboard</h1>
+    <wallet-status></wallet-status>
+  </header>
+
+  <main>
+    <div ng-view></div>
+    <message-display></message-display>
+  </main>
+
+  <footer>
+    <p>&copy; 2024 Farmily. All rights reserved.</p>
+    <user-controls></user-controls>
+  </footer>
+</body>
+</html>

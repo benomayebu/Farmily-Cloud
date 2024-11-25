@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="foodTraceabilityApp">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Real-Time Tracking - Farmily</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/public/css/styles.css">
+    <!-- Font Awesome -->
+    <script src="https://kit.fontawesome.com/d03553a591.js" crossorigin="anonymous"></script>
+    <style>
+        /* Custom styles */
+        .product-card {
+            margin-top: 20px;
+            padding: 20px;
+            background-color: #f8f9fa;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .ownership-history {
+            margin-top: 20px;
+        }
+        .ownership-history li {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body ng-controller="TrackingController">
+    <!-- Header -->
+    <header class="header">
+        <div class="overlay">
+            <div class="container">
+                <!-- Logo linking to homepage -->
+                <a href="/public/index.html" class="navbar-brand">
+                    <img src="/public/images/farmily II.png" alt="Farmily Logo" class="logo">
+                </a>
+                <!-- Navigation menu -->
+                <ul class="nav">
+                    <li class="nav-item"><a href="/public/index.html" class="nav-link">Home</a></li>
+                    <li class="nav-item"><a href="/public/about-us.html" class="nav-link">About Us</a></li>
+                    <li class="nav-item"><a href="/public/real-time-tracking.html" class="nav-link active">Real-Time Tracking</a></li>
+                    <li class="nav-item"><a href="/public/contact-us.html" class="nav-link">Contact Us</a></li>
+                </ul>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main content -->
+    <!-- Product information card -->
+<div class="product-card" id="productInfo" ng-if="product && !isLoading">
+    <h2>Product Traceability Information</h2>
+    <h3>Product Details</h3>
+    <p><strong>Product ID:</strong> {{product._id}}</p>
+    <p><strong>Type:</strong> {{product.type}}</p>
+    <p><strong>Batch Number:</strong> {{product.batchNumber}}</p>
+    <p><strong>Origin:</strong> {{product.origin}}</p>
+    <p><strong>Production Date:</strong> {{formatDate(product.productionDate)}}</p>
+    <p><strong>Current Status:</strong> {{product.status}}</p>
+    <p><strong>Quantity:</strong> {{product.quantity}}</p>
+    <p><strong>Storage Conditions:</strong> {{product.storageConditions}}</p>
+    <p><strong>Transportation Details:</strong> {{product.transportationDetails}}</p>
+
+    <h3>Farmer Information</h3>
+    <p><strong>Name:</strong> {{farmer.username}}</p>
+    <p><strong>Location:</strong> {{farmer.location}}</p>
+
+    <h3>Current Owner</h3>
+    <p><strong>Name:</strong> {{currentOwner.username}} ({{currentOwner.userType}})</p>
+    <p><strong>Location:</strong> {{currentOwner.location}}</p>
+
+    <h3>Ownership History</h3>
+    <ul class="ownership-history">
+        <li ng-repeat="entry in ownershipHistory">
+            <p><strong>Owner:</strong> {{entry.owner.username}} ({{entry.owner.userType}})</p>
+            <p><strong>Location:</strong> {{entry.owner.location}}</p>
+            <p><strong>Timestamp:</strong> {{formatDate(entry.timestamp)}}</p>
+        </li>
+    </ul>
+
+    <h3>Blockchain Data</h3>
+    <p><strong>Status:</strong> {{blockchainData.status}}</p>
+    <p><strong>Quantity:</strong> {{blockchainData.quantity}}</p>
+</div>
+        </div>
+    </main>
+
+            <!-- Feature highlights -->
+            <div class="row mt-4">
+                <div class="col-md-4">
+                    <div class="feature-card">
+                        <i class="feature-icon fas fa-route"></i>
+                        <h2>Real-Time Updates</h2>
+                        <p>Our system provides instant updates on your product's location, ensuring you always know where your goods are in the supply chain.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="feature-card">
+                        <i class="feature-icon fas fa-temperature-high"></i>
+                        <h2>Environmental Monitoring</h2>
+                        <p>Monitor temperature, humidity, and other crucial environmental factors to maintain product quality throughout transit.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="feature-card">
+                        <i class="feature-icon fas fa-bell"></i>
+                        <h2>Instant Alerts</h2>
+                        <p>Receive immediate notifications for any irregularities or delays, allowing you to take prompt action when needed.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer bg-dark text-white">
+        <div class="container py-3">
+            <p>&copy; 2024 Farmily. All rights reserved.</p>
+            <div class="footer-links">
+                <a href="/public/privacy-policy.html" class="text-white">Privacy Policy</a> | 
+                <a href="/public/terms-of-service.html" class="text-white">Terms of Service</a>
+            </div>
+        </div>
+    </footer>
+
+   <!-- AngularJS -->
+   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+   <!-- Your AngularJS app and controller -->
+   <script src="/public/js/foodTraceabilityApp.js"></script>
+   <script src="/public/js/tracking-controller.js"></script>
+</body>
+</html>

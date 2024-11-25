@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; connect-src 'self' http://localhost:3000; font-src 'self' https://cdn.scite.ai https://fonts.gstatic.com https://cdnjs.cloudflare.com data:; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://unpkg.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com; img-src 'self' data:;">
+    <title>Farmily - Register</title>
+    <link rel="stylesheet" href="/public/css/auth-styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+</head>
+<body>
+    <main class="form-container">
+        <div id="app">
+            <!-- Registration Form -->
+            <form @submit.prevent="registerUser" class="auth-form">
+                <header class="auth-form-header">
+                    <a href="index.html">
+                        <img src="/public/images/farmily II.png" alt="Farmily Logo" class="logo logo-small">
+                    </a>
+                    <h1>Register for Farmily</h1>
+                </header>
+
+                <!-- Role Selection -->
+                <div class="form-group">
+                    <label for="role">Role:</label>
+                    <select id="role" v-model="userType" required>
+                        <option value="">Select your role</option>
+                        <option value="farmer">Farmer</option>
+                        <option value="distributor">Distributor</option>
+                        <option value="retailer">Retailer</option>
+                        <option value="consumer">Consumer</option>
+                    </select>
+                    <i class="fas fa-user-tag" aria-hidden="true"></i>
+                </div>
+
+                <!-- First and Last Names -->
+                <div class="form-group">
+                    <label for="firstName">First Name:</label>
+                    <input type="text" id="firstName" v-model="firstName" required>
+                    <i class="fas fa-id-badge" aria-hidden="true"></i>
+                </div>
+
+                <div class="form-group">
+                    <label for="lastName">Last Name:</label>
+                    <input type="text" id="lastName" v-model="lastName" required>
+                    <i class="fas fa-id-badge" aria-hidden="true"></i>
+                </div>
+
+                <!-- Username and Email -->
+                <div class="form-group">
+                    <label for="username">Username:</label>
+                    <input type="text" id="username" v-model="username" required>
+                    <i class="fas fa-user" aria-hidden="true"></i>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" v-model="email" required>
+                    <i class="fas fa-envelope" aria-hidden="true"></i>
+                </div>
+
+                <!-- Password and Confirm Password -->
+                <div class="form-group">
+                    <label for="password">Password:</label>
+                    <input type="password" id="password" v-model="password" required minlength="8">
+                    <i class="fas fa-lock" aria-hidden="true"></i>
+                </div>
+
+                <div class="form-group">
+                    <label for="confirmPassword">Confirm Password:</label>
+                    <input type="password" id="confirmPassword" v-model="confirmPassword" required minlength="8">
+                    <i class="fas fa-lock" aria-hidden="true"></i>
+                </div>
+
+                <!-- Password Strength Meter -->
+                <div class="password-strength" v-if="password">
+                    <p>Password Strength: {{ passwordStrengthText }}</p>
+                    <div class="strength-meter" :style="{ width: passwordStrength + '%' }"></div>
+                </div>
+
+                <!-- Registration Status Message -->
+                <div v-if="message" :class="{ 'error': hasError, 'success': !hasError }">{{ message }}</div>
+
+                <!-- Registration Button -->
+                <button type="submit" class="btn btn-primary" :disabled="isLoading">
+                    <span v-if="isLoading">
+                        <i class="fas fa-spinner fa-spin" aria-hidden="true"></i> Registering...
+                    </span>
+                    <span v-else>Register</span>
+                </button>
+
+                <!-- Login Link -->
+                <p class="mt-3">Already have an account? <a href="login.html">Login here</a></p>
+            </form>
+        </div>
+    </main>
+
+    <!-- Import Vue.js and Registration Script -->
+    <script src="https://unpkg.com/vue@3/dist/vue.global.prod.js"></script>
+    <script src="/public/js/register.js"></script>
+</body>
+</html>

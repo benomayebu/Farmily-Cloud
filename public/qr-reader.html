@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QR Code Reader</title>
+    <script src="https://unpkg.com/html5-qrcode"></script>
+    <style>
+        body { font-family: Arial, sans-serif; line-height: 1.6; padding: 20px; }
+        #reader { width: 500px; }
+        #result { margin-top: 20px; }
+    </style>
+</head>
+<body>
+    <h1>Product QR Code Reader</h1>
+    <div id="reader"></div>
+    <div id="result"></div>
+
+    <script>
+        function onScanSuccess(decodedText, decodedResult) {
+            try {
+                const productInfo = JSON.parse(decodedText);
+                const resultDiv = document.getElementById('result');
+                resultDiv.innerHTML = `
+                    <h2>Product Information</h2>
+                    <p><strong>ID:</strong> ${productInfo.id}</p>
+                    <p><strong>Type:</strong> ${productInfo.type}</p>
+                    <p><strong>Batch Number:</strong> ${productInfo.batchNumber}</p>
+                    <p><strong>Origin:</strong> ${productInfo.origin}</p>
+                    <p><strong>Production Date:</strong> ${new Date(productInfo.productionDate).toLocaleDateString()}</p>
+                    <p><strong>Status:</strong> ${productInfo.status}</p>
+                `;
+                html5QrcodeScanner.clear();
+            } catch (error) {
+                console.error('Error parsing QR code data:', error);
+                document.getElementById('result').innerHTML = 'Error reading QR code. Please try again.';
+            }
+        }
+
+        const html5QrcodeScanner = new Html5QrcodeScanner(
+            "reader", { fps: 10, qrbox: 250 }, /* verbose= */ false);
+        html5QrcodeScanner.render(onScanSuccess);
+    </script>
+</body>
+</html>
