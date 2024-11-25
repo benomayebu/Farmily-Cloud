@@ -326,23 +326,23 @@ function initiateTransferToRetailer(transferData) {
       });
     }
 
-    /**
-     * Get full information of product traceability
-     * @param {string} productId - The ID of the product
-     * @returns {Promise<Object>} A promise that resolves with the full product information
-     */
-    function getProductWithFullInfo(productId) {
-      console.log(`Fetching full product info for product ID: ${productId}`);
-      return $http.get(`${API_URL}/products/${productId}/fullInfo`, getAuthHeaders())
-        .then(response => {
-          console.log('Full product info fetched:', response.data);
-          return response.data;
-        })
-        .catch(error => {
-          console.error('Error fetching full product info:', error);
-          return $q.reject({message: 'Failed to fetch full product info', details: error});
-        });
-    }
+/**
+ * Get full information of product traceability
+ * @param {string} productId - The ID of the product
+ * @returns {Promise<Object>} A promise that resolves with the full product information
+ */
+function getProductWithFullInfo(productId) {
+  console.log(`Fetching full product info for product ID: ${productId}`);
+  return $http.get(`${API_URL}/products/${productId}/fullInfo`, getAuthHeaders())
+    .then(response => {
+      console.log('Full product info fetched:', response.data);
+      return response.data;
+    })
+    .catch(error => {
+      console.error('Error fetching full product info:', error);
+      return $q.reject({message: 'Failed to fetch full product info', details: error});
+    });
+}
     
 
     /**

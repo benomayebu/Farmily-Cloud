@@ -39,7 +39,7 @@ body {
 .header {
   position: relative;
   height: 100vh;
-  background: url('/public/images/background.jpg') no-repeat center center/cover;
+  background: url('/images/background.jpg') no-repeat center center/cover;
   display: flex;
   align-items: center;
   color: white;
@@ -231,7 +231,7 @@ body {
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  background: url('/public/images/background.jpg') no-repeat center center/cover;
+  background: url('/images/background.jpg') no-repeat center center/cover;
 }
 
 .auth-form {
@@ -299,7 +299,7 @@ body {
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  background: url('/public/images/background.jpg') no-repeat center center/cover;
+  background: url('/images/background.jpg') no-repeat center center/cover;
   padding: 20px;
 }
 

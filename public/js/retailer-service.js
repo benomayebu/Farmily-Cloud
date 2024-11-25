@@ -7,8 +7,8 @@
  */
 
 angular.module('foodTraceabilityApp')
-  .factory('RetailerService', ['$http', 'Web3Service', '$q', '$timeout', '$window', 
-  function($http, Web3Service, $q, $timeout, $window) {
+  .factory('RetailerService', ['$http', 'Web3Service', '$q', '$timeout', '$window', '$rootScope',
+  function($http, Web3Service, $q, $timeout, $window, $rootScope) {
     // Base API URL for backend communication
     const API_URL = 'http://localhost:3000/api/retailer';
     
@@ -168,29 +168,31 @@ angular.module('foodTraceabilityApp')
 function updateProductInfo(productId, updatedInfo) {
   console.log(`Updating product info for product ID: ${productId}`, updatedInfo);
   
+  // First, update the product in the backend database
   return $http.put(`${API_URL}/updateProduct/${productId}`, updatedInfo, getAuthHeaders())
     .then(response => {
-      console.log('Product info updated successfully in database:', response.data);
-      
-      return Web3Service.updateProductInfoAsRetailer(response.data.product.blockchainId, updatedInfo);
+      console.log('Backend response:', response.data);
+      if (response.data.success) {
+        // If backend update is successful, initiate blockchain update
+        return Web3Service.updateProductInfoAsRetailer(response.data.product.blockchainId, updatedInfo);
+      } else {
+        throw new Error(response.data.message || 'Update failed in backend');
+      }
     })
     .then(blockchainResult => {
-      console.log('Product info updated successfully on blockchain:', blockchainResult);
-      return $http.get(`${API_URL}/products/${productId}`, getAuthHeaders());
-    })
-    .then(response => {
-      console.log('Fetched updated product details:', response.data);
+      console.log('Blockchain update result:', blockchainResult);
+      // Combine backend and blockchain success messages
       return {
         success: true,
         message: 'Product updated successfully in database and on blockchain',
-        product: response.data
+        txHash: blockchainResult.txHash
       };
     })
     .catch(error => {
       console.error('Error updating product info:', error);
       return {
         success: false,
-        error: error.error || error.message || 'An error occurred while updating product info'
+        error: error.message || 'An error occurred while updating product info'
       };
     });
 }
@@ -267,42 +269,53 @@ function syncProductWithBlockchain(productId) {
     }
 
 /**
- * Initiate a transfer to a consumer
- * @param {Object} transferData - The transfer data including productId, consumerId, and quantity
- * @returns {Promise<Object>} - A promise that resolves with the transfer result
- */
-function initiateTransferToConsumer(transferData) {
-  console.log('Initiating transfer to consumer:', transferData);
-  return Web3Service.initiateRetailerToConsumerTransfer(transferData.productId, transferData.consumerId, transferData.quantity)
-    .then(result => {
-      console.log('Transfer initiated successfully on blockchain:', result);
-      if (result.success) {
-        // Update backend after successful blockchain transaction
-        return $http.post(`${API_URL}/initiateTransfer`, {
-          ...transferData,
-          blockchainTxHash: result.txHash
+     * Initiate a transfer to a consumer
+     * @param {string} productId - The ID of the product to transfer
+     * @param {string} consumerId - The ID of the consumer receiving the product
+     * @param {number} quantity - The quantity of the product to transfer
+     * @returns {Promise<Object>} A promise that resolves with the transfer result
+     */
+function initiateTransferToConsumer(productId, consumerId, quantity) {
+  console.log(`Preparing transfer to consumer. Product ID: ${productId}, Consumer ID: ${consumerId}, Quantity: ${quantity}`);
+
+  // First, initiate the blockchain transaction
+  return Web3Service.initiateRetailerToConsumerTransfer(productId, consumerId, quantity)
+    .then(blockchainResult => {
+      console.log('Blockchain transaction result:', blockchainResult);
+      
+      // If blockchain transaction is successful, create the backend record
+      if (blockchainResult.success) {
+        return $http.post(`${API_URL}/createTransferRecord`, {
+          productId: productId,
+          consumerId: consumerId,
+          quantity: quantity,
+          blockchainTxHash: blockchainResult.txHash
         }, getAuthHeaders());
       } else {
-        throw new Error(result.error || 'Blockchain transfer initiation failed');
+        throw new Error(blockchainResult.error || 'Blockchain transaction failed');
       }
     })
     .then(response => {
-      console.log('Backend updated with transfer:', response.data);
+      console.log('Transfer record created:', response.data);
+      // Emit an event to notify the controller
+      if ($rootScope) {
+        $rootScope.$emit('transferInitiated', response.data);
+      } else {
+        console.warn('$rootScope is not available. Event not emitted.');
+      }
       return {
         success: true,
         message: 'Transfer initiated successfully',
-        transfer: response.data.transfer,
-        blockchainTx: response.data.blockchainTx
+        transfer: response.data
       };
     })
     .catch(error => {
       console.error('Error initiating transfer:', error);
-      // Improved error handling
       let errorMessage = 'An error occurred while initiating transfer';
-      if (error.status === 500 && error.data && error.data.error) {
-        errorMessage = error.data.error;
-      } else if (error.data && error.data.message) {
-        errorMessage = error.data.message;
+      if (error.error) {
+        errorMessage = error.error;
+      } else if (error.response && error.response.data && error.response.data.message) {
+        errorMessage = error.response.data.message;
       } else if (error.message) {
         errorMessage = error.message;
       }
@@ -322,7 +335,13 @@ function initiateTransferToConsumer(transferData) {
       return $http.get(API_URL + '/transactionHistory', getAuthHeaders())
         .then(response => {
           console.log('Transaction history fetched:', response.data);
-          return response.data;
+          return response.data.map(transaction => ({
+            ...transaction,
+            date: new Date(transaction.createdAt),
+            fromUser: transaction.fromId ? transaction.fromId.username : 'Unknown',
+            toUser: transaction.toId ? transaction.toId.username : 'Unknown',
+            productType: transaction.productId ? transaction.productId.type : 'Unknown'
+          }));
         })
         .catch(error => {
           console.error('Error fetching transaction history:', error);
@@ -360,41 +379,48 @@ function initiateTransferToConsumer(transferData) {
         .catch(handleError);
     }
 
-    /**
-     * Get full information of product traceability
-     * @param {string} productId - The ID of the product
-     * @returns {Promise<Object>} A promise that resolves with the full product information
-     */
-    function getProductWithFullInfo(productId) {
-      console.log(`Fetching full product info for product ID: ${productId}`);
-      return $http.get(`${API_URL}/products/${productId}/fullInfo`, getAuthHeaders())
-        .then(response => {
-          console.log('Full product info fetched:', response.data);
-          return response.data;
-        })
-        .catch(error => {
-          console.error('Error fetching full product info:', error);
-          return $q.reject({message: 'Failed to fetch full product info', details: error});
-        });
-    }
+  /**
+ * Get full information of product traceability
+ * @param {string} productId - The ID of the product
+ * @returns {Promise<Object>} A promise that resolves with the full product information
+ */
+  function getProductWithFullInfo(productId) {
+    console.log(`Fetching full product info for product ID: ${productId}`);
+    return $http.get(`${API_URL}/products/${productId}/fullInfo`, getAuthHeaders())
+      .then(response => {
+        console.log('Full product info fetched:', response.data);
+        return response.data;
+      })
+      .catch(error => {
+        console.error('Error fetching full product info:', error);
+        return $q.reject({message: 'Failed to fetch full product info', details: error});
+      });
+  }
 
-    /**
-     * Get details of a specific product
-     * @param {string} productId - The ID of the product
-     * @returns {Promise} A promise that resolves with the product details
-     */
-    function getProductDetails(productId) {
-      console.log(`Fetching product details for product ID: ${productId}`);
-      return $http.get(`${API_URL}/products/${productId}`, getAuthHeaders())
-        .then(response => {
-          console.log('Product details fetched successfully:', response.data);
-          return response.data;
-        })
-        .catch(error => {
-          console.error('Error fetching product details:', error);
-          return handleError(error);
-        });
-    }
+/**
+ * Get details of a specific product
+ * @param {string} productId - The ID of the product
+ * @returns {Promise} A promise that resolves with the product details
+ */
+function getProductDetails(productId) {
+  console.log(`Fetching product details for product ID: ${productId}`);
+  return $http.get(`${API_URL}/products/${productId}`, getAuthHeaders())
+    .then(response => {
+      console.log('Product details fetched successfully:', response.data);
+      // Ensure all fields have a value, replace undefined with 'N/A'
+      const product = response.data;
+      for (let key in product) {
+        if (product[key] === undefined || product[key] === null) {
+          product[key] = 'N/A';
+        }
+      }
+      return product;
+    })
+    .catch(error => {
+      console.error('Error fetching product details:', error);
+      return $q.reject(error.data || error.message || 'An unexpected error occurred');
+    });
+}
 
     /**
      * Update product status

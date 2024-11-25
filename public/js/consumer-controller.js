@@ -2,14 +2,14 @@
  * Consumer Controller
  * 
  * This controller manages the consumer dashboard functionality in the food traceability platform.
- * It handles product viewing, QR code scanning, product authentication, and transfer acceptance.
+ * It handles product viewing, transfer acceptance, QR code scanning, and real-time tracking.
  */
 angular.module('foodTraceabilityApp')
-  .controller('ConsumerController', ['$scope', '$timeout', '$interval', '$location', 'ConsumerService', 'Web3Service', 
-  function($scope, $timeout, $interval, $location, ConsumerService, Web3Service) {
+  .controller('ConsumerController', ['$scope', '$location', '$q', '$timeout', '$interval', 'ConsumerService', 'Web3Service', '$window',
+  function($scope, $location, $q, $timeout, $interval, ConsumerService, Web3Service, $window) {
 
     // Initialize scope variables
-    $scope.myProducts = [];
+    $scope.products = [];
     $scope.pendingTransfers = [];
     $scope.isWalletConnected = false;
     $scope.walletAddress = '';
@@ -19,24 +19,16 @@ angular.module('foodTraceabilityApp')
     $scope.errorMessage = '';
     $scope.isLoading = false;
     $scope.selectedProduct = null;
-    $scope.notifications = [];
-    $scope.isConnecting = false;
-    $scope.showQRCode = false;
-    $scope.qrCodeUrl = null;
-    $scope.isGeneratingQR = false;
-    $scope.qrCodeError = null;
     $scope.scannedProduct = null;
-    $scope.productJourney = null;
-    $scope.feedbackData = {
-      rating: null,
+    $scope.productHistory = [];
+    $scope.notifications = [];
+    $scope.manualProductId = '';
+    $scope.feedback = {
+      rating: 0,
       comment: ''
     };
 
-    /**
-     * Helper function to handle errors
-     * @param {Error} error - The error object
-     * @param {string} action - The action being performed when the error occurred
-     */
+    // Helper function to handle errors
     function handleError(error, action) {
       console.error(`Error ${action}:`, error);
       $scope.errorMessage = `Error ${action}: ${error.message || 'An unexpected error occurred'}`;
@@ -51,25 +43,20 @@ angular.module('foodTraceabilityApp')
       $scope.activeTab = tab;
       $location.path('/' + tab);
 
-      // Use $timeout to defer the execution of tab-specific actions
-      $timeout(function() {
-        switch(tab) {
-          case 'my-products':
-            $scope.loadMyProducts();
-            break;
-          case 'transfers':
-            $scope.loadPendingTransfers();
-            break;
-          case 'scan-product':
-            // Reset scanned product when switching to scan tab
-            $scope.scannedProduct = null;
-            break;
-          case 'product-history':
-            // Clear product journey when switching to history tab
-            $scope.productJourney = null;
-            break;
-        }
-      });
+      switch(tab) {
+        case 'my-products':
+          $scope.loadProducts();
+          break;
+        case 'transfers':
+          $scope.loadPendingTransfers();
+          break;
+        case 'scan-product':
+          // Prepare for QR code scanning
+          break;
+        case 'product-history':
+          $scope.loadProductHistory();
+          break;
+      }
     };
 
     /**
@@ -91,11 +78,8 @@ angular.module('foodTraceabilityApp')
         })
         .then(function(balance) {
           $scope.walletBalance = balance;
-          // Use $timeout to defer the execution of these functions
-          $timeout(function() {
-            $scope.loadMyProducts();
-            $scope.loadPendingTransfers();
-          });
+          $scope.loadProducts();
+          $scope.loadPendingTransfers();
         })
         .catch(function(error) {
           handleError(error, 'connecting wallet');
@@ -124,7 +108,7 @@ angular.module('foodTraceabilityApp')
     $scope.dismissError = function() {
       $scope.errorMessage = '';
     };
-    
+
     /**
      * Dismiss success message
      */
@@ -133,201 +117,17 @@ angular.module('foodTraceabilityApp')
     };
 
     /**
-     * Load my products
+     * Load products owned by the consumer
      */
-    $scope.loadMyProducts = function() {
-      if (!$scope.isWalletConnected) {
-        console.log('Wallet not connected. Skipping product load.');
-        return;
-      }
-
+    $scope.loadProducts = function() {
       $scope.isLoading = true;
-      ConsumerService.getMyProducts()
+      return ConsumerService.getProducts()
         .then(function(products) {
-          $timeout(function() {
-            $scope.myProducts = products;
-            console.log('My products loaded:', $scope.myProducts);
-          });
+          $scope.products = products;
+          console.log('Products loaded:', $scope.products);
         })
         .catch(function(error) {
-          console.error('Error loading products:', error);
-          $scope.errorMessage = 'Failed to load products: ' + error.message;
-        })
-        .finally(function() {
-          $timeout(function() {
-            $scope.isLoading = false;
-          });
-        });
-    };
-
-    /**
-     * Load pending transfers for the consumer
-     */
-    $scope.loadPendingTransfers = function() {
-      if (!$scope.isWalletConnected) {
-        console.log('Wallet not connected. Skipping pending transfers load.');
-        return;
-      }
-
-      $scope.isLoading = true;
-      ConsumerService.getPendingTransfers()
-        .then(function(transfers) {
-          $timeout(function() {
-            $scope.pendingTransfers = transfers;
-            console.log('Pending transfers loaded:', $scope.pendingTransfers);
-          });
-        })
-        .catch(function(error) {
-          console.error('Error loading pending transfers:', error);
-          $scope.errorMessage = 'Failed to load pending transfers: ' + error.message;
-        })
-        .finally(function() {
-          $timeout(function() {
-            $scope.isLoading = false;
-          });
-        });
-    };
-
-    /**
-     * Accept a transfer from a retailer
-     * @param {string} transferId - The ID of the transfer to accept
-     */
-    $scope.acceptTransfer = function(transferId) {
-      if (!$scope.isWalletConnected) {
-        $scope.errorMessage = 'Please connect your wallet first';
-        return;
-      }
-
-      $scope.isLoading = true;
-      ConsumerService.acceptTransfer(transferId)
-        .then(function(result) {
-          $scope.successMessage = 'Transfer accepted successfully';
-          $timeout(function() {
-            $scope.loadPendingTransfers();
-            $scope.loadMyProducts();
-          });
-        })
-        .catch(function(error) {
-          console.error('Error accepting transfer:', error);
-          $scope.errorMessage = 'Failed to accept transfer: ' + error.message;
-        })
-        .finally(function() {
-          $timeout(function() {
-            $scope.isLoading = false;
-          });
-        });
-    };
-
-  /**
-   * View product history
-   * @param {string} productId - The ID of the product
-   */
-  $scope.viewProductHistory = function(productId) {
-    $scope.isLoading = true;
-    ConsumerService.getProductHistory(productId)
-      .then(function(history) {
-        $scope.productHistory = history;
-        $scope.showProductHistoryModal = true;
-      })
-      .catch(function(error) {
-        console.error('Error fetching product history:', error);
-        $scope.errorMessage = 'Failed to fetch product history: ' + error.message;
-      })
-      .finally(function() {
-        $scope.isLoading = false;
-        $scope.$apply();
-      });
-  };
-
-    /**
-     * Scan QR code to get product details
-     */
-    $scope.scanQRCode = function() {
-      // In a real implementation, this would integrate with a QR code scanner
-      // For now, we'll simulate scanning by prompting for a product ID
-      var productId = prompt("Enter Product ID (simulating QR code scan):");
-      if (productId) {
-        $scope.isLoading = true;
-        ConsumerService.getProductByQRCode(productId)
-          .then(function(product) {
-            $scope.scannedProduct = product;
-            console.log('Scanned product:', $scope.scannedProduct);
-          })
-          .catch(function(error) {
-            handleError(error, 'scanning product');
-          })
-          .finally(function() {
-            $scope.isLoading = false;
-            $scope.$applyAsync();
-          });
-      }
-    };
-
-    /**
-     * Verify the authenticity of a product
-     * @param {string} productId - The ID of the product to verify
-     */
-    $scope.verifyProductAuthenticity = function(productId) {
-      $scope.isLoading = true;
-      ConsumerService.verifyProductAuthenticity(productId)
-        .then(function(result) {
-          if (result.verified) {
-            $scope.successMessage = 'Product authenticity verified successfully';
-          } else {
-            $scope.errorMessage = 'Product authenticity could not be verified: ' + result.error;
-          }
-        })
-        .catch(function(error) {
-          handleError(error, 'verifying product authenticity');
-        })
-        .finally(function() {
-          $scope.isLoading = false;
-          $scope.$applyAsync();
-        });
-    };
-
-    /**
-     * Get the full journey of a product
-     * @param {string} productId - The ID of the product
-     */
-    $scope.getProductJourney = function(productId) {
-      $scope.isLoading = true;
-      ConsumerService.getProductJourney(productId)
-        .then(function(journey) {
-          $scope.productJourney = journey;
-          console.log('Product journey:', $scope.productJourney);
-        })
-        .catch(function(error) {
-          handleError(error, 'fetching product journey');
-        })
-        .finally(function() {
-          $scope.isLoading = false;
-          $scope.$applyAsync();
-        });
-    };
-
-    /**
-     * Submit feedback for a product
-     * @param {string} productId - The ID of the product
-     */
-    $scope.submitFeedback = function(productId) {
-      if (!$scope.feedbackData.rating) {
-        $scope.errorMessage = 'Please provide a rating';
-        return;
-      }
-
-      $scope.isLoading = true;
-      ConsumerService.submitFeedback(productId, $scope.feedbackData)
-        .then(function(result) {
-          if (result.success) {
-            $scope.successMessage = 'Feedback submitted successfully';
-            $scope.feedbackData = { rating: null, comment: '' }; // Reset feedback form
-          } else {
-            throw new Error(result.error || 'Failed to submit feedback');
-          }
-        })
-        .catch(function(error) {
-          handleError(error, 'submitting feedback');
+          handleError(error, 'loading products');
         })
         .finally(function() {
           $scope.isLoading = false;
@@ -342,17 +142,17 @@ angular.module('foodTraceabilityApp')
     $scope.showProductDetails = function(productId) {
       console.log('Showing details for product:', productId);
       $scope.isLoading = true;
-      ConsumerService.getProductByQRCode(productId)
-        .then(function(product) {
-          $scope.selectedProduct = product;
+      ConsumerService.getProductDetails(productId)
+        .then(function(productDetails) {
+          $scope.selectedProduct = productDetails;
           console.log('Selected product:', $scope.selectedProduct);
           $scope.showProductModal = true;
-          $scope.isLoading = false;
         })
         .catch(function(error) {
           handleError(error, 'fetching product details');
         })
         .finally(function() {
+          $scope.isLoading = false;
           $scope.$applyAsync();
         });
     };
@@ -363,6 +163,256 @@ angular.module('foodTraceabilityApp')
     $scope.closeProductDetails = function() {
       $scope.showProductModal = false;
       $scope.selectedProduct = null;
+    };
+
+/**
+ * Get product info manually by ID
+ */
+$scope.getProductInfoManually = function() {
+  if (!$scope.manualProductId) {
+    $scope.errorMessage = 'Please enter a valid Product ID';
+    return;
+  }
+  $scope.isLoading = true;
+  ConsumerService.getProductWithFullInfo($scope.manualProductId)
+    .then(function(productDetails) {
+      $scope.selectedProduct = productDetails;
+      $scope.showProductModal = true;
+      console.log('Product details fetched manually:', productDetails);
+    })
+    .catch(function(error) {
+      console.error('Error fetching product details:', error);
+      $scope.errorMessage = 'Failed to fetch product details: ' + (error.message || error);
+    })
+    .finally(function() {
+      $scope.isLoading = false;
+      $scope.$applyAsync();
+    });
+};
+
+/**
+ * Open real-time tracking for a product
+ */
+$scope.openRealTimeTracking = function() {
+  if (!$scope.selectedProduct || !$scope.selectedProduct.product) {
+    console.error('Invalid product or product ID');
+    $scope.errorMessage = 'Unable to open real-time tracking: Invalid product';
+    return;
+  }
+
+  console.log('Selected product for tracking:', $scope.selectedProduct);
+
+  // Construct the URL with all product details as query parameters
+  var url = '/public/consumer-real-time-tracking.html?' + 
+    'id=' + encodeURIComponent($scope.selectedProduct.product._id) +
+    '&type=' + encodeURIComponent($scope.selectedProduct.product.type) +
+    '&origin=' + encodeURIComponent($scope.selectedProduct.product.origin) +
+    '&productionDate=' + encodeURIComponent($scope.selectedProduct.product.productionDate) +
+    '&batchNumber=' + encodeURIComponent($scope.selectedProduct.product.batchNumber) +
+    '&status=' + encodeURIComponent($scope.selectedProduct.product.status) +
+    '&quantity=' + encodeURIComponent($scope.selectedProduct.product.quantity) +
+    '&price=' + encodeURIComponent($scope.selectedProduct.product.price) +
+    '&blockchainId=' + encodeURIComponent($scope.selectedProduct.product.blockchainId) +
+    '&blockchainStatus=' + encodeURIComponent($scope.selectedProduct.blockchainStatus) +
+    '&storageConditions=' + encodeURIComponent($scope.selectedProduct.product.storageConditions) +
+    '&transportationMode=' + encodeURIComponent($scope.selectedProduct.product.transportationMode) +
+    '&transportationDetails=' + encodeURIComponent($scope.selectedProduct.product.transportationDetails) +
+    '&estimatedDeliveryDate=' + encodeURIComponent($scope.selectedProduct.product.estimatedDeliveryDate) +
+    '&certifications=' + encodeURIComponent(JSON.stringify($scope.selectedProduct.product.certifications)) +
+    '&farmerUsername=' + encodeURIComponent($scope.selectedProduct.farmer ? $scope.selectedProduct.farmer.username : 'N/A') +
+    '&distributorUsername=' + encodeURIComponent($scope.selectedProduct.distributor ? $scope.selectedProduct.distributor.username : 'N/A') +
+    '&retailerUsername=' + encodeURIComponent($scope.selectedProduct.currentOwner ? $scope.selectedProduct.currentOwner.username : 'N/A') +
+    '&consumerUsername=' + encodeURIComponent($scope.selectedProduct.consumer ? $scope.selectedProduct.consumer.username : 'N/A');
+
+  console.log('Opening URL:', url);
+  
+  // Open the tracking page in a new tab
+  $window.open(url, '_blank');
+};
+    /**
+     * Scan QR code for product information
+     * This function would typically be called when a QR code is successfully scanned
+     * @param {string} qrData - The data from the scanned QR code
+     */
+    $scope.scanQRCode = function(qrData) {
+      ConsumerService.getProductFromQR(qrData)
+        .then(function(product) {
+          $scope.scannedProduct = product;
+          $scope.showScannedProductModal = true;
+        })
+        .catch(function(error) {
+          handleError(error, 'scanning QR code');
+        });
+    };
+
+    /**
+     * Generate QR code for a product
+     */
+    $scope.generateQRCode = function() {
+      if (!$scope.selectedProduct || !$scope.selectedProduct.product) {
+        $scope.errorMessage = 'No product selected for QR code generation';
+        return;
+      }
+
+      $scope.isGeneratingQR = true;
+      ConsumerService.generateQRCode($scope.selectedProduct.product)
+        .then(function(qrCodeUrl) {
+          $scope.qrCodeUrl = qrCodeUrl;
+          $scope.showQRCode = true;
+        })
+        .catch(function(error) {
+          $scope.errorMessage = 'Failed to generate QR code: ' + error;
+        })
+        .finally(function() {
+          $scope.isGeneratingQR = false;
+          $scope.$applyAsync();
+        });
+    };
+
+    /**
+     * Handle QR code scan
+     * @param {string} qrData - The data from the scanned QR code
+     */
+    $scope.handleQRScan = function(qrData) {
+      $scope.isLoading = true;
+      ConsumerService.getProductFromQR(qrData)
+        .then(function(product) {
+          $scope.scannedProduct = product;
+          $scope.showScannedProductModal = true;
+        })
+        .catch(function(error) {
+          handleError(error, 'scanning QR code');
+        })
+        .finally(function() {
+          $scope.isLoading = false;
+          $scope.$applyAsync();
+        });
+    };
+
+    /**
+     * Close the modal for a scanned product
+     * Resets the selected scanned product to null
+     */
+    $scope.closeScannedProductModal = function() {
+      $scope.showScannedProductModal = false;
+      $scope.scannedProduct = null;
+    };
+
+    /**
+     * Submit feedback for a product
+     */
+    $scope.submitFeedback = function() {
+      if (!$scope.selectedProduct || !$scope.selectedProduct.product || !$scope.selectedProduct.product._id) {
+        $scope.errorMessage = 'No product selected for feedback';
+        return;
+      }
+      if ($scope.feedback.rating === 0) {
+        $scope.errorMessage = 'Please select a rating';
+        return;
+      }
+      
+      $scope.isLoading = true;
+      ConsumerService.submitFeedback($scope.selectedProduct.product._id, $scope.feedback)
+        .then(function(response) {
+          $scope.successMessage = 'Feedback submitted successfully';
+          $scope.feedback = { rating: 0, comment: '' }; // Reset feedback
+          $scope.closeProductDetails(); // Close the modal after submitting feedback
+        })
+        .catch(function(error) {
+          $scope.errorMessage = 'Failed to submit feedback: ' + error;
+        })
+        .finally(function() {
+          $scope.isLoading = false;
+          $scope.$applyAsync();
+        });
+    };
+
+    /**
+     * Load pending transfers for the consumer
+     */
+    $scope.loadPendingTransfers = function() {
+      if (!$scope.isWalletConnected) {
+        console.log('Wallet not connected. Skipping pending transfers load.');
+        return;
+      }
+
+      $scope.isLoading = true;
+      ConsumerService.getPendingTransfers($scope.walletAddress)
+        .then(function(transfers) {
+          $scope.pendingTransfers = transfers;
+          console.log('Pending transfers loaded:', $scope.pendingTransfers);
+        })
+        .catch(function(error) {
+          handleError(error, 'loading pending transfers');
+        })
+        .finally(function() {
+          $scope.isLoading = false;
+          $scope.$applyAsync();
+        });
+    };
+
+    /**
+     * Accept a transfer from a retailer
+     * @param {string} transferId - The ID of the transfer to accept
+     */
+    $scope.acceptTransfer = function(transferId) {
+      if (!$scope.isWalletConnected) {
+        $scope.errorMessage = 'Please connect your wallet first';
+        return;
+      }
+
+      console.log('Accepting transfer:', transferId);
+
+      $scope.isLoading = true;
+      ConsumerService.acceptTransfer(transferId)
+        .then(function(result) {
+          console.log('Transfer acceptance result:', result);
+          if (result.success) {
+            $scope.successMessage = 'Transfer accepted successfully: ' + result.message;
+            $scope.addNotification('Transfer processed');
+            return $q.all([
+              $scope.loadPendingTransfers(),
+              $scope.loadProducts()
+            ]);
+          } else {
+            throw new Error(result.error || 'Unknown error occurred');
+          }
+        })
+        .then(function() {
+          console.log('Transfers and products reloaded after processing');
+        })
+        .catch(function(error) {
+          console.error('Error processing transfer:', error);
+          $scope.errorMessage = 'Failed to process transfer: ' + error.message;
+        })
+        .finally(function() {
+          $scope.isLoading = false;
+          $scope.$applyAsync();
+        });
+    };
+
+    /**
+     * Load product history
+     */
+    $scope.loadProductHistory = function() {
+      if (!$scope.selectedProduct) {
+        $scope.errorMessage = 'Please select a product to view its history';
+        return;
+      }
+
+      $scope.isLoading = true;
+      ConsumerService.getProductHistory($scope.selectedProduct.product._id)
+        .then(function(history) {
+          $scope.productHistory = history;
+          console.log('Product history loaded:', $scope.productHistory);
+        })
+        .catch(function(error) {
+          handleError(error, 'loading product history');
+        })
+        .finally(function() {
+          $scope.isLoading = false;
+          $scope.$applyAsync();
+        });
     };
 
     /**
@@ -411,33 +461,40 @@ angular.module('foodTraceabilityApp')
      */
     function initializeDashboard() {
       if ($scope.isWalletConnected) {
-        $scope.loadMyProducts();
+        $scope.loadProducts();
         $scope.loadPendingTransfers();
       }
     }
 
-    // Initialize dashboard
-    function initializeDashboard() {
-        if ($scope.isWalletConnected) {
-          $scope.loadMyProducts();
+    // Call initialize function
+    initializeDashboard();
+
+    // Watch for changes in wallet connection status
+    $scope.$watch('isWalletConnected', function(newValue, oldValue) {
+      if (newValue !== oldValue) {
+        if (newValue) {
+          $scope.refreshWalletBalance();
+          $scope.loadProducts();
           $scope.loadPendingTransfers();
+        } else {
+          $scope.walletBalance = 0;
+          $scope.products = [];
+          $scope.pendingTransfers = [];
         }
       }
-  
-      // Call initialize function
-      initializeDashboard();
-  
-      // Set up an interval to check for new transfers
-        var transferCheckInterval = $interval(function() {
-        if ($scope.isWalletConnected) {
-          $scope.loadPendingTransfers();
-        }
-      }, 30000); // Check every 30 seconds
-  
-      // Cleanup on scope destruction
-      $scope.$on('$destroy', function() {
-        if (angular.isDefined(transferCheckInterval)) {
-          $interval.cancel(transferCheckInterval);
-        }
-      });
-    }]);
+    });
+
+    // Set up an interval to check for new transfers
+    var transferCheckInterval = $interval(function() {
+      if ($scope.isWalletConnected) {
+        $scope.loadPendingTransfers();
+      }
+    }, 30000); // Check every 30 seconds
+
+    // Cleanup on scope destruction
+    $scope.$on('$destroy', function() {
+      if (angular.isDefined(transferCheckInterval)) {
+        $interval.cancel(transferCheckInterval);
+      }
+    });
+  }]);

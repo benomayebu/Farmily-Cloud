@@ -94,7 +94,6 @@ angular.module('foodTraceabilityApp', ['ngRoute', 'ui.bootstrap'])
         controller: 'ConsumerController'
       })
       // Real-time tracking route
-      // Real-time tracking route
       .when('/real-time-tracking', {
         templateUrl: '/public/real-time-tracking.html',
         controller: 'TrackingController'

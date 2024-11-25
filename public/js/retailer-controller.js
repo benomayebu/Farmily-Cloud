@@ -250,9 +250,9 @@ $scope.updateProductInfo = function() {
   RetailerService.updateProductInfo($scope.selectedProduct._id, $scope.updatedInfo)
     .then(function(result) {
       if (result.success) {
-        $scope.successMessage = 'Product updated successfully: ' + result.message;
-        $scope.selectedProduct = result.product; // Update the selected product with new details
+        $scope.successMessage = result.message;
         $scope.closeUpdateProductForm();
+        // Optionally, refresh the product details
         return $scope.loadProducts();
       } else {
         throw new Error(result.error || 'Update failed');
@@ -311,40 +311,94 @@ $scope.updateProductInfo = function() {
     };
 
 
-    /**
+  /**
      * Initiate a transfer to a consumer
      */
-    // Add this function to handle dismissing error messages
+  $scope.initiateTransferToConsumer = function() {
+    if (!$scope.isWalletConnected) {
+      $scope.errorMessage = 'Please connect your wallet first';
+      return;
+    }
 
-$scope.initiateTransferToConsumer = function() {
-  if (!$scope.transferData.productId || !$scope.transferData.consumerId || !$scope.transferData.quantity) {
-    $scope.errorMessage = 'Please fill in all transfer details';
-    return;
-  }
+    if (!$scope.transferData.productId || !$scope.transferData.consumerId || !$scope.transferData.quantity) {
+      $scope.errorMessage = 'Please fill in all transfer details';
+      return;
+    }
 
-  $scope.isLoading = true;
-  RetailerService.initiateTransferToConsumer($scope.transferData)
-    .then(function(result) {
-      if (result.success) {
-        $scope.successMessage = 'Transfer initiated successfully: ' + result.message;
-        $scope.errorMessage = ''; // Clear any previous error messages
-        $scope.loadProducts();
-        $scope.addNotification('Transfer initiated to consumer');
-      } else {
-        $scope.errorMessage = 'Failed to initiate transfer: ' + result.error;
-        $scope.successMessage = ''; // Clear any previous success messages
-      }
-    })
-    .catch(function(error) {
-      console.error('Error initiating transfer:', error);
-      $scope.errorMessage = 'An unexpected error occurred while initiating transfer';
-      $scope.successMessage = ''; // Clear any previous success messages
-    })
-    .finally(function() {
-      $scope.isLoading = false;
-      $scope.$applyAsync();
-    });
+    console.log(`Initiating transfer to consumer. Product ID: ${$scope.transferData.productId}, Consumer ID: ${$scope.transferData.consumerId}, Quantity: ${$scope.transferData.quantity}`);
+
+    $scope.isLoading = true;
+    $scope.successMessage = '';
+    $scope.errorMessage = '';
+
+    RetailerService.initiateTransferToConsumer($scope.transferData.productId, $scope.transferData.consumerId, $scope.transferData.quantity)
+      .then(function(result) {
+        if (result.success) {
+          $scope.successMessage = 'Transfer initiated successfully: ' + result.message;
+          $scope.addNotification('Transfer initiated to consumer successfully');
+          showSuccessAlert($scope.successMessage);
+          $scope.loadProducts();
+          $scope.transferData = {
+            productId: null,
+            consumerId: null,
+            quantity: null
+          };
+        } else {
+          throw new Error(result.error || 'Failed to initiate transfer');
+        }
+      })
+      .catch(function(error) {
+        console.error('Error initiating transfer:', error);
+        $scope.errorMessage = 'An error occurred while initiating transfer: ' + (error.error || error.message || 'Unknown error');
+        showErrorAlert($scope.errorMessage);
+      })
+      .finally(function() {
+        $scope.isLoading = false;
+        $scope.$applyAsync();
+      });
+  };
+
+
+// Helper function to show success alert (implement based on your UI framework)
+function showSuccessAlert(message) {
+  // This is a placeholder. Implement based on your UI framework.
+  // For example, if you're using Angular Material:
+  // $mdToast.show($mdToast.simple().textContent(message).position('top right').hideDelay(3000));
+  console.log('Success:', message);
+  // If you don't have a specific alert system, you could use browser's alert for now
+  alert('Success: ' + message);
+}
+
+// Helper function to show error alert (implement based on your UI framework)
+function showErrorAlert(message) {
+  // This is a placeholder. Implement based on your UI framework.
+  console.error('Error:', message);
+  // If you don't have a specific alert system, you could use browser's alert for now
+  alert('Error: ' + message);
+}
+
+/**
+ * Add a notification
+ * @param {string} message - The notification message
+ */
+$scope.addNotification = function(message) {
+  $scope.notifications.push({ message: message, timestamp: new Date() });
+  console.log('Notification added:', message);
+  // Ensure the view is updated
+  $scope.$applyAsync();
+  // Optionally, you can use a toast or alert service here
+  showNotification(message);
 };
+
+// Helper function to show notifications (implement based on your UI framework)
+function showNotification(message) {
+  // This is a placeholder. Implement based on your UI framework.
+  // For example, if you're using Angular Material:
+  // $mdToast.show($mdToast.simple().textContent(message).position('top right').hideDelay(3000));
+  console.log('Showing notification:', message);
+  // If you don't have a specific notification system, you could use browser's alert for now
+  alert(message);
+}
     /**
      * Load transaction history
      */
@@ -353,7 +407,7 @@ $scope.initiateTransferToConsumer = function() {
         $scope.errorMessage = 'Please connect your wallet to view transaction history';
         return;
       }
-
+    
       $scope.isLoading = true;
       RetailerService.getTransactionHistory()
         .then(function(history) {
@@ -451,20 +505,45 @@ $scope.syncProductWithBlockchain = function(productId) {
       }
     };
 
-    /**
-     * Open real-time tracking page for a product
-     */
-    $scope.openRealTimeTracking = function() {
-      if (!$scope.selectedProduct) {
-        console.error('No product selected for real-time tracking');
-        $scope.errorMessage = 'Please select a product before opening real-time tracking.';
-        return;
-      }
+/**
+ * Opens the real-time tracking page for the selected product
+ * This function passes all relevant product details to the tracking page
+ */
+$scope.openRealTimeTracking = function() {
+  if (!$scope.selectedProduct) {
+      console.error('No product selected for real-time tracking');
+      $scope.errorMessage = 'Please select a product before opening real-time tracking.';
+      return;
+  }
 
-      var url = '/public/real-time-tracking.html?id=' + encodeURIComponent($scope.selectedProduct._id);
-      $window.open(url, '_blank');
-      console.log('Opening real-time tracking for product:', $scope.selectedProduct._id);
-    };
+  console.log('Selected product for tracking:', $scope.selectedProduct);
+
+  // Construct the URL with all product details as query parameters
+  var url = '/public/retailer-real-time-tracking.html?' + 
+      'id=' + encodeURIComponent($scope.selectedProduct._id) +
+      '&type=' + encodeURIComponent($scope.selectedProduct.type) +
+      '&origin=' + encodeURIComponent($scope.selectedProduct.origin) +
+      '&productionDate=' + encodeURIComponent($scope.selectedProduct.productionDate) +
+      '&batchNumber=' + encodeURIComponent($scope.selectedProduct.batchNumber) +
+      '&status=' + encodeURIComponent($scope.selectedProduct.status) +
+      '&quantity=' + encodeURIComponent($scope.selectedProduct.quantity) +
+      '&price=' + encodeURIComponent($scope.selectedProduct.price) +
+      '&blockchainId=' + encodeURIComponent($scope.selectedProduct.blockchainId) +
+      '&blockchainStatus=' + encodeURIComponent($scope.selectedProduct.blockchainStatus) +
+      '&storageConditions=' + encodeURIComponent($scope.selectedProduct.storageConditions) +
+      '&transportationMode=' + encodeURIComponent($scope.selectedProduct.transportationMode) +
+      '&transportationDetails=' + encodeURIComponent($scope.selectedProduct.transportationDetails) +
+      '&estimatedDeliveryDate=' + encodeURIComponent($scope.selectedProduct.estimatedDeliveryDate) +
+      '&certifications=' + encodeURIComponent(JSON.stringify($scope.selectedProduct.certifications)) +
+      '&farmerUsername=' + encodeURIComponent($scope.selectedProduct.farmer ? $scope.selectedProduct.farmer.username : 'N/A') +
+      '&distributorUsername=' + encodeURIComponent($scope.selectedProduct.distributor ? $scope.selectedProduct.distributor.username : 'N/A') +
+      '&retailerUsername=' + encodeURIComponent($scope.selectedProduct.retailer ? $scope.selectedProduct.retailer.username : 'N/A');
+
+  console.log('Opening URL:', url);
+  
+  // Open the tracking page in a new tab
+  $window.open(url, '_blank');
+};
 
     /**
      * Show traceability information for the selected product
@@ -644,23 +723,22 @@ $scope.syncProductWithBlockchain = function(productId) {
     $scope.showProductDetails = function(productId) {
       console.log('Showing details for product:', productId);
       $scope.isLoading = true;
-      RetailerService.getProductDetails(productId)
-        .then(function(product) {
-          $scope.selectedProduct = product;
-          // Convert date strings to Date objects
-          $scope.selectedProduct.productionDate = new Date($scope.selectedProduct.productionDate);
-          $scope.selectedProduct.estimatedDeliveryDate = new Date($scope.selectedProduct.estimatedDeliveryDate);
-          console.log('Selected product:', $scope.selectedProduct);
-          $scope.showProductModal = true;
-          $scope.isLoading = false;
-        })
-        .catch(function(error) {
-          handleError(error, 'fetching product details');
-        })
-        .finally(function() {
-          $scope.$applyAsync();
-        });
-    };
+      RetailerService.getProductWithFullInfo(productId)
+          .then(function(fullProductInfo) {
+              $scope.selectedProduct = fullProductInfo.product;
+              $scope.selectedProduct.farmer = fullProductInfo.farmer;
+              $scope.selectedProduct.distributor = fullProductInfo.distributor;
+              $scope.selectedProduct.retailer = fullProductInfo.currentOwner;
+              $scope.showProductModal = true;
+              $scope.isLoading = false;
+          })
+          .catch(function(error) {
+              handleError(error, 'fetching product details');
+          })
+          .finally(function() {
+              $scope.$applyAsync();
+          });
+  };
 
     /**
      * Sync product with blockchain

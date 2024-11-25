@@ -207,9 +207,9 @@ $scope.showTraceability = function(product) {
 };
 
 /**
-     * Opens the real-time tracking page for a selected product
-     * @param {Object} product - The selected product object
-     */
+ * Opens the real-time tracking page for a selected product
+ * @param {Object} product - The selected product object
+ */
 $scope.openRealTimeTracking = function(product) {
   if (product && product._id) {
     var url = '/public/real-time-tracking.html?' + 

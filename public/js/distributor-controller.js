@@ -528,6 +528,7 @@ $scope.generateQRCode = function(product) {
 
 /**
  * Opens the real-time tracking page for the selected product
+ * This function passes all relevant product details to the tracking page
  */
 $scope.openRealTimeTracking = function() {
   if (!$scope.selectedProduct) {
@@ -536,13 +537,32 @@ $scope.openRealTimeTracking = function() {
     return;
   }
 
-  // Construct the URL with query parameters
-  var url = '/public/real-time-tracking.html?id=' + encodeURIComponent($scope.selectedProduct._id);
+  console.log('Selected product for tracking:', $scope.selectedProduct);
+
+  // Construct the URL with all product details as query parameters
+  var url = '/public/distributor-real-time-tracking.html?' + 
+    'id=' + encodeURIComponent($scope.selectedProduct._id) +
+    '&type=' + encodeURIComponent($scope.selectedProduct.type) +
+    '&origin=' + encodeURIComponent($scope.selectedProduct.origin) +
+    '&productionDate=' + encodeURIComponent($scope.selectedProduct.productionDate) +
+    '&batchNumber=' + encodeURIComponent($scope.selectedProduct.batchNumber) +
+    '&status=' + encodeURIComponent($scope.selectedProduct.status) +
+    '&quantity=' + encodeURIComponent($scope.selectedProduct.quantity) +
+    '&price=' + encodeURIComponent($scope.selectedProduct.price) +
+    '&blockchainId=' + encodeURIComponent($scope.selectedProduct.blockchainId) +
+    '&blockchainStatus=' + encodeURIComponent($scope.selectedProduct.blockchainStatus) +
+    '&storageConditions=' + encodeURIComponent($scope.selectedProduct.storageConditions) +
+    '&transportationMode=' + encodeURIComponent($scope.selectedProduct.transportationMode) +
+    '&transportationDetails=' + encodeURIComponent($scope.selectedProduct.transportationDetails) +
+    '&estimatedDeliveryDate=' + encodeURIComponent($scope.selectedProduct.estimatedDeliveryDate) +
+    '&certifications=' + encodeURIComponent(JSON.stringify($scope.selectedProduct.certifications)) +
+    '&farmerUsername=' + encodeURIComponent($scope.selectedProduct.originalOwner.username) +
+    '&distributorUsername=' + encodeURIComponent($scope.selectedProduct.currentOwner.username);
+
+  console.log('Opening URL:', url);
   
   // Open the tracking page in a new tab
   $window.open(url, '_blank');
-  
-  console.log('Opening real-time tracking for product:', $scope.selectedProduct._id);
 };
 
 /**

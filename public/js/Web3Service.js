@@ -8,7 +8,7 @@
  */
 
 angular.module('foodTraceabilityApp')
-  .factory('Web3Service', ['$q', '$window', '$http', function($q, $window, $http) {
+  .factory('Web3Service', ['$q', '$window', '$rootScope', '$timeout', function($q, $window, $rootScope, $timeout) {
     let web3;
     let contract;
     let currentAccount;
@@ -838,7 +838,7 @@ function handleError(error) {
 }
 
 /**
-     * Initialize Web3 and connect to Ethereum with debounce
+     * Initialize Web3 and connect to Ethereum
      * @returns {Promise} - A promise that resolves with the current account
      */
 function initWeb3() {
@@ -846,37 +846,65 @@ function initWeb3() {
     return connectionPromise;
   }
 
-  if (connectionTimeout) {
-    clearTimeout(connectionTimeout);
-  }
-
   connectionPromise = new Promise((resolve, reject) => {
-    connectionTimeout = setTimeout(() => {
-      if (typeof $window.ethereum !== 'undefined') {
-        web3 = new Web3($window.ethereum);
-        $window.ethereum.request({ method: 'eth_requestAccounts' })
-          .then(accounts => {
-            if (accounts.length === 0) {
-              reject('No Ethereum accounts available');
-            } else {
-              currentAccount = accounts[0];
-              contract = new web3.eth.Contract(contractABI, contractAddress);
-              console.log('Connected to Ethereum account:', currentAccount);
-              resolve(currentAccount);
-            }
-          })
-          .catch(error => reject('Failed to connect Ethereum wallet: ' + error.message))
-          .finally(() => {
-            connectionPromise = null;
-            connectionTimeout = null;
-          });
-      } else {
-        reject('MetaMask or another Ethereum wallet extension is required.');
-      }
-    }, 1000); // 1 second debounce
+    if (typeof $window.ethereum !== 'undefined') {
+      web3 = new Web3($window.ethereum);
+      $window.ethereum.request({ method: 'eth_requestAccounts' })
+        .then(accounts => {
+          if (accounts.length === 0) {
+            reject('No Ethereum accounts available');
+          } else {
+            currentAccount = accounts[0];
+            contract = new web3.eth.Contract(contractABI, contractAddress);
+            console.log('Connected to Ethereum account:', currentAccount);
+            
+            // Start listening to blockchain events
+            listenToBlockchainEvents();
+            
+            resolve(currentAccount);
+          }
+        })
+        .catch(error => reject('Failed to connect Ethereum wallet: ' + error.message))
+        .finally(() => {
+          connectionPromise = null;
+        });
+    } else {
+      reject('MetaMask or another Ethereum wallet extension is required.');
+    }
   });
 
   return connectionPromise;
+}
+
+/**
+ * Listen to relevant blockchain events
+ */
+function listenToBlockchainEvents() {
+  // Listen to TransferAccepted events
+  contract.events.TransferAccepted({
+    fromBlock: 'latest'
+  })
+  .on('data', function(event) {
+    console.log('TransferAccepted event:', event);
+    // Emit an event to update the frontend
+    $rootScope.$emit('TransferAccepted', event.returnValues);
+  })
+  .on('error', function(error) {
+    console.error('Error on TransferAccepted event:', error);
+  });
+
+  // Listen to TransferInitiated events
+  contract.events.TransferInitiated({
+    fromBlock: 'latest'
+  })
+  .on('data', function(event) {
+    console.log('TransferInitiated event:', event);
+    // Emit an event to update the frontend
+    $rootScope.$emit('TransferInitiated', event.returnValues);
+  })
+  .on('error', function(error) {
+    console.error('Error on TransferInitiated event:', error);
+  });
 }
 
 /**
@@ -950,6 +978,27 @@ function getBalance() {
       })
       .catch(reject);
   }).catch(handleError);
+}
+/**
+ * Get the current Ethereum account address
+ * @returns {Promise<string>} - A promise that resolves with the current Ethereum account address
+ */
+function getCurrentAddress() {
+  return $q(function(resolve, reject) {
+    if (web3 && currentAccount) {
+      resolve(currentAccount);
+    } else {
+      web3.eth.getAccounts()
+        .then(function(accounts) {
+          if (accounts.length > 0) {
+            resolve(accounts[0]);
+          } else {
+            reject('No Ethereum accounts found');
+          }
+        })
+        .catch(reject);
+    }
+  });
 }
 
 /**
@@ -1638,142 +1687,166 @@ function acceptTransferAsRetailer(transferId) {
  */
 function updateProductInfoAsRetailer(productId, updatedInfo) {
   return $q(function(resolve, reject) {
-    // Check if Web3 and smart contract are initialized and user is connected
-    if (!contract || !currentAccount) {
-      reject({ success: false, error: 'Web3 not initialized or no account connected' });
+    if (!web3 || !contract || !window.ethereum) {
+      reject({ success: false, error: 'Web3 or MetaMask not initialized' });
       return;
     }
 
     console.log(`Retailer updating product info: ${productId}`, updatedInfo);
     
-    // Convert the productId to the correct format for the blockchain
     const formattedProductId = convertToBytes32(productId);
-    
-    // Convert the updated info object to a JSON string
     const details = JSON.stringify(updatedInfo);
 
-    // Call the smart contract method to update product info
-    contract.methods.updateProductInfo(formattedProductId, details)
-      .send({ from: currentAccount }) // Send the transaction from the current user's account
-      .then(function(receipt) {
-        console.log('Product info updated by retailer:', receipt);
-        // Resolve with success status and transaction hash
-        resolve({ 
-          success: true, 
-          txHash: receipt.transactionHash,
-          message: 'Product information updated successfully on the blockchain.'
-        });
-      })
-      .catch(function(error) {
-        console.error('Error updating product info as retailer:', error);
-        // Reject with error information if the update fails
-        reject({ 
-          success: false, 
-          error: error.message || 'An error occurred during the blockchain transaction'
-        });
-      });
-  });
-}
+    // Prepare the transaction object
+    const txObject = contract.methods.updateProductInfo(formattedProductId, details);
 
-/**
- * Update product information by retailer on the blockchain
- * @param {string} productId - The blockchain ID of the product
- * @param {Object} updatedInfo - The updated product information
- * @returns {Promise<Object>} A promise that resolves with the update result
- */
-function updateProductInfoAsRetailer(productId, updatedInfo) {
-  return $q(function(resolve, reject) {
-    // Check if Web3 and smart contract are initialized and user is connected
-    if (!contract || !currentAccount) {
-      reject({ success: false, error: 'Web3 not initialized or no account connected' });
-      return;
-    }
-
-    console.log(`Retailer updating product info: ${productId}`, updatedInfo);
-    
-    // Convert the productId to the correct format for the blockchain
-    const formattedProductId = convertToBytes32(productId);
-    
-    // Convert the updated info object to a JSON string
-    const details = JSON.stringify(updatedInfo);
-
-    // Estimate gas for the transaction
-    contract.methods.updateProductInfo(formattedProductId, details).estimateGas({ from: currentAccount })
+    // Estimate gas
+    txObject.estimateGas({ from: window.ethereum.selectedAddress })
       .then(function(gasEstimate) {
         console.log('Estimated gas:', gasEstimate);
-        // Send the transaction with the estimated gas (plus a buffer)
-        return contract.methods.updateProductInfo(formattedProductId, details).send({ 
-          from: currentAccount,
-          gas: Math.floor(gasEstimate * 1.5) // Increase buffer to 50% to avoid out-of-gas errors
+        
+        // Prepare transaction parameters
+        const txParams = {
+          from: window.ethereum.selectedAddress,
+          to: contract._address,
+          data: txObject.encodeABI(),
+          gas: web3.utils.toHex(Math.floor(gasEstimate * 1.5)) // 50% buffer
+        };
+
+        // Send transaction - this will trigger MetaMask popup
+        return window.ethereum.request({
+          method: 'eth_sendTransaction',
+          params: [txParams],
         });
       })
+      .then(function(txHash) {
+        console.log('Transaction sent:', txHash);
+        // Wait for transaction confirmation
+        return waitForTransactionReceipt(txHash);
+      })
       .then(function(receipt) {
-        console.log('Product info updated by retailer. Transaction receipt:', receipt);
+        console.log('Transaction confirmed:', receipt);
         resolve({ 
           success: true, 
           txHash: receipt.transactionHash,
-          message: 'Product information updated successfully on the blockchain.'
+          message: 'Product updated successfully on the blockchain.'
         });
       })
       .catch(function(error) {
-        console.error('Error updating product info as retailer:', error);
-        // Provide more detailed error information
-        let errorMessage = 'An error occurred during the blockchain transaction';
-        if (error.message) {
-          errorMessage += ': ' + error.message;
-        }
-        if (error.code) {
-          errorMessage += ' (Error code: ' + error.code + ')';
-        }
-        // Check for specific error types
-        if (error.message.includes('gas required exceeds allowance')) {
-          errorMessage = 'Transaction failed due to insufficient gas. Please try again or increase the gas limit.';
-        } else if (error.message.includes('nonce too low')) {
-          errorMessage = 'Transaction nonce is too low. Please refresh the page and try again.';
-        } else if (error.message.includes('Internal JSON-RPC error')) {
-          errorMessage = 'Internal blockchain error occurred. Please try again later.';
-        }
-        reject({ success: false, error: errorMessage });
+        console.error('MetaMask error:', error);
+        reject({ 
+          success: false, 
+          error: error.message || 'Transaction rejected or failed'
+        });
       });
   });
 }
 
-/**
- * Initiate a transfer from retailer to consumer
- * @param {string} productId - The blockchain ID of the product
- * @param {string} consumerId - The consumer's unique identifier
- * @param {number} quantity - The quantity to transfer
- * @returns {Promise<Object>} A promise that resolves with the transaction result
- */
-function initiateRetailerToConsumerTransfer(productId, consumerId, quantity) {
+// Helper function to wait for transaction receipt
+function waitForTransactionReceipt(txHash, maxAttempts = 30) {
+  return new Promise((resolve, reject) => {
+    let attempts = 0;
+    const checkReceipt = () => {
+      web3.eth.getTransactionReceipt(txHash)
+        .then(receipt => {
+          if (receipt) {
+            resolve(receipt);
+          } else if (attempts < maxAttempts) {
+            attempts++;
+            setTimeout(checkReceipt, 2000); // Check every 2 seconds
+          } else {
+            reject(new Error('Transaction not mined within the expected time'));
+          }
+        })
+        .catch(reject);
+    };
+    checkReceipt();
+  });
+}
+
+
+ /**
+     * Initiate a transfer from retailer to consumer
+     * @param {string} productId - The blockchain ID of the product
+     * @param {string} consumerId - The consumer's unique identifier
+     * @param {number} quantity - The quantity to transfer
+     * @returns {Promise<Object>} A promise that resolves with the transaction result
+     */
+ function initiateRetailerToConsumerTransfer(productId, consumerId, quantity) {
   return $q(function(resolve, reject) {
-    if (!contract || !currentAccount) {
-      reject({ success: false, error: 'Web3 not initialized or no account connected' });
+    if (!web3 || !contract || !$window.ethereum) {
+      reject({ success: false, error: 'Web3 or MetaMask not initialized' });
       return;
     }
 
-    console.log(`Retailer initiating transfer to consumer: ${productId}, ${consumerId}, ${quantity}`);
-    const formattedProductId = convertToBytes32(productId);
+    console.log(`Initiating transfer on blockchain. Product ID: ${productId}, Consumer ID: ${consumerId}, Quantity: ${quantity}`);
 
-    contract.methods.initiateTransfer(formattedProductId, consumerId, quantity)
-      .send({ from: currentAccount })
-      .then(function(receipt) {
-        console.log('Transfer to consumer initiated:', receipt);
+    const formattedProductId = convertToBytes32(productId);
+    let currentAccount;
+
+    // Set a timeout for the entire process
+    const timeout = $timeout(function() {
+      reject({ success: false, error: 'Transaction timed out. It may still be pending, please check your MetaMask for status.' });
+    }, 90000); // 90 seconds timeout
+
+    // Request account access if needed
+    $window.ethereum.request({ method: 'eth_requestAccounts' })
+      .then(function(accounts) {
+        if (accounts.length === 0) {
+          throw new Error('No Ethereum accounts found');
+        }
+        currentAccount = accounts[0];
+
+        // Prepare the transaction
+        return contract.methods.initiateTransfer(formattedProductId, consumerId, quantity).estimateGas({ from: currentAccount });
+      })
+      .then(function(gasEstimate) {
+        console.log('Estimated gas:', gasEstimate);
+        
+        // Prompt the user to sign the transaction using MetaMask
+        return $window.ethereum.request({
+          method: 'eth_sendTransaction',
+          params: [{
+            from: currentAccount,
+            to: contract._address,
+            data: contract.methods.initiateTransfer(formattedProductId, consumerId, quantity).encodeABI(),
+            gas: web3.utils.toHex(Math.floor(gasEstimate * 2)) // Double the gas estimate
+          }]
+        });
+      })
+      .then(function(txHash) {
+        console.log('Transaction hash:', txHash);
+        // Emit an event to notify the controller
+        $rootScope.$emit('transferInitiated', { txHash, productId, consumerId, quantity });
+        
+        // Clear the timeout as the transaction was sent successfully
+        $timeout.cancel(timeout);
+        
         resolve({ 
           success: true, 
-          txHash: receipt.transactionHash,
-          message: 'Transfer to consumer initiated successfully on the blockchain.'
+          txHash: txHash, 
+          message: 'Transfer initiated successfully on the blockchain. Please wait for confirmation.' 
         });
       })
       .catch(function(error) {
-        console.error('Error initiating transfer to consumer:', error);
-        reject({ 
-          success: false, 
-          error: error.message || 'An error occurred during the blockchain transaction'
-        });
+        console.error('Blockchain transaction error:', error);
+        // Clear the timeout as we're handling the error
+        $timeout.cancel(timeout);
+        
+        // Handle different types of errors
+        if (error.code === 4001) {
+          reject({ success: false, error: 'Transaction rejected by user' });
+        } else if (error.code === -32603) {
+          reject({ success: false, error: 'Internal JSON-RPC error. Please check your Ethereum node connection and try again.' });
+        } else if (error.message.includes('Transaction was not mined within')) {
+          reject({ success: false, error: 'Transaction was sent but not mined within the timeout period. It may still be pending, please check your MetaMask for status.' });
+        } else {
+          reject({ success: false, error: error.message || 'An error occurred during the blockchain transaction' });
+        }
       });
   });
 }
+
 /**
  * Get pending transfers for the retailer
  * @returns {Promise<Object>} - Resolves with an array of pending transfers
@@ -1878,10 +1951,10 @@ function checkTransferStatus(txHash) {
  */
 
 /**
- * Verify a product's authenticity
- * @param {string} productId - The blockchain ID of the product to verify
- * @returns {Promise<Object>} The verification result
- */
+     * Verify a product's authenticity
+     * @param {string} productId - The blockchain ID of the product to verify
+     * @returns {Promise<Object>} The verification result
+     */
 function verifyProduct(productId) {
   return $q(function(resolve, reject) {
     if (!contract || !currentAccount) {
@@ -1892,21 +1965,22 @@ function verifyProduct(productId) {
     console.log(`Verifying product: ${productId}`);
     const formattedProductId = convertToBytes32(productId);
 
-    contract.methods.getProduct(formattedProductId).call({ from: currentAccount })
-      .then(function(product) {
-        const isAuthentic = product[0] !== ''; // Check if the product exists
+    contract.methods.getProductState(formattedProductId).call({ from: currentAccount })
+      .then(function(productState) {
+        const isAuthentic = productState.currentOwner !== '0x0000000000000000000000000000000000000000';
         resolve({
           success: true,
           isAuthentic: isAuthentic,
           product: isAuthentic ? {
-            batchNumber: product[0],
-            type: product[1],
-            origin: product[2],
-            productionDate: new Date(parseInt(product[3]) * 1000),
-            quantity: parseInt(product[4]),
-            currentOwner: product[5],
-            status: Object.keys(statusEnum)[parseInt(product[6])],
-            price: web3.utils.fromWei(product[7], 'ether')
+            batchNumber: productState.batchNumber,
+            productType: productState.productType,
+            origin: productState.origin,
+            productionDate: new Date(parseInt(productState.productionDate) * 1000),
+            quantity: parseInt(productState.quantity),
+            currentOwner: productState.currentOwner,
+            status: getStatusString(parseInt(productState.status)),
+            price: web3.utils.fromWei(productState.price, 'ether'),
+            hasPendingTransfer: productState.hasPendingTransfer
           } : null
         });
       })
@@ -1918,44 +1992,71 @@ function verifyProduct(productId) {
 }
 
 /**
- * Get the journey of a product
- * @param {string} productId - The blockchain ID of the product
- * @returns {Promise<Array>} The product's journey
+ * Get the string representation of a status code
+ * @param {number} statusCode - The status code
+ * @returns {string} The status string
  */
-function getProductJourney(productId) {
+function getStatusString(statusCode) {
+  const statuses = ['Registered', 'Planted', 'Growing', 'Harvested', 'Processed', 'Packaged', 'InTransit', 'Delivered'];
+  return statuses[statusCode] || 'Unknown';
+}
+
+/**
+ * Check if a transfer exists on the blockchain
+ * @param {string} transferId - The blockchain transaction hash of the transfer
+ * @returns {Promise<boolean>} - Resolves with true if the transfer exists, false otherwise
+ */
+function checkTransferExistsOnBlockchain(transferId) {
   return $q(function(resolve, reject) {
     if (!contract || !currentAccount) {
-      reject({ success: false, error: 'Web3 not initialized or no account connected' });
+      reject('Web3 not initialized or no account connected');
       return;
     }
 
-    console.log(`Getting journey for product: ${productId}`);
-    const formattedProductId = convertToBytes32(productId);
-
-    // Assuming there's a method to get the product journey in the smart contract
-    contract.methods.getProductJourney(formattedProductId).call({ from: currentAccount })
-      .then(function(journey) {
-        resolve({
-          success: true,
-          journey: journey.map(step => ({
-            timestamp: new Date(parseInt(step.timestamp) * 1000),
-            action: step.action,
-            actor: step.actor,
-            details: step.details
-          }))
-        });
+    console.log('Checking transfer existence on blockchain:', transferId);
+    contract.methods.pendingTransfers(transferId).call({ from: currentAccount })
+      .then(function(transferData) {
+        const exists = transferData.quantity !== '0';
+        console.log('Transfer exists on blockchain:', exists);
+        resolve({ exists: exists });
       })
       .catch(function(error) {
-        console.error('Error getting product journey:', error);
-        reject({ success: false, error: error.message });
+        console.error('Error checking transfer on blockchain:', error);
+        resolve({ exists: false });
       });
   });
 }
 
 /**
- * Accept a transfer of ownership (for consumer)
- * @param {string} transferId - The ID of the transfer to accept
- * @returns {Promise<Object>} The transaction receipt
+ * Estimate gas price
+ * @returns {Promise<string>} - Resolves with the estimated gas price in wei
+ */
+function estimateGasPrice() {
+  return web3.eth.getGasPrice()
+    .then(function(price) {
+      // Add a 20% buffer to the gas price
+      return (parseFloat(price) * 1.2).toString();
+    });
+}
+
+/**
+ * Convert a value to bytes32 format
+ * @param {string} value - The value to convert
+ * @returns {string} The value in bytes32 format
+ */
+function convertToBytes32(value) {
+  // If the value is already 66 characters long (0x + 64 hex characters), return it as is
+  if (value.startsWith('0x') && value.length === 66) {
+    return value;
+  }
+  // Otherwise, remove '0x' if present, pad to 32 bytes, and add '0x' prefix
+  return '0x' + value.replace('0x', '').padStart(64, '0');
+}
+
+/**
+ * Accept a transfer as a consumer on the blockchain
+ * @param {string} transferId - The blockchain transaction hash of the transfer to accept
+ * @returns {Promise<Object>} - Resolves with the transaction result
  */
 function acceptTransferAsConsumer(transferId) {
   return $q(function(resolve, reject) {
@@ -1965,9 +2066,8 @@ function acceptTransferAsConsumer(transferId) {
     }
 
     console.log(`Consumer accepting transfer: ${transferId}`);
-    const formattedTransferId = convertToBytes32(transferId);
 
-    contract.methods.acceptTransfer(formattedTransferId).send({ from: currentAccount })
+    contract.methods.acceptTransfer(transferId).send({ from: currentAccount })
       .then(function(receipt) {
         console.log('Transfer accepted by consumer:', receipt);
         resolve({ success: true, txHash: receipt.transactionHash });
@@ -1980,13 +2080,44 @@ function acceptTransferAsConsumer(transferId) {
 }
 
 /**
- * Submit feedback for a product
- * @param {string} productId - The blockchain ID of the product
- * @param {number} rating - The rating (1-5)
- * @param {string} comment - The feedback comment
- * @returns {Promise<Object>} The transaction receipt
+ * Cancel a transfer on the blockchain
+ * @param {string} transferId - The blockchain transaction hash of the transfer to cancel
+ * @returns {Promise<Object>} - Resolves with the transaction result
  */
-function submitProductFeedback(productId, rating, comment) {
+function cancelTransferOnBlockchain(transferId) {
+  return $q(function(resolve, reject) {
+    if (!contract || !currentAccount) {
+      reject('Web3 not initialized or no account connected');
+      return;
+    }
+
+    const formattedTransferId = web3.utils.padLeft(web3.utils.toHex(transferId), 64);
+    contract.methods.cancelTransfer(formattedTransferId).send({ from: currentAccount })
+      .then(function(receipt) {
+        resolve({
+          success: true,
+          txHash: receipt.transactionHash,
+          message: 'Transfer cancelled successfully on the blockchain.'
+        });
+      })
+      .catch(function(error) {
+        reject({
+          success: false,
+          error: error.message || 'An error occurred during the blockchain transaction'
+        });
+      });
+  });
+}
+
+
+ /**
+     * Submit feedback for a product
+     * @param {string} productId - The blockchain ID of the product
+     * @param {number} rating - The rating (1-5)
+     * @param {string} comment - The feedback comment
+     * @returns {Promise<Object>} The transaction receipt
+     */
+ function submitProductFeedback(productId, rating, comment) {
   return $q(function(resolve, reject) {
     if (!contract || !currentAccount) {
       reject({ success: false, error: 'Web3 not initialized or no account connected' });
@@ -2004,6 +2135,90 @@ function submitProductFeedback(productId, rating, comment) {
       })
       .catch(function(error) {
         console.error('Error submitting feedback:', error);
+        reject({ success: false, error: error.message });
+      });
+  });
+}
+
+/**
+     * Get the product journey from blockchain events
+     * @param {string} productId - The blockchain ID of the product
+     * @returns {Promise<Array>} A promise that resolves with the product's journey
+     */
+function getProductJourney(productId) {
+  return $q(function(resolve, reject) {
+    if (!contract || !currentAccount) {
+      reject({ success: false, error: 'Web3 not initialized or no account connected' });
+      return;
+    }
+
+    console.log(`Getting journey for product: ${productId}`);
+    const formattedProductId = convertToBytes32(productId);
+
+    // Get all relevant events for this product
+    const eventPromises = [
+      contract.getPastEvents('ProductCreated', { filter: { productId: formattedProductId }, fromBlock: 0 }),
+      contract.getPastEvents('StatusUpdated', { filter: { productId: formattedProductId }, fromBlock: 0 }),
+      contract.getPastEvents('OwnershipTransferred', { filter: { productId: formattedProductId }, fromBlock: 0 }),
+      contract.getPastEvents('ProductInfoUpdated', { filter: { productId: formattedProductId }, fromBlock: 0 })
+    ];
+
+    Promise.all(eventPromises)
+      .then(function([createdEvents, statusEvents, transferEvents, infoUpdateEvents]) {
+        const journey = [];
+
+        // Add creation event
+        if (createdEvents.length > 0) {
+          const createEvent = createdEvents[0];
+          journey.push({
+            action: 'Created',
+            timestamp: new Date(createEvent.returnValues.timestamp * 1000),
+            actor: createEvent.returnValues.owner,
+            details: `Batch Number: ${createEvent.returnValues.batchNumber}`
+          });
+        }
+
+        // Add status updates
+        statusEvents.forEach(event => {
+          journey.push({
+            action: 'Status Updated',
+            timestamp: new Date(event.blockNumber * 1000), // Using block number as a timestamp approximation
+            actor: event.returnValues.updatedBy,
+            oldStatus: getStatusString(event.returnValues.oldStatus),
+            newStatus: getStatusString(event.returnValues.newStatus)
+          });
+        });
+
+        // Add ownership transfers
+        transferEvents.forEach(event => {
+          journey.push({
+            action: 'Ownership Transferred',
+            timestamp: new Date(event.blockNumber * 1000),
+            from: event.returnValues.previousOwner,
+            to: event.returnValues.newOwner,
+            quantity: event.returnValues.quantity
+          });
+        });
+
+        // Add info updates
+        infoUpdateEvents.forEach(event => {
+          journey.push({
+            action: 'Info Updated',
+            timestamp: new Date(event.blockNumber * 1000),
+            details: event.returnValues.details
+          });
+        });
+
+        // Sort journey by timestamp
+        journey.sort((a, b) => a.timestamp - b.timestamp);
+
+        resolve({
+          success: true,
+          journey: journey
+        });
+      })
+      .catch(function(error) {
+        console.error('Error getting product journey:', error);
         reject({ success: false, error: error.message });
       });
   });
@@ -2076,6 +2291,7 @@ return {
   disconnectWallet,
   isWalletConnected,
   getBalance,
+  getCurrentAddress,
   registerProductOnBlockchain,
   checkProductExistsOnBlockchain,
   convertToBytes32,
@@ -2103,8 +2319,12 @@ return {
   recordSaleToConsumer,
   // consumer specific functions
   verifyProduct,
+  getStatusString,
   getProductJourney,
+  checkTransferExistsOnBlockchain,
+  estimateGasPrice,
   acceptTransferAsConsumer,
+  cancelTransferOnBlockchain, // duplicate function but for consumer
   submitProductFeedback,
   getConsumerProductHistory,
   scanProductQR

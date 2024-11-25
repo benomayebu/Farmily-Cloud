@@ -1,133 +1,280 @@
 <!DOCTYPE html>
-<html lang="en" ng-app="foodTraceabilityApp">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Real-Time Tracking - Farmily</title>
-    <!-- Bootstrap CSS -->
+    <!-- Bootstrap CSS for responsive design and styling -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <!-- Custom CSS -->
-    <link rel="stylesheet" href="/public/css/styles.css">
-    <!-- Font Awesome -->
+    <!-- Custom CSS file for additional styling -->
+    <link rel="stylesheet" href="/css/styles.css">
+    <!-- Font Awesome for icons -->
     <script src="https://kit.fontawesome.com/d03553a591.js" crossorigin="anonymous"></script>
+    <!-- jQuery for easier DOM manipulation -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- Moment.js for date formatting -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+    <!-- Custom styles for this page -->
     <style>
-        /* Custom styles */
-        .product-card {
-            margin-top: 20px;
-            padding: 20px;
-            background-color: #f8f9fa;
-            border-radius: 5px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        #map-container {
+            height: 400px;
+            width: 100%;
         }
-        .ownership-history {
-            margin-top: 20px;
+        .social-icon {
+            font-size: 1.5em;
+            margin: 0 10px;
         }
-        .ownership-history li {
-            margin-bottom: 10px;
+        /* Styles for the timeline */
+        .timeline {
+            position: relative;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .timeline::after {
+            content: '';
+            position: absolute;
+            width: 6px;
+            background-color: #1a1a1a;
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            margin-left: -3px;
+        }
+        .timeline-item {
+            padding: 10px 40px;
+            position: relative;
+            background-color: inherit;
+            width: 50%;
+        }
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            width: 25px;
+            height: 25px;
+            right: -17px;
+            background-color: white;
+            border: 4px solid #FF9F55;
+            top: 15px;
+            border-radius: 50%;
+            z-index: 1;
+        }
+        .left {
+            left: 0;
+        }
+        .right {
+            left: 50%;
+        }
+        .left::before {
+            content: " ";
+            height: 0;
+            position: absolute;
+            top: 22px;
+            width: 0;
+            z-index: 1;
+            right: 30px;
+            border: medium solid #1a1a1a;
+            border-width: 10px 0 10px 10px;
+            border-color: transparent transparent transparent #1a1a1a;
+        }
+        .right::before {
+            content: " ";
+            height: 0;
+            position: absolute;
+            top: 22px;
+            width: 0;
+            z-index: 1;
+            left: 30px;
+            border: medium solid #1a1a1a;
+            border-width: 10px 10px 10px 0;
+            border-color: transparent #1a1a1a transparent transparent;
+        }
+        .right::after {
+            left: -16px;
+        }
+        .timeline-content {
+            padding: 20px 30px;
+            background-color: #1a1a1a;
+            position: relative;
+            border-radius: 6px;
+            color: white;
         }
     </style>
 </head>
-<body ng-controller="TrackingController">
-    <!-- Header -->
-    <header class="header">
-        <div class="overlay">
-            <div class="container">
-                <!-- Logo linking to homepage -->
-                <a href="/public/index.html" class="navbar-brand">
-                    <img src="/public/images/farmily II.png" alt="Farmily Logo" class="logo">
-                </a>
-                <!-- Navigation menu -->
-                <ul class="nav">
-                    <li class="nav-item"><a href="/public/index.html" class="nav-link">Home</a></li>
-                    <li class="nav-item"><a href="/public/about-us.html" class="nav-link">About Us</a></li>
-                    <li class="nav-item"><a href="/public/real-time-tracking.html" class="nav-link active">Real-Time Tracking</a></li>
-                    <li class="nav-item"><a href="/public/contact-us.html" class="nav-link">Contact Us</a></li>
-                </ul>
-            </div>
+<body>
+    <!-- Navigation bar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="index.html">
+            <img src="/images/farmily II.png" alt="Farmily Logo" class="logo">
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="index.html">Home</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="real-time-tracking.html">Real-Time Tracking</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="about-us.html">About</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="features.html">Features</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="contact-us.html">Contact</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="register.html">Register</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="login.html">Login</a>
+                </li>
+            </ul>
         </div>
-    </header>
+    </nav>
 
     <!-- Main content -->
-    <!-- Product information card -->
-<div class="product-card" id="productInfo" ng-if="product && !isLoading">
-    <h2>Product Traceability Information</h2>
-    <h3>Product Details</h3>
-    <p><strong>Product ID:</strong> {{product._id}}</p>
-    <p><strong>Type:</strong> {{product.type}}</p>
-    <p><strong>Batch Number:</strong> {{product.batchNumber}}</p>
-    <p><strong>Origin:</strong> {{product.origin}}</p>
-    <p><strong>Production Date:</strong> {{formatDate(product.productionDate)}}</p>
-    <p><strong>Current Status:</strong> {{product.status}}</p>
-    <p><strong>Quantity:</strong> {{product.quantity}}</p>
-    <p><strong>Storage Conditions:</strong> {{product.storageConditions}}</p>
-    <p><strong>Transportation Details:</strong> {{product.transportationDetails}}</p>
-
-    <h3>Farmer Information</h3>
-    <p><strong>Name:</strong> {{farmer.username}}</p>
-    <p><strong>Location:</strong> {{farmer.location}}</p>
-
-    <h3>Current Owner</h3>
-    <p><strong>Name:</strong> {{currentOwner.username}} ({{currentOwner.userType}})</p>
-    <p><strong>Location:</strong> {{currentOwner.location}}</p>
-
-    <h3>Ownership History</h3>
-    <ul class="ownership-history">
-        <li ng-repeat="entry in ownershipHistory">
-            <p><strong>Owner:</strong> {{entry.owner.username}} ({{entry.owner.userType}})</p>
-            <p><strong>Location:</strong> {{entry.owner.location}}</p>
-            <p><strong>Timestamp:</strong> {{formatDate(entry.timestamp)}}</p>
-        </li>
-    </ul>
-
-    <h3>Blockchain Data</h3>
-    <p><strong>Status:</strong> {{blockchainData.status}}</p>
-    <p><strong>Quantity:</strong> {{blockchainData.quantity}}</p>
-</div>
-        </div>
-    </main>
-
-            <!-- Feature highlights -->
-            <div class="row mt-4">
-                <div class="col-md-4">
-                    <div class="feature-card">
-                        <i class="feature-icon fas fa-route"></i>
-                        <h2>Real-Time Updates</h2>
-                        <p>Our system provides instant updates on your product's location, ensuring you always know where your goods are in the supply chain.</p>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="feature-card">
-                        <i class="feature-icon fas fa-temperature-high"></i>
-                        <h2>Environmental Monitoring</h2>
-                        <p>Monitor temperature, humidity, and other crucial environmental factors to maintain product quality throughout transit.</p>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="feature-card">
-                        <i class="feature-icon fas fa-bell"></i>
-                        <h2>Instant Alerts</h2>
-                        <p>Receive immediate notifications for any irregularities or delays, allowing you to take prompt action when needed.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
+    <main class="container mt-5">
+        <h1 class="mb-4">Real-Time Product Tracking</h1>
+        
+        <!-- Product information display -->
+        <div id="product-info" class="mb-4"></div>
+        
+        <!-- Container for Google Maps -->
+        <div id="map-container" class="mt-4 mb-4"></div>
+        
+        <!-- Container for product timeline -->
+        <div id="timeline" class="mt-4"></div>
     </main>
 
     <!-- Footer -->
-    <footer class="footer bg-dark text-white">
+    <footer class="footer bg-dark text-white mt-5">
         <div class="container py-3">
-            <p>&copy; 2024 Farmily. All rights reserved.</p>
-            <div class="footer-links">
-                <a href="/public/privacy-policy.html" class="text-white">Privacy Policy</a> | 
-                <a href="/public/terms-of-service.html" class="text-white">Terms of Service</a>
+            <div class="row">
+                <div class="col-md-6">
+                    <p>&copy; 2024 Farmily. All rights reserved.</p>
+                </div>
+                <div class="col-md-6 text-md-right">
+                    <!-- Social media links with aria labels for accessibility -->
+                    <a href="#" class="text-white social-icon" aria-label="Facebook">
+                        <i class="fab fa-facebook" aria-hidden="true"></i>
+                    </a>
+                    <a href="#" class="text-white social-icon" aria-label="Twitter">
+                        <i class="fab fa-twitter" aria-hidden="true"></i>
+                    </a>
+                    <a href="#" class="text-white social-icon" aria-label="Instagram">
+                        <i class="fab fa-instagram" aria-hidden="true"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="row mt-2">
+                <div class="col-12 text-center">
+                    <a href="privacypolicy.html" class="text-white mx-2">Privacy Policy</a>
+                    <a href="terms-of-service.html" class="text-white mx-2">Terms of Service</a>
+                </div>
             </div>
         </div>
     </footer>
 
-   <!-- AngularJS -->
-   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
-   <!-- Your AngularJS app and controller -->
-   <script src="/public/js/foodTraceabilityApp.js"></script>
-   <script src="/public/js/tracking-controller.js"></script>
+    <!-- jQuery, Popper.js, and Bootstrap JS for Bootstrap functionality -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    
+    <!-- Google Maps API for map functionality -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDaYhXgrVvfFbrI2F39I3aUGF82FLriPTg"></script>
+    
+    <!-- Custom JavaScript for real-time tracking functionality -->
+    <script>
+    $(document).ready(function() {
+        // Function to get URL parameters
+        function getUrlParameter(name) {
+            name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
+            var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
+            var results = regex.exec(location.search);
+            return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
+        }
+
+        // Get product details from URL parameters
+        var productId = getUrlParameter('id');
+        var productType = getUrlParameter('type');
+        var productOrigin = getUrlParameter('origin');
+        var productionDate = getUrlParameter('productionDate');
+        var batchNumber = getUrlParameter('batchNumber');
+        var productStatus = getUrlParameter('status');
+
+        // Display product information
+        var productInfoHtml = `
+            <h2>Product Information</h2>
+            <p><strong>Product ID:</strong> ${productId}</p>
+            <p><strong>Type:</strong> ${productType}</p>
+            <p><strong>Origin:</strong> ${productOrigin}</p>
+            <p><strong>Production Date:</strong> ${moment(productionDate).format('MMMM D, YYYY')}</p>
+            <p><strong>Batch Number:</strong> ${batchNumber}</p>
+            <p><strong>Current Status:</strong> ${productStatus}</p>
+        `;
+        $('#product-info').html(productInfoHtml);
+
+        // Initialize map
+        var map = new google.maps.Map(document.getElementById('map-container'), {
+            zoom: 4,
+            center: {lat: 0, lng: 0}
+        });
+
+        // Simulated product journey for demonstration
+        // In a real application, this data would come from your backend API
+        var journey = [
+            {status: 'Registered', date: '2024-01-01', location: {lat: 40.7128, lng: -74.0060}},
+            {status: 'In Transit', date: '2024-01-05', location: {lat: 41.8781, lng: -87.6298}},
+            {status: 'Delivered', date: '2024-01-10', location: {lat: 34.0522, lng: -118.2437}}
+        ];
+
+        // Create timeline
+        var timelineHtml = '<div class="timeline">';
+        journey.forEach(function(step, index) {
+            // Alternate between left and right side of the timeline
+            var className = index % 2 === 0 ? 'left' : 'right';
+            timelineHtml += `
+                <div class="timeline-item ${className}">
+                    <div class="timeline-content">
+                        <h3>${step.status}</h3>
+                        <p>${moment(step.date).format('MMMM D, YYYY')}</p>
+                    </div>
+                </div>
+            `;
+
+            // Add marker to map for each journey step
+            new google.maps.Marker({
+                position: step.location,
+                map: map,
+                title: step.status
+            });
+        });
+        timelineHtml += '</div>';
+        $('#timeline').html(timelineHtml);
+
+        // Fit map bounds to markers
+        var bounds = new google.maps.LatLngBounds();
+        journey.forEach(function(step) {
+            bounds.extend(step.location);
+        });
+        map.fitBounds(bounds);
+
+        // TODO: Implement real-time updates
+        // This could involve setting up a WebSocket connection or
+        // periodically polling your backend API for updates
+        function checkForUpdates() {
+            // Simulated update check
+            console.log('Checking for updates...');
+            // In a real application, you would make an API call here
+            // and update the UI with any new information
+        }
+
+        // Check for updates every 30 seconds
+        setInterval(checkForUpdates, 30000);
+    });
+    </script>
 </body>
 </html>
