@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const bcrypt = require('bcrypt');
-const User = require('../models/User');
+const User = require('../models/user.js');
 
 // Hash password function
 const hashPassword = async (password) => {
