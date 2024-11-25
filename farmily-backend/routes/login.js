@@ -3,7 +3,7 @@ const cors = require('cors'); // Import the cors middleware
 const router = express.Router();
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-const User = require('../models/User');
+const User = require('../models/user.js');
 
 // JWT secret key - in production, this should be set as an environment variable
 const JWT_SECRET = process.env.JWT_SECRET || 'b4a1a5726e2ba2fd4a8e38b2607ae022b6d108636fa2157b4443363b2c45b0e3709c5c86eb7ade391ef88c1d85578b97fc263108f5c618b374c1c4b2eb804a55';
