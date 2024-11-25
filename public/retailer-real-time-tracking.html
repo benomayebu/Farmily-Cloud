@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Real-Time Product Tracking - Retailer View</title>
+    <!-- Bootstrap CSS for responsive design and styling -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+    <!-- Custom CSS -->
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        .card {
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+        }
+        .card:hover {
+            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+        }
+        .card-header {
+            background-color: #007bff;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        /* Styles for the map container */
+        #map-container {
+            height: 400px;
+            width: 100%;
+            margin-bottom: 20px;
+        }
+        /* Styles for the timeline */
+        .timeline {
+            position: relative;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px 0;
+        }
+        .timeline::after {
+            content: '';
+            position: absolute;
+            width: 6px;
+            background-color: #007bff;
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            margin-left: -3px;
+        }
+        .timeline-item {
+            padding: 10px 40px;
+            position: relative;
+            background-color: inherit;
+            width: 50%;
+        }
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            width: 25px;
+            height: 25px;
+            right: -17px;
+            background-color: white;
+            border: 4px solid #FF9F55;
+            top: 15px;
+            border-radius: 50%;
+            z-index: 1;
+        }
+        .left {
+            left: 0;
+        }
+        .right {
+            left: 50%;
+        }
+        .left::before {
+            content: " ";
+            height: 0;
+            position: absolute;
+            top: 22px;
+            width: 0;
+            z-index: 1;
+            right: 30px;
+            border: medium solid #007bff;
+            border-width: 10px 0 10px 10px;
+            border-color: transparent transparent transparent #007bff;
+        }
+        .right::before {
+            content: " ";
+            height: 0;
+            position: absolute;
+            top: 22px;
+            width: 0;
+            z-index: 1;
+            left: 30px;
+            border: medium solid #007bff;
+            border-width: 10px 10px 10px 0;
+            border-color: transparent #007bff transparent transparent;
+        }
+        .right::after {
+            left: -16px;
+        }
+        .timeline-content {
+            padding: 20px 30px;
+            background-color: white;
+            position: relative;
+            border-radius: 6px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation bar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="index.html">
+            <img src="/images/farmily II.png" alt="Farmily Logo" class="logo" height="30">
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="index.html">Home</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="retailer-real-time-tracking.html">Real-Time Tracking</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Main content -->
+    <main class="container mt-5">
+        <h1 class="mb-4 text-center">Real-Time Product Tracking - Retailer View</h1>
+        
+        <!-- Product information card -->
+        <div class="card" id="product-info">
+            <div class="card-header">
+                <h2 class="mb-0">Product Information</h2>
+            </div>
+            <div class="card-body">
+                <!-- Product details will be dynamically inserted here -->
+            </div>
+        </div>
+        
+        <!-- Farmer information card -->
+        <div class="card" id="farmer-info">
+            <div class="card-header">
+                <h2 class="mb-0">Farmer Information</h2>
+            </div>
+            <div class="card-body">
+                <!-- Farmer details will be dynamically inserted here -->
+            </div>
+        </div>
+        
+        <!-- Distributor information card -->
+        <div class="card" id="distributor-info">
+            <div class="card-header">
+                <h2 class="mb-0">Distributor Information</h2>
+            </div>
+            <div class="card-body">
+                <!-- Distributor details will be dynamically inserted here -->
+            </div>
+        </div>
+
+        <!-- Retailer information card -->
+        <div class="card" id="retailer-info">
+            <div class="card-header">
+                <h2 class="mb-0">Retailer Information</h2>
+            </div>
+            <div class="card-body">
+                <!-- Retailer details will be dynamically inserted here -->
+            </div>
+        </div>
+        
+        <!-- Map container -->
+        <div class="card">
+            <div class="card-header">
+                <h2 class="mb-0">Location Map</h2>
+            </div>
+            <div class="card-body">
+                <div id="map-container"></div>
+            </div>
+        </div>
+        
+        <!-- Timeline container -->
+        <div class="card">
+            <div class="card-header">
+                <h2 class="mb-0">Product Timeline</h2>
+            </div>
+            <div class="card-body">
+                <div id="timeline"></div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white mt-5 py-3">
+        <div class="container text-center">
+            <p>&copy; 2024 Farmily. All rights reserved.</p>
+            <div>
+                <a href="#" class="text-white mx-2"><i class="fab fa-facebook"></i></a>
+                <a href="#" class="text-white mx-2"><i class="fab fa-twitter"></i></a>
+                <a href="#" class="text-white mx-2"><i class="fab fa-instagram"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- jQuery, Popper.js, and Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    
+    <!-- Moment.js for date formatting -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+    
+    <!-- Google Maps API -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDaYhXgrVvfFbrI2F39I3aUGF82FLriPTg"></script>
+    
+    <!-- Custom JavaScript -->
+    <script>
+    $(document).ready(function() {
+        // Function to get URL parameters
+        function getUrlParameter(name) {
+            name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
+            var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
+            var results = regex.exec(location.search);
+            return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
+        }
+
+        // Get all product details from URL parameters
+        var productId = getUrlParameter('id');
+        var productType = getUrlParameter('type');
+        var productOrigin = getUrlParameter('origin');
+        var productionDate = getUrlParameter('productionDate');
+        var batchNumber = getUrlParameter('batchNumber');
+        var productStatus = getUrlParameter('status');
+        var quantity = getUrlParameter('quantity');
+        var price = getUrlParameter('price');
+        var blockchainId = getUrlParameter('blockchainId');
+        var blockchainStatus = getUrlParameter('blockchainStatus');
+        var storageConditions = getUrlParameter('storageConditions');
+        var transportationMode = getUrlParameter('transportationMode');
+        var transportationDetails = getUrlParameter('transportationDetails');
+        var estimatedDeliveryDate = getUrlParameter('estimatedDeliveryDate');
+        var certifications = JSON.parse(getUrlParameter('certifications') || '[]');
+        var farmerUsername = getUrlParameter('farmerUsername');
+        var distributorUsername = getUrlParameter('distributorUsername');
+        var retailerUsername = getUrlParameter('retailerUsername');
+
+        console.log('Product ID:', productId);
+
+        // Display product information
+        var productInfoHtml = `
+            <table class="table table-borderless">
+                <tr><th>Product ID:</th><td>${productId}</td></tr>
+                <tr><th>Type:</th><td>${productType}</td></tr>
+                <tr><th>Origin:</th><td>${productOrigin}</td></tr>
+                <tr><th>Production Date:</th><td>${moment(productionDate).isValid() ? moment(productionDate).format('MMMM D, YYYY') : 'N/A'}</td></tr>
+                <tr><th>Batch Number:</th><td>${batchNumber}</td></tr>
+                <tr><th>Current Status:</th><td><span class="badge badge-primary">${productStatus}</span></td></tr>
+                <tr><th>Quantity:</th><td>${quantity}</td></tr>
+                <tr><th>Price:</th><td>${price} ETH</td></tr>
+                <tr><th>Blockchain ID:</th><td><span data-toggle="tooltip" title="Unique identifier on the blockchain">${blockchainId}</span></td></tr>
+                <tr><th>Blockchain Status:</th><td>${blockchainStatus}</td></tr>
+                <tr><th>Storage Conditions:</th><td>${storageConditions}</td></tr>
+                <tr><th>Transportation Mode:</th><td>${transportationMode}</td></tr>
+                <tr><th>Transportation Details:</th><td>${transportationDetails}</td></tr>
+                <tr><th>Estimated Delivery Date:</th><td>${moment(estimatedDeliveryDate).isValid() ? moment(estimatedDeliveryDate).format('MMMM D, YYYY') : 'N/A'}</td></tr>
+                <tr><th>Certifications:</th><td>${certifications.join(', ')}</td></tr>
+            </table>
+        `;
+        $('#product-info .card-body').html(productInfoHtml);
+
+        // Display initial stakeholder information
+        $('#farmer-info .card-body').html(`<p>Username: ${farmerUsername}</p>`);
+        $('#distributor-info .card-body').html(`<p>Username: ${distributorUsername}</p>`);
+        $('#retailer-info .card-body').html(`<p>Username: ${retailerUsername}</p>`);
+
+        // Fetch additional product information
+        $.ajax({
+            url: '/api/retailer/products/' + productId + '/fullInfo',
+            method: 'GET',
+            headers: {
+                'Authorization': 'Bearer ' + localStorage.getItem('token') // Add token if using authentication
+            },
+            success: function(data) {
+                console.log('Received additional data:', data);
+                updateAdditionalInfo(data);
+                initializeMap(data);
+                createTimeline(data);
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+            console.error('Error fetching additional product info:', textStatus, errorThrown);
+            console.log('Response:', jqXHR.responseText);
+            $('#product-info .card-body').append('<p class="text-danger">Error fetching additional product information: ' + textStatus + '</p>');
+            
+            // Fallback: Use available information to create map and timeline
+            var fallbackData = createFallbackData();
+            initializeMap(fallbackData);
+            createTimeline(fallbackData);
+        }
+        });
+
+        // Function to create fallback data using URL parameters
+        function createFallbackData() {
+            return {
+                product: {
+                    productionDate: productionDate,
+                    estimatedDeliveryDate: estimatedDeliveryDate
+                },
+                farmer: {
+                    username: farmerUsername,
+                    location: productOrigin // Assuming origin can be used as location
+                },
+                distributor: {
+                    username: distributorUsername,
+                    location: 'Unknown' // We don't have this information from URL params
+                },
+                currentOwner: {
+                    username: retailerUsername,
+                    location: 'Unknown' // We don't have this information from URL params
+                },
+                ownershipHistory: [
+                    { username: farmerUsername, timestamp: productionDate },
+                    { username: retailerUsername, timestamp: estimatedDeliveryDate }
+                ]
+            };
+        }
+
+        // Function to update additional information
+        function updateAdditionalInfo(data) {
+            // Update farmer information
+            $('#farmer-info .card-body').append(`
+                <p>Location: ${data.farmer.location}</p>
+            `);
+            
+            // Update distributor information
+            $('#distributor-info .card-body').append(`
+                <p>Location: ${data.distributor.location}</p>
+                <p>User Type: ${data.distributor.userType}</p>
+            `);
+
+            // Update retailer information
+            $('#retailer-info .card-body').append(`
+                <p>Location: ${data.currentOwner.location}</p>
+                <p>User Type: ${data.currentOwner.userType}</p>
+            `);
+        }
+
+        // Function to initialize Google Maps
+        function initializeMap(data) {
+            var map = new google.maps.Map(document.getElementById('map-container'), {
+                zoom: 4,
+                center: {lat: 0, lng: 0}
+            });
+
+            var bounds = new google.maps.LatLngBounds();
+            var locations = [
+                { name: 'Farmer', data: data.farmer, icon: 'http://maps.google.com/mapfiles/ms/icons/green-dot.png' },
+                { name: 'Distributor', data: data.distributor, icon: 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png' },
+                { name: 'Retailer', data: data.currentOwner, icon: 'http://maps.google.com/mapfiles/ms/icons/red-dot.png' }
+            ];
+
+            var markerAdded = false;
+            locations.forEach(function(loc) {
+                if (loc.data && loc.data.location && loc.data.location !== 'Unknown') {
+                    var position;
+                    if (typeof loc.data.location === 'string' && loc.data.location.includes(',')) {
+                        // If location is a string of coordinates, split and convert to numbers
+                        position = loc.data.location.split(',').map(Number);
+                    } else {
+                        // Fallback: Use a random position if we can't parse the location
+                        position = [Math.random() * 180 - 90, Math.random() * 360 - 180];
+                    }
+                    var marker = new google.maps.Marker({
+                        position: {lat: position[0], lng: position[1]},
+                        map: map,
+                        title: `${loc.name}: ${loc.data.username}`,
+                        icon: loc.icon
+                    });
+                    bounds.extend(marker.getPosition());
+                    markerAdded = true;
+                }
+            });
+
+            if (markerAdded) {
+                map.fitBounds(bounds);
+            } else {
+                // If no markers were added, show a default view
+                map.setCenter({lat: 0, lng: 0});
+                map.setZoom(2);
+            }
+        }
+
+        // Function to create timeline
+        function createTimeline(data) {
+            var timelineHtml = '<div class="timeline">';
+            
+            // Add production date to timeline
+            if (data.product.productionDate) {
+                timelineHtml += createTimelineItem('Production', data.product.productionDate, 'left');
+            }
+            
+            // Add ownership history to timeline
+            if (data.ownershipHistory && data.ownershipHistory.length > 0) {
+                data.ownershipHistory.forEach((entry, index) => {
+                    var side = index % 2 === 0 ? 'right' : 'left';
+                    timelineHtml += createTimelineItem(`Owned by ${entry.username}`, entry.timestamp, side);
+                });
+            }
+
+            // Add estimated delivery date to timeline if available
+            if (data.product.estimatedDeliveryDate) {
+                timelineHtml += createTimelineItem('Estimated Delivery', data.product.estimatedDeliveryDate, 'right');
+            }
+
+            timelineHtml += '</div>';
+            $('#timeline').html(timelineHtml);
+        }
+
+        // Helper function to create timeline items
+        function createTimelineItem(event, date, side) {
+            return `
+                <div class="timeline-item ${side}">
+                    <div class="timeline-content">
+                        <h3>${event}</h3>
+                        <p>${moment(date).format('MMMM D, YYYY, h:mm:ss a')}</p>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Function to update the status badge color
+        function updateStatusBadgeColor(status) {
+            var badgeClass = 'badge-primary'; // default color
+            switch(status.toLowerCase()) {
+                case 'registered':
+                    badgeClass = 'badge-info';
+                    break;
+                case 'in transit':
+                    badgeClass = 'badge-warning';
+                    break;
+                case 'delivered':
+                    badgeClass = 'badge-success';
+                    break;
+                case 'packaged':
+                    badgeClass = 'badge-secondary';
+                    break;
+                // Add more cases as needed
+            }
+            $('.badge').removeClass('badge-primary').addClass(badgeClass);
+        }
+
+        // Call the function to update the badge color
+        updateStatusBadgeColor(productStatus);
+
+        // Add interactive elements (example: toggling additional info)
+        $('.card-header').click(function() {
+            $(this).next('.card-body').slideToggle();
+        });
+
+        // Add a refresh button for real-time updates
+        $('<button>')
+            .addClass('btn btn-primary mt-3')
+            .text('Refresh Data')
+            .click(function() {
+                location.reload();
+            })
+            .appendTo('.container');
+
+        // Add tooltips to blockchain IDs for better UX
+        $('[data-toggle="tooltip"]').tooltip();
+
+        // Function to export product data as CSV
+        function exportToCSV() {
+            var csv = 'data:text/csv;charset=utf-8,';
+            $('.table tr').each(function() {
+                var row = $(this).find('th, td').map(function() {
+                    return $(this).text();
+                }).get().join(',');
+                csv += row + '\r\n';
+            });
+            var encodedUri = encodeURI(csv);
+            var link = document.createElement('a');
+            link.setAttribute('href', encodedUri);
+            link.setAttribute('download', 'product_data.csv');
+            document.body.appendChild(link);
+            link.click();
+        }
+
+        // Add export to CSV button
+        $('<button>')
+            .addClass('btn btn-secondary mt-3 ml-2')
+            .text('Export to CSV')
+            .click(exportToCSV)
+            .appendTo('.container');
+
+        console.log('Real-time tracking page fully loaded and initialized');
+    });
+    </script>
+</body>
+</html>

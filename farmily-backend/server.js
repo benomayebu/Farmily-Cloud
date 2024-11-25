@@ -1,10 +1,4 @@
-// server.js
-// Main entry point for the Blockchain-based Food Traceability API
-
-// Import required modules
 const express = require('express');
-const http = require('http');
-const socketIo = require('socket.io');
 const cors = require('cors');
 const mongoose = require('mongoose');
 const path = require('path');
@@ -14,9 +8,7 @@ const morgan = require('morgan');
 const fs = require('fs');
 require('dotenv').config();
 
-// Import custom modules and routes
 const connectDB = require('./utils/db');
-const Transfer = require('./models/Transfer'); 
 const registerRouter = require('./routes/register');
 const loginRouter = require('./routes/login');
 const farmerDashboardRouter = require('./routes/farmerDashboard');
@@ -28,20 +20,8 @@ const blockchainRouter = require('./routes/blockchain');
 // Initialize the Express application
 const app = express();
 
-// Create an HTTP server using the Express app
-const server = http.createServer(app);
-
-// Initialize Socket.IO with the HTTP server
-const io = socketIo(server, {
-  cors: {
-    origin: ['http://127.0.0.1:5500', 'http://localhost:5500', 'http://localhost:3000'],
-    methods: ['GET', 'POST'],
-    credentials: true
-  }
-});
-
 // Security middleware to set various HTTP headers
-// Adjust Content Security Policy (CSP) to allow necessary resources
+// Adjust CSP to allow necessary resources
 app.use(helmet({
   contentSecurityPolicy: {
     directives: {
@@ -53,7 +33,7 @@ app.use(helmet({
   },
 }));
 
-// Configure CORS options
+// Configure CORS
 const corsOptions = {
   origin: ['http://127.0.0.1:5500', 'http://localhost:5500', 'http://localhost:3000'],
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
@@ -63,7 +43,7 @@ const corsOptions = {
 };
 app.use(cors(corsOptions));
 
-// Rate limiting middleware to prevent abuse
+// Rate limiting middleware
 const limiter = rateLimit({
   windowMs: 15 * 60 * 1000, // 15 minutes
   max: 100, // limit each IP to 100 requests per windowMs
@@ -93,7 +73,7 @@ app.use((req, res, next) => {
 // Connect to the database
 connectDB();
 
-// Set up routes
+// Routes
 app.use('/api/register', registerRouter);
 app.use('/api/login', loginRouter);
 app.use('/api/farmer', farmerDashboardRouter);
@@ -116,21 +96,9 @@ app.use((err, req, res, next) => {
   });
 });
 
-// Set io instance on app for use in other parts of the application
-app.set('io', io);
-
-// Socket.IO connection handler
-io.on('connection', (socket) => {
-  console.log('A user connected');
-
-  socket.on('disconnect', () => {
-    console.log('User disconnected');
-  });
-});
-
 // Start the server
 const PORT = process.env.PORT || 3000;
-server.listen(PORT, () => {
+const server = app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
 
@@ -141,4 +109,4 @@ process.on('unhandledRejection', (reason, promise) => {
   server.close(() => process.exit(1));
 });
 
-module.exports = app; // Export for testing purposes
+module.exports = app; // For testing purposes
