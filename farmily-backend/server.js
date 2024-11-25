@@ -78,8 +78,6 @@ app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ extended: true, limit: '10mb' }));
 
 // Serve static files from the public directory
-app.use(express.static(path.join(__dirname, 'public')));
-
 // Setup request logging
 const accessLogStream = fs.createWriteStream(path.join(__dirname, 'access.log'), { flags: 'a' });
 app.use(morgan('combined', { stream: accessLogStream }));
@@ -106,7 +104,8 @@ app.use('/api/blockchain', blockchainRouter);
 const publicDirectoryPath = path.join(__dirname, '../public');
 
 // Serve the index.html file from the public directory
-app.use(express.static('../public'));
+app.use(express.static(path.join(__dirname, '../public')));
+
 // Optional: Default route to serve index.html for unmatched routes
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, '../public/index.html'));
