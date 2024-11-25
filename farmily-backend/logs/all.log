@@ -771,3 +771,429 @@
 2024-09-30 06:37:07:377 [32minfo[39m: [32mConnected to blockchain node[39m
 2024-09-30 07:08:55:855 [32minfo[39m: [32mConnected to blockchain node[39m
 2024-09-30 07:33:54:3354 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-10-01 10:40:51:4051 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-10-01 10:42:20:4220 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-10-01 11:37:42:3742 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-10-01 12:18:43:1843 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-10-01 12:33:56:3356 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-10-01 12:34:33:3433 [32minfo[39m: [32mRetailer initiating transfer to consumer. Product ID: 0x0000000000000000000000000000000000000000000000000000000000000011, Consumer ID: consumer-Nicolas@9-1727453788043, Quantity: 15[39m
+2024-10-01 12:34:33:3433 [32minfo[39m: [32mEstimated gas for retailer-to-consumer transfer: 40342[39m
+2024-10-01 12:41:13:4113 [32minfo[39m: [32mTransaction sent. Receipt:[39m
+2024-10-01 12:41:13:4113 [32minfo[39m: [32mTransfer to consumer initiated successfully by retailer. Transaction receipt:[39m
+2024-10-01 13:18:57:1857 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-10-01 13:29:12:2912 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-10-01 13:34:34:3434 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-10-01 16:51:59:5159 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-10-01 16:52:38:5238 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-10-01 22:32:40:3240 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-10-01 22:50:42:5042 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-10-01 22:59:23:5923 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-10-01 22:59:54:5954 [32minfo[39m: [32mChecking transfer status for transaction: 0xc9a7b86f608b25d4e145fee75675460677dfaf9459d5b68bb1e8b2f808a13827[39m
+2024-10-01 23:06:36:636 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-10-01 23:06:49:649 [32minfo[39m: [32mChecking transfer status for transaction: 0xc9a7b86f608b25d4e145fee75675460677dfaf9459d5b68bb1e8b2f808a13827[39m
+2024-10-01 23:06:54:654 [32minfo[39m: [32mChecking transfer status for transaction: 0xc9a7b86f608b25d4e145fee75675460677dfaf9459d5b68bb1e8b2f808a13827[39m
+2024-10-01 23:06:55:655 [32minfo[39m: [32mChecking transfer status for transaction: 0xc9a7b86f608b25d4e145fee75675460677dfaf9459d5b68bb1e8b2f808a13827[39m
+2024-10-01 23:06:56:656 [32minfo[39m: [32mChecking transfer status for transaction: 0xc9a7b86f608b25d4e145fee75675460677dfaf9459d5b68bb1e8b2f808a13827[39m
+2024-10-01 23:06:58:658 [32minfo[39m: [32mChecking transfer status for transaction: 0xc9a7b86f608b25d4e145fee75675460677dfaf9459d5b68bb1e8b2f808a13827[39m
+2024-10-01 23:06:59:659 [32minfo[39m: [32mChecking transfer status for transaction: 0xc9a7b86f608b25d4e145fee75675460677dfaf9459d5b68bb1e8b2f808a13827[39m
+2024-10-01 23:07:00:70 [32minfo[39m: [32mChecking transfer status for transaction: 0xc9a7b86f608b25d4e145fee75675460677dfaf9459d5b68bb1e8b2f808a13827[39m
+2024-10-01 23:07:01:71 [32minfo[39m: [32mChecking transfer status for transaction: 0xc9a7b86f608b25d4e145fee75675460677dfaf9459d5b68bb1e8b2f808a13827[39m
+2024-10-01 23:07:02:72 [32minfo[39m: [32mChecking transfer status for transaction: 0xc9a7b86f608b25d4e145fee75675460677dfaf9459d5b68bb1e8b2f808a13827[39m
+2024-10-01 23:07:03:73 [32minfo[39m: [32mChecking transfer status for transaction: 0xc9a7b86f608b25d4e145fee75675460677dfaf9459d5b68bb1e8b2f808a13827[39m
+2024-10-01 23:07:04:74 [32minfo[39m: [32mChecking transfer status for transaction: 0xc9a7b86f608b25d4e145fee75675460677dfaf9459d5b68bb1e8b2f808a13827[39m
+2024-10-01 23:07:05:75 [32minfo[39m: [32mChecking transfer status for transaction: 0xc9a7b86f608b25d4e145fee75675460677dfaf9459d5b68bb1e8b2f808a13827[39m
+2024-10-01 23:07:06:76 [32minfo[39m: [32mChecking transfer status for transaction: 0xc9a7b86f608b25d4e145fee75675460677dfaf9459d5b68bb1e8b2f808a13827[39m
+2024-10-01 23:07:08:78 [32minfo[39m: [32mChecking transfer status for transaction: 0xc9a7b86f608b25d4e145fee75675460677dfaf9459d5b68bb1e8b2f808a13827[39m
+2024-10-01 23:07:08:78 [32minfo[39m: [32mChecking transfer status for transaction: 0xc9a7b86f608b25d4e145fee75675460677dfaf9459d5b68bb1e8b2f808a13827[39m
+2024-10-01 23:07:10:710 [32minfo[39m: [32mChecking transfer status for transaction: 0xc9a7b86f608b25d4e145fee75675460677dfaf9459d5b68bb1e8b2f808a13827[39m
+2024-10-01 23:07:11:711 [32minfo[39m: [32mChecking transfer status for transaction: 0xc9a7b86f608b25d4e145fee75675460677dfaf9459d5b68bb1e8b2f808a13827[39m
+2024-10-01 23:07:12:712 [32minfo[39m: [32mChecking transfer status for transaction: 0xc9a7b86f608b25d4e145fee75675460677dfaf9459d5b68bb1e8b2f808a13827[39m
+2024-10-01 23:07:13:713 [32minfo[39m: [32mChecking transfer status for transaction: 0xc9a7b86f608b25d4e145fee75675460677dfaf9459d5b68bb1e8b2f808a13827[39m
+2024-10-01 23:07:13:713 [32minfo[39m: [32mChecking transfer status for transaction: 0xc9a7b86f608b25d4e145fee75675460677dfaf9459d5b68bb1e8b2f808a13827[39m
+2024-10-01 23:17:28:1728 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-10-01 23:17:38:1738 [32minfo[39m: [32mChecking transfer status for transaction: 0xc9a7b86f608b25d4e145fee75675460677dfaf9459d5b68bb1e8b2f808a13827[39m
+2024-10-01 23:52:22:5222 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-10-01 23:52:31:5231 [32minfo[39m: [32mChecking transfer status for transaction: 0xc9a7b86f608b25d4e145fee75675460677dfaf9459d5b68bb1e8b2f808a13827[39m
+2024-10-01 23:52:33:5233 [32minfo[39m: [32mRejecting transfer on blockchain. Transfer ID: 0xc9a7b86f608b25d4e145fee75675460677dfaf9459d5b68bb1e8b2f808a13827[39m
+2024-10-01 23:52:33:5233 [31merror[39m: [31mError rejecting transfer on blockchain: contract.methods.rejectTransfer is not a function[39m
+2024-10-02 00:09:17:917 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-10-02 00:11:07:117 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-10-02 00:12:28:1228 [32minfo[39m: [32mRejecting transfer on blockchain. Transfer ID: 0xc9a7b86f608b25d4e145fee75675460677dfaf9459d5b68bb1e8b2f808a13827[39m
+2024-10-02 00:12:28:1228 [31merror[39m: [31mError rejecting transfer on blockchain: contract.methods.rejectTransfer is not a function[39m
+2024-10-02 00:18:14:1814 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-10-02 00:28:30:2830 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-10-02 00:45:19:4519 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-10-03 00:32:03:323 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-10-03 00:43:54:4354 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-10-03 00:48:16:4816 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-10-03 00:58:25:5825 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-10-03 01:04:40:440 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-10-03 01:08:34:834 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-10-03 01:17:51:1751 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-10-03 01:29:18:2918 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-10-03 01:45:05:455 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-10-03 02:31:52:3152 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-10-03 02:59:24:5924 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-10-03 03:27:14:2714 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-10-03 03:59:49:5949 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-10-03 04:00:14:014 [32minfo[39m: [32mInitiating transfer. Product ID: 66f75921341d411eb750ff31, Consumer ID: 66f6da5cb3c53fbf66978fd9, Quantity: 4[39m
+2024-10-03 04:00:14:014 [32minfo[39m: [32mPrepared transfer data:[39m
+2024-10-03 04:00:14:014 [32minfo[39m: [32mInitiating retailer to consumer transfer. Product ID: 0x000000000000000000000000000000000000000000000000000000000000001d, Consumer ID: consumer-Nicolas@9-1727453788043, Quantity: 4[39m
+2024-10-03 04:00:14:014 [37mdebug[39m: [37mFormatted Product ID: 0x000000000000000000000000000000000000000000000000000000000000001d[39m
+2024-10-03 04:00:14:014 [32minfo[39m: [32mEstimated gas for retailer-to-consumer transfer: 40342[39m
+2024-10-03 04:12:47:1247 [31merror[39m: [31mError in retailer initiating transfer to consumer: Transaction was not mined within 750 seconds, please make sure your transaction was properly sent. Be aware that it might still be mined![39m
+2024-10-03 04:12:47:1247 [31merror[39m: [31mBlockchain transfer initiation failed:[39m
+2024-10-03 19:05:50:550 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-10-03 19:06:52:652 [32minfo[39m: [32mCreating transfer record. Product ID: 66f75921341d411eb750ff31, Consumer ID: 66f6da5cb3c53fbf66978fd9, Quantity: 4, Tx Hash: 0x1fdbc53e3a2a785b3376dee0d5465efea7e5eef2c981912b0727631bcea9c6ea[39m
+2024-10-03 19:06:52:652 [32minfo[39m: [32mTransfer record created in database:[39m
+2024-10-03 19:06:53:653 [32minfo[39m: [32mProduct quantity updated. New quantity: 4[39m
+2024-10-03 19:13:46:1346 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-10-03 19:14:16:1416 [32minfo[39m: [32mCreating transfer record. Product ID: 66f36a45eb86f0d62f28aac9, Consumer ID: 66f6da5cb3c53fbf66978fd9, Quantity: 4, Tx Hash: 0x7c907699d50785724bc0ecfbce3b592c62436bbb84783354122c182e9792a69e[39m
+2024-10-03 19:14:16:1416 [32minfo[39m: [32mTransfer record created in database:[39m
+2024-10-03 19:14:16:1416 [32minfo[39m: [32mProduct quantity updated. New quantity: 0[39m
+2024-10-03 20:08:35:835 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-10-03 20:23:12:2312 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-10-03 20:26:13:2613 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-10-03 21:40:54:4054 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-10-03 21:48:04:484 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-10-03 21:48:13:4813 [32minfo[39m: [32mChecking transfer status for transaction: pending[39m
+2024-10-03 21:48:13:4813 [32minfo[39m: [32mChecking transfer status for transaction: 0x1fdbc53e3a2a785b3376dee0d5465efea7e5eef2c981912b0727631bcea9c6ea[39m
+2024-10-03 21:48:13:4813 [32minfo[39m: [32mChecking transfer status for transaction: 0x7c907699d50785724bc0ecfbce3b592c62436bbb84783354122c182e9792a69e[39m
+2024-10-03 21:48:13:4813 [31merror[39m: [31mError checking transfer status on blockchain: Returned error: data types must start with 0x[39m
+2024-10-03 21:48:42:4842 [32minfo[39m: [32mChecking transfer status for transaction: pending[39m
+2024-10-03 21:48:42:4842 [32minfo[39m: [32mChecking transfer status for transaction: 0x1fdbc53e3a2a785b3376dee0d5465efea7e5eef2c981912b0727631bcea9c6ea[39m
+2024-10-03 21:48:42:4842 [32minfo[39m: [32mChecking transfer status for transaction: 0x7c907699d50785724bc0ecfbce3b592c62436bbb84783354122c182e9792a69e[39m
+2024-10-03 21:48:42:4842 [31merror[39m: [31mError checking transfer status on blockchain: Returned error: data types must start with 0x[39m
+2024-10-03 21:49:12:4912 [32minfo[39m: [32mChecking transfer status for transaction: pending[39m
+2024-10-03 21:49:12:4912 [32minfo[39m: [32mChecking transfer status for transaction: 0x1fdbc53e3a2a785b3376dee0d5465efea7e5eef2c981912b0727631bcea9c6ea[39m
+2024-10-03 21:49:12:4912 [32minfo[39m: [32mChecking transfer status for transaction: 0x7c907699d50785724bc0ecfbce3b592c62436bbb84783354122c182e9792a69e[39m
+2024-10-03 21:49:12:4912 [31merror[39m: [31mError checking transfer status on blockchain: Returned error: data types must start with 0x[39m
+2024-10-03 21:49:44:4944 [32minfo[39m: [32mChecking transfer status for transaction: pending[39m
+2024-10-03 21:49:44:4944 [32minfo[39m: [32mChecking transfer status for transaction: 0x1fdbc53e3a2a785b3376dee0d5465efea7e5eef2c981912b0727631bcea9c6ea[39m
+2024-10-03 21:49:44:4944 [32minfo[39m: [32mChecking transfer status for transaction: 0x7c907699d50785724bc0ecfbce3b592c62436bbb84783354122c182e9792a69e[39m
+2024-10-03 21:49:44:4944 [31merror[39m: [31mError checking transfer status on blockchain: Returned error: data types must start with 0x[39m
+2024-10-03 21:50:14:5014 [32minfo[39m: [32mChecking transfer status for transaction: pending[39m
+2024-10-03 21:50:14:5014 [32minfo[39m: [32mChecking transfer status for transaction: 0x1fdbc53e3a2a785b3376dee0d5465efea7e5eef2c981912b0727631bcea9c6ea[39m
+2024-10-03 21:50:14:5014 [32minfo[39m: [32mChecking transfer status for transaction: 0x7c907699d50785724bc0ecfbce3b592c62436bbb84783354122c182e9792a69e[39m
+2024-10-03 21:50:14:5014 [31merror[39m: [31mError checking transfer status on blockchain: Returned error: data types must start with 0x[39m
+2024-10-03 21:51:28:5128 [32minfo[39m: [32mChecking transfer status for transaction: pending[39m
+2024-10-03 21:51:28:5128 [32minfo[39m: [32mChecking transfer status for transaction: 0x1fdbc53e3a2a785b3376dee0d5465efea7e5eef2c981912b0727631bcea9c6ea[39m
+2024-10-03 21:51:28:5128 [32minfo[39m: [32mChecking transfer status for transaction: 0x7c907699d50785724bc0ecfbce3b592c62436bbb84783354122c182e9792a69e[39m
+2024-10-03 21:51:28:5128 [31merror[39m: [31mError checking transfer status on blockchain: Returned error: data types must start with 0x[39m
+2024-10-03 21:52:28:5228 [32minfo[39m: [32mChecking transfer status for transaction: pending[39m
+2024-10-03 21:52:28:5228 [32minfo[39m: [32mChecking transfer status for transaction: 0x1fdbc53e3a2a785b3376dee0d5465efea7e5eef2c981912b0727631bcea9c6ea[39m
+2024-10-03 21:52:28:5228 [32minfo[39m: [32mChecking transfer status for transaction: 0x7c907699d50785724bc0ecfbce3b592c62436bbb84783354122c182e9792a69e[39m
+2024-10-03 21:52:28:5228 [31merror[39m: [31mError checking transfer status on blockchain: Returned error: data types must start with 0x[39m
+2024-10-03 21:53:28:5328 [32minfo[39m: [32mChecking transfer status for transaction: pending[39m
+2024-10-03 21:53:28:5328 [32minfo[39m: [32mChecking transfer status for transaction: 0x1fdbc53e3a2a785b3376dee0d5465efea7e5eef2c981912b0727631bcea9c6ea[39m
+2024-10-03 21:53:28:5328 [32minfo[39m: [32mChecking transfer status for transaction: 0x7c907699d50785724bc0ecfbce3b592c62436bbb84783354122c182e9792a69e[39m
+2024-10-03 21:53:28:5328 [31merror[39m: [31mError checking transfer status on blockchain: Returned error: data types must start with 0x[39m
+2024-10-03 21:58:59:5859 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-10-03 21:59:12:5912 [32minfo[39m: [32mChecking transfer status for transaction: pending[39m
+2024-10-03 21:59:12:5912 [32minfo[39m: [32mChecking transfer status for transaction: 0x1fdbc53e3a2a785b3376dee0d5465efea7e5eef2c981912b0727631bcea9c6ea[39m
+2024-10-03 21:59:12:5912 [32minfo[39m: [32mChecking transfer status for transaction: 0x7c907699d50785724bc0ecfbce3b592c62436bbb84783354122c182e9792a69e[39m
+2024-10-03 21:59:12:5912 [31merror[39m: [31mError checking transfer status on blockchain: Returned error: data types must start with 0x[39m
+2024-10-03 21:59:41:5941 [32minfo[39m: [32mChecking transfer status for transaction: pending[39m
+2024-10-03 21:59:41:5941 [32minfo[39m: [32mChecking transfer status for transaction: 0x1fdbc53e3a2a785b3376dee0d5465efea7e5eef2c981912b0727631bcea9c6ea[39m
+2024-10-03 21:59:41:5941 [32minfo[39m: [32mChecking transfer status for transaction: 0x7c907699d50785724bc0ecfbce3b592c62436bbb84783354122c182e9792a69e[39m
+2024-10-03 21:59:41:5941 [31merror[39m: [31mError checking transfer status on blockchain: Returned error: data types must start with 0x[39m
+2024-10-03 22:00:11:011 [32minfo[39m: [32mChecking transfer status for transaction: pending[39m
+2024-10-03 22:00:11:011 [32minfo[39m: [32mChecking transfer status for transaction: 0x1fdbc53e3a2a785b3376dee0d5465efea7e5eef2c981912b0727631bcea9c6ea[39m
+2024-10-03 22:00:11:011 [32minfo[39m: [32mChecking transfer status for transaction: 0x7c907699d50785724bc0ecfbce3b592c62436bbb84783354122c182e9792a69e[39m
+2024-10-03 22:00:11:011 [31merror[39m: [31mError checking transfer status on blockchain: Returned error: data types must start with 0x[39m
+2024-10-03 22:00:41:041 [32minfo[39m: [32mChecking transfer status for transaction: pending[39m
+2024-10-03 22:00:41:041 [32minfo[39m: [32mChecking transfer status for transaction: 0x1fdbc53e3a2a785b3376dee0d5465efea7e5eef2c981912b0727631bcea9c6ea[39m
+2024-10-03 22:00:41:041 [32minfo[39m: [32mChecking transfer status for transaction: 0x7c907699d50785724bc0ecfbce3b592c62436bbb84783354122c182e9792a69e[39m
+2024-10-03 22:00:41:041 [31merror[39m: [31mError checking transfer status on blockchain: Returned error: data types must start with 0x[39m
+2024-10-03 22:01:11:111 [32minfo[39m: [32mChecking transfer status for transaction: pending[39m
+2024-10-03 22:01:11:111 [32minfo[39m: [32mChecking transfer status for transaction: 0x1fdbc53e3a2a785b3376dee0d5465efea7e5eef2c981912b0727631bcea9c6ea[39m
+2024-10-03 22:01:11:111 [32minfo[39m: [32mChecking transfer status for transaction: 0x7c907699d50785724bc0ecfbce3b592c62436bbb84783354122c182e9792a69e[39m
+2024-10-03 22:01:11:111 [31merror[39m: [31mError checking transfer status on blockchain: Returned error: data types must start with 0x[39m
+2024-10-03 22:02:28:228 [32minfo[39m: [32mChecking transfer status for transaction: pending[39m
+2024-10-03 22:02:28:228 [32minfo[39m: [32mChecking transfer status for transaction: 0x1fdbc53e3a2a785b3376dee0d5465efea7e5eef2c981912b0727631bcea9c6ea[39m
+2024-10-03 22:02:28:228 [32minfo[39m: [32mChecking transfer status for transaction: 0x7c907699d50785724bc0ecfbce3b592c62436bbb84783354122c182e9792a69e[39m
+2024-10-03 22:02:28:228 [31merror[39m: [31mError checking transfer status on blockchain: Returned error: data types must start with 0x[39m
+2024-10-03 22:03:57:357 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-10-03 22:04:11:411 [32minfo[39m: [32mChecking transfer status for transaction: pending[39m
+2024-10-03 22:04:11:411 [33mwarn[39m: [33mInvalid transaction hash: pending[39m
+2024-10-03 22:04:11:411 [32minfo[39m: [32mChecking transfer status for transaction: 0x1fdbc53e3a2a785b3376dee0d5465efea7e5eef2c981912b0727631bcea9c6ea[39m
+2024-10-03 22:04:11:411 [32minfo[39m: [32mChecking transfer status for transaction: 0x7c907699d50785724bc0ecfbce3b592c62436bbb84783354122c182e9792a69e[39m
+2024-10-03 22:13:52:1352 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-10-03 22:15:38:1538 [32minfo[39m: [32mChecking transfer status for transaction: 0xb00074baac17f7edc36da658d6e86b2958e3a76881cf6a65874ae745ccfcc02b[39m
+2024-10-03 22:15:55:1555 [32minfo[39m: [32mCreating transfer record. Product ID: 66ef8cedbd0e4b67d019e33d, Consumer ID: 66f6da5cb3c53fbf66978fd9, Quantity: 20, Tx Hash: 0x1ab561c84d0cdef27eb6b3189493d428849a164b0b2da04242455415ed0a6434[39m
+2024-10-03 22:15:55:1555 [32minfo[39m: [32mTransfer record created in database:[39m
+2024-10-03 22:15:55:1555 [32minfo[39m: [32mProduct quantity updated. New quantity: 30[39m
+2024-10-03 22:17:53:1753 [32minfo[39m: [32mChecking transfer status for transaction: 0x1ab561c84d0cdef27eb6b3189493d428849a164b0b2da04242455415ed0a6434[39m
+2024-10-03 22:18:23:1823 [32minfo[39m: [32mChecking transfer status for transaction: 0x1ab561c84d0cdef27eb6b3189493d428849a164b0b2da04242455415ed0a6434[39m
+2024-10-03 22:18:53:1853 [32minfo[39m: [32mChecking transfer status for transaction: 0x1ab561c84d0cdef27eb6b3189493d428849a164b0b2da04242455415ed0a6434[39m
+2024-10-03 22:19:23:1923 [32minfo[39m: [32mChecking transfer status for transaction: 0x1ab561c84d0cdef27eb6b3189493d428849a164b0b2da04242455415ed0a6434[39m
+2024-10-03 22:19:53:1953 [32minfo[39m: [32mChecking transfer status for transaction: 0x1ab561c84d0cdef27eb6b3189493d428849a164b0b2da04242455415ed0a6434[39m
+2024-10-03 22:20:28:2028 [32minfo[39m: [32mChecking transfer status for transaction: 0x1ab561c84d0cdef27eb6b3189493d428849a164b0b2da04242455415ed0a6434[39m
+2024-10-03 22:21:28:2128 [32minfo[39m: [32mChecking transfer status for transaction: 0x1ab561c84d0cdef27eb6b3189493d428849a164b0b2da04242455415ed0a6434[39m
+2024-10-03 22:22:28:2228 [32minfo[39m: [32mChecking transfer status for transaction: 0x1ab561c84d0cdef27eb6b3189493d428849a164b0b2da04242455415ed0a6434[39m
+2024-10-03 22:23:28:2328 [32minfo[39m: [32mChecking transfer status for transaction: 0x1ab561c84d0cdef27eb6b3189493d428849a164b0b2da04242455415ed0a6434[39m
+2024-10-03 22:24:28:2428 [32minfo[39m: [32mChecking transfer status for transaction: 0x1ab561c84d0cdef27eb6b3189493d428849a164b0b2da04242455415ed0a6434[39m
+2024-10-03 22:25:28:2528 [32minfo[39m: [32mChecking transfer status for transaction: 0x1ab561c84d0cdef27eb6b3189493d428849a164b0b2da04242455415ed0a6434[39m
+2024-10-03 22:26:28:2628 [32minfo[39m: [32mChecking transfer status for transaction: 0x1ab561c84d0cdef27eb6b3189493d428849a164b0b2da04242455415ed0a6434[39m
+2024-10-03 22:30:51:3051 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-10-03 22:31:04:314 [32minfo[39m: [32mChecking transfer status for transaction: 0x1ab561c84d0cdef27eb6b3189493d428849a164b0b2da04242455415ed0a6434[39m
+2024-10-03 22:31:05:315 [32minfo[39m: [32mChecking transfer status for transaction: 0x1ab561c84d0cdef27eb6b3189493d428849a164b0b2da04242455415ed0a6434[39m
+2024-10-03 22:31:09:319 [32minfo[39m: [32mChecking transfer status for transaction: 0x1ab561c84d0cdef27eb6b3189493d428849a164b0b2da04242455415ed0a6434[39m
+2024-10-04 00:47:06:476 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-10-04 00:49:10:4910 [32minfo[39m: [32mSubmitting product feedback on blockchain. Product ID: 0x000000000000000000000000000000000000000000000000000000000000001d, Consumer: undefined[39m
+2024-10-04 00:49:10:4910 [31merror[39m: [31mError submitting product feedback on blockchain: contract.methods.submitFeedback is not a function[39m
+2024-10-04 01:00:01:01 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-10-04 01:02:30:230 [32minfo[39m: [32mSubmitting product feedback on blockchain. Product ID: 0x000000000000000000000000000000000000000000000000000000000000001d, Consumer: undefined[39m
+2024-10-04 01:02:30:230 [31merror[39m: [31mError submitting product feedback on blockchain: contract.methods.submitFeedback is not a function[39m
+2024-10-04 01:15:26:1526 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-10-04 16:02:26:226 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-10-04 16:03:10:310 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-10-04 16:06:28:628 [32minfo[39m: [32mFetching product journey from blockchain. Product ID: 0x000000000000000000000000000000000000000000000000000000000000001d[39m
+2024-10-04 16:06:28:628 [31merror[39m: [31mError fetching product journey from blockchain: contract.methods.getProductJourney is not a function[39m
+2024-10-04 17:24:18:2418 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-10-04 17:24:51:2451 [32minfo[39m: [32mFetching product journey from blockchain. Product ID: 0x000000000000000000000000000000000000000000000000000000000000001d[39m
+2024-10-04 17:24:51:2451 [32minfo[39m: [32mProduct journey fetched for 0x000000000000000000000000000000000000000000000000000000000000001d. Steps: 1[39m
+2024-10-04 17:54:06:546 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-10-05 18:16:26:1626 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-10-05 18:20:13:2013 [32minfo[39m: [32mUpdating product info on blockchain. Product ID: 0x0000000000000000000000000000000000000000000000000000000000000007[39m
+2024-10-05 18:20:14:2014 [32minfo[39m: [32mEstimated gas: 32852[39m
+2024-10-05 18:20:37:2037 [32minfo[39m: [32mTransaction sent. Receipt:[39m
+2024-10-05 18:20:37:2037 [32minfo[39m: [32mProduct info updated successfully on blockchain. Transaction receipt:[39m
+2024-10-05 18:28:30:2830 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-10-05 18:31:27:3127 [32minfo[39m: [32mChecking transfer status for transaction: 0xab7d37f79a0e92f5dc6ff5ad3305784f024b510948fff091477c1ca0156cd074[39m
+2024-10-05 18:33:43:3343 [32minfo[39m: [32mRetailer updating product info: 0x0000000000000000000000000000000000000000000000000000000000000007[39m
+2024-10-05 18:33:43:3343 [32minfo[39m: [32mEstimated gas:[39m
+2024-10-05 18:34:01:341 [32minfo[39m: [32mTransaction sent. Receipt:[39m
+2024-10-05 18:34:01:341 [32minfo[39m: [32mProduct info updated by retailer. Transaction receipt:[39m
+2024-10-05 18:57:41:5741 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-10-05 18:59:42:5942 [32minfo[39m: [32mRetailer updating product info: 0x0000000000000000000000000000000000000000000000000000000000000007[39m
+2024-10-05 18:59:42:5942 [32minfo[39m: [32mEstimated gas:[39m
+2024-10-05 18:59:48:5948 [32minfo[39m: [32mTransaction sent. Receipt:[39m
+2024-10-05 19:00:59:059 [32minfo[39m: [32mRetailer updating product info: 0x0000000000000000000000000000000000000000000000000000000000000007[39m
+2024-10-05 19:00:59:059 [32minfo[39m: [32mEstimated gas:[39m
+2024-10-05 19:01:12:112 [32minfo[39m: [32mTransaction sent. Receipt:[39m
+2024-10-05 19:06:11:611 [32minfo[39m: [32mRetailer updating product info: 0x0000000000000000000000000000000000000000000000000000000000000007[39m
+2024-10-05 19:06:11:611 [32minfo[39m: [32mEstimated gas:[39m
+2024-10-05 19:06:36:636 [32minfo[39m: [32mTransaction sent. Receipt:[39m
+2024-10-05 19:11:25:1125 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-10-05 19:12:17:1217 [32minfo[39m: [32mRetailer updating product info: 0x0000000000000000000000000000000000000000000000000000000000000028[39m
+2024-10-05 19:12:17:1217 [32minfo[39m: [32mEstimated gas:[39m
+2024-10-05 19:12:24:1224 [32minfo[39m: [32mTransaction sent. Receipt:[39m
+2024-10-05 19:15:14:1514 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-10-05 19:16:00:160 [32minfo[39m: [32mRetailer updating product info: 0x0000000000000000000000000000000000000000000000000000000000000028[39m
+2024-10-05 19:16:00:160 [32minfo[39m: [32mEstimated gas:[39m
+2024-10-05 19:17:26:1726 [32minfo[39m: [32mTransaction sent. Receipt:[39m
+2024-10-05 19:20:29:2029 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-10-05 19:21:20:2120 [32minfo[39m: [32mRetailer updating product info: 0x0000000000000000000000000000000000000000000000000000000000000028[39m
+2024-10-05 19:21:20:2120 [32minfo[39m: [32mEstimated gas:[39m
+2024-10-05 19:24:05:245 [32minfo[39m: [32mRetailer updating product info: 0x0000000000000000000000000000000000000000000000000000000000000028[39m
+2024-10-05 19:24:05:245 [32minfo[39m: [32mEstimated gas:[39m
+2024-10-05 19:31:52:3152 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-10-05 19:32:51:3251 [32minfo[39m: [32mRetailer updating product info: 0x0000000000000000000000000000000000000000000000000000000000000028[39m
+2024-10-05 19:32:52:3252 [32minfo[39m: [32mEstimated gas:[39m
+2024-10-05 19:33:00:330 [32minfo[39m: [32mTransaction sent. Receipt:[39m
+2024-10-05 19:40:02:402 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-10-05 19:47:10:4710 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-10-05 20:03:46:346 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-10-05 20:04:36:436 [32minfo[39m: [32mRetailer updating product info: 0x0000000000000000000000000000000000000000000000000000000000000007[39m
+2024-10-05 20:04:36:436 [32minfo[39m: [32mEstimated gas:[39m
+2024-10-05 20:05:36:536 [32minfo[39m: [32mTransaction sent. Receipt:[39m
+2024-10-05 20:05:50:550 [32minfo[39m: [32mRetailer updating product info: 0x000000000000000000000000000000000000000000000000000000000000000c[39m
+2024-10-05 20:05:50:550 [32minfo[39m: [32mEstimated gas:[39m
+2024-10-05 20:06:02:62 [32minfo[39m: [32mTransaction sent. Receipt:[39m
+2024-10-05 20:06:42:642 [32minfo[39m: [32mRetailer updating product info: 0x000000000000000000000000000000000000000000000000000000000000000c[39m
+2024-10-05 20:06:42:642 [32minfo[39m: [32mEstimated gas:[39m
+2024-10-05 20:06:50:650 [32minfo[39m: [32mTransaction sent. Receipt:[39m
+2024-10-05 20:19:30:1930 [32minfo[39m: [32mRetailer updating product info: 0x000000000000000000000000000000000000000000000000000000000000000c[39m
+2024-10-05 20:19:30:1930 [32minfo[39m: [32mEstimated gas:[39m
+2024-10-05 20:20:13:2013 [32minfo[39m: [32mTransaction sent. Receipt:[39m
+2024-10-05 20:23:33:2333 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-10-05 20:27:28:2728 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-10-05 20:28:05:285 [32minfo[39m: [32mRetailer updating product info: 0x000000000000000000000000000000000000000000000000000000000000000c[39m
+2024-10-05 20:28:05:285 [32minfo[39m: [32mEstimated gas:[39m
+2024-10-05 20:28:37:2837 [32minfo[39m: [32mTransaction sent. Receipt:[39m
+2024-10-05 20:34:42:3442 [32minfo[39m: [32mRetailer updating product info: 0x0000000000000000000000000000000000000000000000000000000000000007[39m
+2024-10-05 20:34:43:3443 [32minfo[39m: [32mEstimated gas:[39m
+2024-10-05 20:35:25:3525 [32minfo[39m: [32mTransaction sent. Receipt:[39m
+2024-10-05 20:43:07:437 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-10-05 20:43:56:4356 [32minfo[39m: [32mRetailer updating product info: 0x000000000000000000000000000000000000000000000000000000000000000c[39m
+2024-10-05 20:43:56:4356 [32minfo[39m: [32mEstimated gas:[39m
+2024-10-05 20:44:13:4413 [32minfo[39m: [32mTransaction sent. Receipt:[39m
+2024-10-05 20:44:13:4413 [32minfo[39m: [32mProduct info updated by retailer. Transaction receipt:[39m
+2024-10-05 20:47:14:4714 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-10-05 20:48:13:4813 [32minfo[39m: [32mRetailer updating product info: 0x000000000000000000000000000000000000000000000000000000000000000c[39m
+2024-10-05 20:48:13:4813 [32minfo[39m: [32mEstimated gas:[39m
+2024-10-05 20:48:24:4824 [32minfo[39m: [32mTransaction sent. Receipt:[39m
+2024-10-05 20:48:24:4824 [32minfo[39m: [32mProduct info updated by retailer. Transaction receipt:[39m
+2024-10-05 20:54:35:5435 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-10-05 20:55:12:5512 [32minfo[39m: [32mRetailer updating product info: 0x0000000000000000000000000000000000000000000000000000000000000007[39m
+2024-10-05 20:55:12:5512 [32minfo[39m: [32mEstimated gas:[39m
+2024-10-05 20:56:31:5631 [32minfo[39m: [32mRetailer updating product info: 0x0000000000000000000000000000000000000000000000000000000000000007[39m
+2024-10-05 20:56:31:5631 [32minfo[39m: [32mEstimated gas:[39m
+2024-10-05 20:57:21:5721 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-10-05 20:57:52:5752 [32minfo[39m: [32mRetailer updating product info: 0x0000000000000000000000000000000000000000000000000000000000000007[39m
+2024-10-05 20:57:52:5752 [32minfo[39m: [32mEstimated gas:[39m
+2024-10-05 20:58:01:581 [32minfo[39m: [32mTransaction sent. Receipt:[39m
+2024-10-05 20:58:01:581 [32minfo[39m: [32mProduct info updated by retailer. Transaction receipt:[39m
+2024-10-05 21:08:15:815 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-10-05 21:08:57:857 [32minfo[39m: [32mRetailer updating product info: 0x0000000000000000000000000000000000000000000000000000000000000007[39m
+2024-10-05 21:08:58:858 [32minfo[39m: [32mEstimated gas:[39m
+2024-10-05 21:09:02:92 [32minfo[39m: [32mTransaction sent. Receipt:[39m
+2024-10-05 21:09:02:92 [32minfo[39m: [32mProduct info updated by retailer. Transaction receipt:[39m
+2024-10-05 21:13:00:130 [32minfo[39m: [32mRetailer updating product info: 0x0000000000000000000000000000000000000000000000000000000000000007[39m
+2024-10-05 21:13:00:130 [32minfo[39m: [32mEstimated gas:[39m
+2024-10-05 21:13:13:1313 [32minfo[39m: [32mTransaction sent. Receipt:[39m
+2024-10-05 21:13:13:1313 [32minfo[39m: [32mProduct info updated by retailer. Transaction receipt:[39m
+2024-10-05 21:15:37:1537 [32minfo[39m: [32mRetailer updating product info: 0x0000000000000000000000000000000000000000000000000000000000000007[39m
+2024-10-05 21:15:37:1537 [32minfo[39m: [32mEstimated gas:[39m
+2024-10-05 21:15:43:1543 [32minfo[39m: [32mRetailer updating product info: 0x0000000000000000000000000000000000000000000000000000000000000007[39m
+2024-10-05 21:15:43:1543 [32minfo[39m: [32mEstimated gas:[39m
+2024-10-05 21:17:33:1733 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-10-05 21:22:17:2217 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-10-05 21:25:04:254 [32minfo[39m: [32mCreating transfer record. Product ID: 66ed8fd109440f9614f2dcb1, Consumer ID: 66f6da5cb3c53fbf66978fd9, Quantity: 30, Tx Hash: 0x47c87c343c7886f2eff48765561defe3a6c46320f0677577f0d184f3a3a6e371[39m
+2024-10-05 21:25:04:254 [32minfo[39m: [32mTransfer record created in database:[39m
+2024-10-05 21:25:04:254 [32minfo[39m: [32mProduct quantity updated. New quantity: 10[39m
+2024-10-05 21:28:17:2817 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-10-05 21:29:06:296 [32minfo[39m: [32mCreating transfer record. Product ID: 66ed8fd109440f9614f2dcb1, Consumer ID: 66f6da5cb3c53fbf66978fd9, Quantity: 10, Tx Hash: 0x56e0c7cd239cf249e8101ac9e0d6e3b8c1a176cba7acb071b7fc7deba6293039[39m
+2024-10-05 21:29:06:296 [32minfo[39m: [32mTransfer record created in database:[39m
+2024-10-05 21:29:06:296 [32minfo[39m: [32mProduct quantity updated. New quantity: 0[39m
+2024-10-05 21:29:28:2928 [32minfo[39m: [32mChecking transfer status for transaction: 0x47c87c343c7886f2eff48765561defe3a6c46320f0677577f0d184f3a3a6e371[39m
+2024-10-05 21:29:28:2928 [32minfo[39m: [32mChecking transfer status for transaction: 0x56e0c7cd239cf249e8101ac9e0d6e3b8c1a176cba7acb071b7fc7deba6293039[39m
+2024-10-06 17:18:47:1847 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-10-06 17:20:09:209 [32minfo[39m: [32mFetching product journey from blockchain. Product ID: 0x000000000000000000000000000000000000000000000000000000000000001d[39m
+2024-10-06 17:20:10:2010 [32minfo[39m: [32mProduct journey fetched for 0x000000000000000000000000000000000000000000000000000000000000001d. Steps: 1[39m
+2024-10-06 17:44:21:4421 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-10-06 17:44:48:4448 [32minfo[39m: [32mFetching product journey from blockchain. Product ID: 0x000000000000000000000000000000000000000000000000000000000000001d[39m
+2024-10-06 17:44:49:4449 [32minfo[39m: [32mProduct journey fetched for 0x000000000000000000000000000000000000000000000000000000000000001d. Steps: 1[39m
+2024-10-06 17:45:34:4534 [32minfo[39m: [32mFetching product journey from blockchain. Product ID: 0x000000000000000000000000000000000000000000000000000000000000001d[39m
+2024-10-06 17:45:35:4535 [32minfo[39m: [32mProduct journey fetched for 0x000000000000000000000000000000000000000000000000000000000000001d. Steps: 1[39m
+2024-10-06 17:45:49:4549 [32minfo[39m: [32mFetching product journey from blockchain. Product ID: 0x000000000000000000000000000000000000000000000000000000000000001d[39m
+2024-10-06 17:45:49:4549 [32minfo[39m: [32mProduct journey fetched for 0x000000000000000000000000000000000000000000000000000000000000001d. Steps: 1[39m
+2024-10-06 17:57:52:5752 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-10-06 17:58:54:5854 [32minfo[39m: [32mFetching product journey from blockchain. Product ID: 0x000000000000000000000000000000000000000000000000000000000000001d[39m
+2024-10-06 17:58:55:5855 [32minfo[39m: [32mProduct journey fetched for 0x000000000000000000000000000000000000000000000000000000000000001d. Steps: 1[39m
+2024-10-06 18:12:27:1227 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-10-06 18:12:43:1243 [32minfo[39m: [32mFetching product journey from blockchain. Product ID: 0x000000000000000000000000000000000000000000000000000000000000001d[39m
+2024-10-06 18:12:44:1244 [32minfo[39m: [32mProduct journey fetched for 0x000000000000000000000000000000000000000000000000000000000000001d. Steps: 1[39m
+2024-10-06 18:47:04:474 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-10-06 18:47:24:4724 [32minfo[39m: [32mFetching product journey from blockchain. Product ID: 0x000000000000000000000000000000000000000000000000000000000000001d[39m
+2024-10-06 18:47:24:4724 [32minfo[39m: [32mProduct journey fetched for 0x000000000000000000000000000000000000000000000000000000000000001d. Steps: 1[39m
+2024-10-06 18:54:42:5442 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-10-06 18:57:01:571 [32minfo[39m: [32mFetching product journey from blockchain. Product ID: 0x000000000000000000000000000000000000000000000000000000000000001d[39m
+2024-10-06 18:57:02:572 [32minfo[39m: [32mProduct journey fetched for 0x000000000000000000000000000000000000000000000000000000000000001d. Steps: 1[39m
+2024-10-06 19:08:13:813 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-10-06 19:08:52:852 [32minfo[39m: [32mFetching product journey from blockchain. Product ID: 0x000000000000000000000000000000000000000000000000000000000000001d[39m
+2024-10-06 19:08:52:852 [32minfo[39m: [32mProduct journey fetched for 0x000000000000000000000000000000000000000000000000000000000000001d. Steps: 1[39m
+2024-10-06 19:23:50:2350 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-10-06 19:24:03:243 [32minfo[39m: [32mFetching product journey from blockchain. Product ID: 0x000000000000000000000000000000000000000000000000000000000000001d[39m
+2024-10-06 19:24:04:244 [32minfo[39m: [32mProduct journey fetched for 0x000000000000000000000000000000000000000000000000000000000000001d. Steps: 1[39m
+2024-10-06 19:24:17:2417 [32minfo[39m: [32mFetching product journey from blockchain. Product ID: 0x000000000000000000000000000000000000000000000000000000000000001d[39m
+2024-10-06 19:24:17:2417 [32minfo[39m: [32mProduct journey fetched for 0x000000000000000000000000000000000000000000000000000000000000001d. Steps: 1[39m
+2024-10-06 19:25:33:2533 [32minfo[39m: [32mFetching product journey from blockchain. Product ID: 0x000000000000000000000000000000000000000000000000000000000000001d[39m
+2024-10-06 19:25:33:2533 [32minfo[39m: [32mProduct journey fetched for 0x000000000000000000000000000000000000000000000000000000000000001d. Steps: 1[39m
+2024-10-06 19:25:38:2538 [32minfo[39m: [32mFetching product journey from blockchain. Product ID: 0x000000000000000000000000000000000000000000000000000000000000001d[39m
+2024-10-06 19:25:38:2538 [32minfo[39m: [32mProduct journey fetched for 0x000000000000000000000000000000000000000000000000000000000000001d. Steps: 1[39m
+2024-10-06 19:40:13:4013 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-10-06 19:40:28:4028 [32minfo[39m: [32mFetching product journey from blockchain. Product ID: 0x000000000000000000000000000000000000000000000000000000000000001d[39m
+2024-10-06 19:40:28:4028 [32minfo[39m: [32mProduct journey fetched for 0x000000000000000000000000000000000000000000000000000000000000001d. Steps: 1[39m
+2024-10-06 19:40:42:4042 [32minfo[39m: [32mFetching product journey from blockchain. Product ID: 0x000000000000000000000000000000000000000000000000000000000000001d[39m
+2024-10-06 19:40:42:4042 [32minfo[39m: [32mProduct journey fetched for 0x000000000000000000000000000000000000000000000000000000000000001d. Steps: 1[39m
+2024-10-06 19:41:17:4117 [32minfo[39m: [32mFetching product journey from blockchain. Product ID: 0x000000000000000000000000000000000000000000000000000000000000001d[39m
+2024-10-06 19:41:17:4117 [32minfo[39m: [32mProduct journey fetched for 0x000000000000000000000000000000000000000000000000000000000000001d. Steps: 1[39m
+2024-10-06 19:47:07:477 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-10-06 19:47:13:4713 [32minfo[39m: [32mFetching product journey from blockchain. Product ID: 0x000000000000000000000000000000000000000000000000000000000000001d[39m
+2024-10-06 19:47:14:4714 [32minfo[39m: [32mProduct journey fetched for 0x000000000000000000000000000000000000000000000000000000000000001d. Steps: 1[39m
+2024-10-06 19:47:18:4718 [32minfo[39m: [32mFetching product journey from blockchain. Product ID: 0x000000000000000000000000000000000000000000000000000000000000001d[39m
+2024-10-06 19:47:18:4718 [32minfo[39m: [32mProduct journey fetched for 0x000000000000000000000000000000000000000000000000000000000000001d. Steps: 1[39m
+2024-10-07 00:22:41:2241 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-10-07 19:15:02:152 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-10-07 19:16:14:1614 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-10-07 20:22:47:2247 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-10-07 20:34:44:3444 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-10-07 20:44:20:4420 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-10-07 20:55:38:5538 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-10-07 21:25:56:2556 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-10-07 21:45:28:4528 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-10-07 21:56:13:5613 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-10-07 22:05:48:548 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-10-08 00:25:25:2525 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-10-08 00:25:59:2559 [32minfo[39m: [32mFetching product journey from blockchain. Product ID: 0x000000000000000000000000000000000000000000000000000000000000001d[39m
+2024-10-08 00:25:59:2559 [32minfo[39m: [32mProduct journey fetched for 0x000000000000000000000000000000000000000000000000000000000000001d. Steps: 1[39m
+2024-10-08 00:26:03:263 [32minfo[39m: [32mFetching product journey from blockchain. Product ID: 0x000000000000000000000000000000000000000000000000000000000000001d[39m
+2024-10-08 00:26:03:263 [32minfo[39m: [32mProduct journey fetched for 0x000000000000000000000000000000000000000000000000000000000000001d. Steps: 1[39m
+2024-10-08 00:26:27:2627 [32minfo[39m: [32mFetching product journey from blockchain. Product ID: 0x000000000000000000000000000000000000000000000000000000000000001d[39m
+2024-10-08 00:26:28:2628 [32minfo[39m: [32mProduct journey fetched for 0x000000000000000000000000000000000000000000000000000000000000001d. Steps: 1[39m
+2024-10-08 00:26:28:2628 [32minfo[39m: [32mFetching product journey from blockchain. Product ID: 0x000000000000000000000000000000000000000000000000000000000000001d[39m
+2024-10-08 00:26:28:2628 [32minfo[39m: [32mProduct journey fetched for 0x000000000000000000000000000000000000000000000000000000000000001d. Steps: 1[39m
+2024-10-08 00:26:41:2641 [32minfo[39m: [32mFetching product journey from blockchain. Product ID: 0x000000000000000000000000000000000000000000000000000000000000001d[39m
+2024-10-08 00:26:42:2642 [32minfo[39m: [32mProduct journey fetched for 0x000000000000000000000000000000000000000000000000000000000000001d. Steps: 1[39m
+2024-10-08 00:50:46:5046 [32minfo[39m: [32mFetching product journey from blockchain. Product ID: 0x000000000000000000000000000000000000000000000000000000000000001d[39m
+2024-10-08 00:50:46:5046 [32minfo[39m: [32mProduct journey fetched for 0x000000000000000000000000000000000000000000000000000000000000001d. Steps: 1[39m
+2024-10-08 00:50:49:5049 [32minfo[39m: [32mFetching product journey from blockchain. Product ID: 0x000000000000000000000000000000000000000000000000000000000000001d[39m
+2024-10-08 00:50:49:5049 [32minfo[39m: [32mProduct journey fetched for 0x000000000000000000000000000000000000000000000000000000000000001d. Steps: 1[39m
+2024-10-08 00:59:10:5910 [32minfo[39m: [32mFetching product journey from blockchain. Product ID: 0x000000000000000000000000000000000000000000000000000000000000001d[39m
+2024-10-08 00:59:10:5910 [32minfo[39m: [32mProduct journey fetched for 0x000000000000000000000000000000000000000000000000000000000000001d. Steps: 1[39m
+2024-10-08 01:00:40:040 [32minfo[39m: [32mFetching product journey from blockchain. Product ID: 0x000000000000000000000000000000000000000000000000000000000000001d[39m
+2024-10-08 01:00:40:040 [32minfo[39m: [32mProduct journey fetched for 0x000000000000000000000000000000000000000000000000000000000000001d. Steps: 1[39m
+2024-10-08 01:00:52:052 [32minfo[39m: [32mFetching product journey from blockchain. Product ID: 0x000000000000000000000000000000000000000000000000000000000000001d[39m
+2024-10-08 01:00:52:052 [32minfo[39m: [32mProduct journey fetched for 0x000000000000000000000000000000000000000000000000000000000000001d. Steps: 1[39m
+2024-10-08 01:01:25:125 [32minfo[39m: [32mFetching product journey from blockchain. Product ID: 0x000000000000000000000000000000000000000000000000000000000000001d[39m
+2024-10-08 01:01:25:125 [32minfo[39m: [32mProduct journey fetched for 0x000000000000000000000000000000000000000000000000000000000000001d. Steps: 1[39m
+2024-10-08 01:01:42:142 [32minfo[39m: [32mFetching product journey from blockchain. Product ID: 0x000000000000000000000000000000000000000000000000000000000000001d[39m
+2024-10-08 01:01:42:142 [32minfo[39m: [32mProduct journey fetched for 0x000000000000000000000000000000000000000000000000000000000000001d. Steps: 1[39m
+2024-10-08 12:48:39:4839 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-10-08 23:15:02:152 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-10-08 23:15:59:1559 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-10-09 16:26:55:2655 [32minfo[39m: [32mChecking transfer status for transaction: 0xc905c782715261410040ae4662549f56efff4515b929d53db957a9277bbc0bd1[39m
+2024-10-09 16:28:17:2817 [32minfo[39m: [32mUpdating product info on blockchain. Product ID: 0x0000000000000000000000000000000000000000000000000000000000000034[39m
+2024-10-09 16:28:17:2817 [32minfo[39m: [32mEstimated gas: 32203[39m
+2024-10-09 16:28:24:2824 [32minfo[39m: [32mTransaction sent. Receipt:[39m
+2024-10-09 16:28:24:2824 [32minfo[39m: [32mProduct info updated successfully on blockchain. Transaction receipt:[39m
+2024-10-09 16:30:03:303 [32minfo[39m: [32mChecking transfer status for transaction: 0xfd1f6bcfbe9732db21e796c9496221f25172f2a49f97bcb53319754b352fc1e7[39m
+2024-10-09 16:30:34:3034 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-10-09 16:33:28:3328 [32minfo[39m: [32mCreating transfer record. Product ID: 6705afd53f7c12501fd1b8e8, Consumer ID: 66f6da5cb3c53fbf66978fd9, Quantity: 100, Tx Hash: 0xa63c021ef4cfa276f26840f675bf9b0892a5cc53eb0aa4fded08740efe40086b[39m
+2024-10-09 16:33:28:3328 [32minfo[39m: [32mTransfer record created in database:[39m
+2024-10-09 16:33:28:3328 [32minfo[39m: [32mProduct quantity updated. New quantity: 100[39m
+2024-10-09 16:33:57:3357 [32minfo[39m: [32mChecking transfer status for transaction: 0xa63c021ef4cfa276f26840f675bf9b0892a5cc53eb0aa4fded08740efe40086b[39m
+2024-10-09 17:00:12:012 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-10-09 19:54:20:5420 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-10-09 19:55:18:5518 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-10-09 19:57:45:5745 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-10-09 20:01:06:16 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-10-09 20:15:18:1518 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-10-09 20:27:02:272 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-10-09 20:48:10:4810 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-10-09 23:16:50:1650 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-10-09 23:17:34:1734 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-10-09 23:42:45:4245 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-10-09 23:45:59:4559 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-10-09 23:53:49:5349 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-10-10 16:48:57:4857 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-10-10 16:50:04:504 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-10-10 17:08:06:86 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-10-10 17:12:02:122 [32minfo[39m: [32mChecking transfer status for transaction: 0xfe1646f82542fabf07ffdba7dee35786aa7f411d3f56b66b6f1d025707aed70a[39m
+2024-10-10 17:13:15:1315 [32minfo[39m: [32mUpdating product info on blockchain. Product ID: 0x0000000000000000000000000000000000000000000000000000000000000035[39m
+2024-10-10 17:13:15:1315 [32minfo[39m: [32mEstimated gas: 32329[39m
+2024-10-10 17:14:01:141 [32minfo[39m: [32mTransaction sent. Receipt:[39m
+2024-10-10 17:14:01:141 [32minfo[39m: [32mProduct info updated successfully on blockchain. Transaction receipt:[39m
+2024-10-10 17:19:56:1956 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-10-10 17:22:28:2228 [32minfo[39m: [32mChecking transfer status for transaction: 0xb89bd9f49e1e5c3a62783d8df0a9fdc82c730a77c5332f0847355fa95e02f70b[39m
+2024-10-10 17:29:47:2947 [32minfo[39m: [32mCreating transfer record. Product ID: 6707f9b7d7d48fe1c4c5f786, Consumer ID: 670800d18a3de4541dfe6159, Quantity: 50, Tx Hash: 0x1130d65d1082e1a0ac4b9cc0fef832b45e818d20eac4283d42c9ccdd6dad06e4[39m
+2024-10-10 17:29:47:2947 [32minfo[39m: [32mTransfer record created in database:[39m
+2024-10-10 17:29:47:2947 [32minfo[39m: [32mProduct quantity updated. New quantity: 50[39m
+2024-10-10 17:31:37:3137 [32minfo[39m: [32mChecking transfer status for transaction: 0x1130d65d1082e1a0ac4b9cc0fef832b45e818d20eac4283d42c9ccdd6dad06e4[39m
+2024-10-10 17:33:17:3317 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-10-10 18:15:46:1546 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-10-10 18:17:24:1724 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-10-10 18:18:56:1856 [32minfo[39m: [32mChecking transfer status for transaction: 0x181a018c529d800ac8f40d083bc609555373cd8eeda4acff6091006ddc039623[39m
+2024-10-10 18:45:57:4557 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-10-11 12:02:42:242 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-10-11 12:06:41:641 [32minfo[39m: [32mChecking transfer status for transaction: 0x1ff7c06051b2ced23b671354359345904dc644753eea29bf959453df077cbee7[39m
+2024-10-11 12:07:27:727 [32minfo[39m: [32mUpdating product info on blockchain. Product ID: 0x0000000000000000000000000000000000000000000000000000000000000036[39m
+2024-10-11 12:07:27:727 [32minfo[39m: [32mEstimated gas: 32329[39m
+2024-10-11 12:07:48:748 [32minfo[39m: [32mTransaction sent. Receipt:[39m
+2024-10-11 12:07:48:748 [32minfo[39m: [32mProduct info updated successfully on blockchain. Transaction receipt:[39m
+2024-10-11 12:10:03:103 [32minfo[39m: [32mChecking transfer status for transaction: 0x335b518ded04ab23724b5678d55f6413977a731959559248ecbc773bbb646aaa[39m
+2024-10-18 12:21:17:2117 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-11-25 00:27:01:271 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-11-25 00:31:54:3154 [32minfo[39m: [32mConnected to blockchain node[39m

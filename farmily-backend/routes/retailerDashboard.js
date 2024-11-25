@@ -14,6 +14,7 @@ const Transaction = require('../models/Transaction');
 const auth = require('../middleware/auth');
 const { body, param, query, validationResult } = require('express-validator');
 const Web3Service = require('../services/Web3Service');
+const logger = require('../utils/logger');
 
 /**
  * Middleware to ensure the authenticated user is a retailer
@@ -185,51 +186,46 @@ router.post('/acceptTransfer/:transferId', [
  * @route PUT /api/retailer/updateProduct/:productId
  */
 router.put('/updateProduct/:productId', [
-    // ... (validation middleware)
-  ], async (req, res) => {
-    try {
-      const errors = validationResult(req);
-      if (!errors.isEmpty()) {
-        return res.status(400).json({ errors: errors.array() });
-      }
-  
-      const { productId } = req.params;
-      const updateData = req.body;
-  
-      const product = await Product.findOne({ _id: productId, currentOwner: req.user.id });
-      if (!product) {
-        return res.status(404).json({ message: 'Product not found or not owned by you' });
-      }
-  
-      // Update product fields in the database
-      Object.assign(product, updateData);
-      await product.save();
-  
-      console.log('Product updated in database:', product._id);
-  
-      // Update product on blockchain
-      const blockchainResult = await Web3Service.updateProductInfoAsRetailer(product.blockchainId, updateData);
-  
-      if (blockchainResult.success) {
-        console.log('Product updated on blockchain. Transaction hash:', blockchainResult.txHash);
-        res.json({ 
-          message: 'Product updated successfully in database and on blockchain', 
-          product, 
-          txHash: blockchainResult.txHash 
-        });
-      } else {
-        // If blockchain update fails, we might want to rollback the database update
-        // or implement a retry mechanism. For now, we'll just send an error response.
-        res.status(500).json({ 
-          message: 'Product updated in database but failed to update on blockchain', 
-          error: blockchainResult.error 
-        });
-      }
-    } catch (error) {
-      console.error('Error updating product:', error);
-      res.status(500).json({ message: 'Error updating product', error: error.message });
+  param('productId').isMongoId().withMessage('Invalid product ID'),
+  // Add other validations as needed
+], async (req, res) => {
+  try {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
     }
-  });
+
+    const { productId } = req.params;
+    const updateData = req.body;
+
+    // Find the product first
+    const product = await Product.findOne({ _id: productId, currentOwner: req.user.id });
+    if (!product) {
+      return res.status(404).json({ message: 'Product not found or not owned by you' });
+    }
+
+    // Update product fields
+    Object.assign(product, updateData);
+
+    // Generate QR code data
+    product.generateQRCodeData();
+
+    // Save the updated product
+    await product.save();
+
+    console.log('Product updated in database:', product._id);
+
+    res.json({ 
+      success: true,
+      message: 'Product updated successfully in database', 
+      product
+    });
+
+  } catch (error) {
+    console.error('Error updating product:', error);
+    res.status(500).json({ success: false, message: 'Error updating product', error: error.message });
+  }
+});
   
   /**
    * Route to sync a product with the blockchain
@@ -275,13 +271,12 @@ router.put('/updateProduct/:productId', [
       res.status(500).json({ message: 'Error syncing product with blockchain', error: error.message });
     }
   });
-  
-
+    
 /**
  * Route to initiate a transfer to a consumer
- * @route POST /api/retailer/initiateTransferToConsumer
+ * @route POST /api/retailer/initiateTransfer
  */
-router.post('/initiateTransferToConsumer', [
+router.post('/initiateTransfer', [
   body('productId').isMongoId().withMessage('Invalid product ID'),
   body('consumerId').isMongoId().withMessage('Invalid consumer ID'),
   body('quantity').isInt({ min: 1 }).withMessage('Quantity must be a positive integer')
@@ -289,119 +284,204 @@ router.post('/initiateTransferToConsumer', [
   try {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
+      logger.error('Validation errors in initiateTransfer:', errors.array());
       return res.status(400).json({ errors: errors.array() });
     }
 
     const { productId, consumerId, quantity } = req.body;
+    logger.info(`Initiating transfer. Product ID: ${productId}, Consumer ID: ${consumerId}, Quantity: ${quantity}`);
 
+    // Fetch the product to ensure it exists and belongs to the retailer
     const product = await Product.findOne({ _id: productId, currentOwner: req.user.id });
     if (!product) {
+      logger.warn(`Product not found or not owned by retailer. Product ID: ${productId}, Retailer ID: ${req.user.id}`);
       return res.status(404).json({ message: 'Product not found or not owned by you' });
     }
 
+    // Check if there's enough quantity to transfer
     if (product.quantity < quantity) {
+      logger.warn(`Insufficient quantity. Available: ${product.quantity}, Requested: ${quantity}`);
       return res.status(400).json({ message: 'Insufficient quantity available' });
     }
 
+    // Fetch the consumer to ensure they exist
     const consumer = await User.findOne({ _id: consumerId, userType: 'consumer' });
     if (!consumer) {
+      logger.warn(`Consumer not found. Consumer ID: ${consumerId}`);
       return res.status(404).json({ message: 'Consumer not found' });
     }
 
-    // Initiate transfer on blockchain
-    const blockchainResult = await Web3Service.initiateRetailerToConsumerTransfer(product.blockchainId, consumer.uniqueIdentifier, quantity);
+    // Prepare transfer data for the blockchain
+    const transferData = {
+      productId: product.blockchainId,
+      consumerId: consumer.uniqueIdentifier,
+      quantity
+    };
+
+    logger.info('Prepared transfer data:', transferData);
+
+    // Initiate the transfer on the blockchain
+    const blockchainResult = await Web3Service.initiateRetailerToConsumerTransfer(
+      transferData.productId,
+      transferData.consumerId,
+      transferData.quantity
+    );
+
     if (!blockchainResult.success) {
-      throw new Error(blockchainResult.error || 'Blockchain transfer initiation failed');
+      logger.error('Blockchain transfer initiation failed:', blockchainResult.error);
+      return res.status(500).json({ message: 'Failed to initiate transfer on blockchain', error: blockchainResult.error });
     }
 
-    // Create transfer record
+    logger.info('Blockchain transfer initiated successfully:', blockchainResult);
+
+    // Create a pending transfer in the database
     const transfer = new Transfer({
       product: productId,
       fromUser: req.user.id,
       toUser: consumerId,
       quantity,
-      status: 'completed', // Assuming immediate completion for consumer transfers
-      blockchainTx: blockchainResult.txHash,
+      status: 'pending',
       fromUserType: 'retailer',
       toUserType: 'consumer',
-      transferDetails: `Sale of ${quantity} units to consumer`,
-      price: product.price * quantity
+      transferDetails: `Initiated transfer of ${quantity} units to consumer`,
+      price: product.price * quantity,
+      blockchainTx: blockchainResult.txHash
     });
+
     await transfer.save();
+    logger.info('Transfer record created in database:', transfer);
 
-    // Update product quantity
-    product.quantity -= quantity;
-    await product.save();
+    // Send the response
+    res.json({
+      message: 'Transfer initiated successfully',
+      transferData,
+      transferId: transfer._id,
+      blockchainTxHash: blockchainResult.txHash
+    });
 
-    // Record the sale
-    const saleResult = await Web3Service.recordSaleToConsumer(product.blockchainId, consumer.uniqueIdentifier, quantity, product.price);
-    if (!saleResult.success) {
-      console.error('Failed to record sale on blockchain:', saleResult.error);
-      // Consider how to handle this scenario - maybe add to a queue for retry?
-    }
-
-    console.log('Transfer to consumer initiated:', transfer._id);
-    res.json({ message: 'Transfer to consumer completed', transfer, blockchainTx: blockchainResult.txHash });
   } catch (error) {
-    console.error('Error initiating transfer to consumer:', error);
-    handleError(error, res);
+    logger.error('Error initiating transfer:', error);
+    res.status(500).json({ message: 'Error initiating transfer', error: error.message });
   }
 });
 
 /**
- * Route to initiate a transfer to a consumer
- * @route POST /api/retailer/initiateTransfer
+ * Route to create a transfer record after blockchain confirmation
+ * @route POST /api/retailer/createTransferRecord
  */
-router.post('/initiateTransfer', [
-    // Add validation middleware here if needed
-  ], async (req, res) => {
-    try {
-      const { productId, consumerId, quantity, blockchainTxHash } = req.body;
-  
-      // Fetch the product to ensure it exists and belongs to the retailer
-      const product = await Product.findOne({ _id: productId, currentOwner: req.user.id });
-      if (!product) {
-        return res.status(404).json({ message: 'Product not found or not owned by you' });
-      }
-  
-      // Check if there's enough quantity to transfer
-      if (product.quantity < quantity) {
-        return res.status(400).json({ message: 'Insufficient quantity available' });
-      }
-  
-      // Create the transfer record with all required fields
-      const transfer = new Transfer({
-        product: productId,
-        fromUser: req.user.id,
-        toUser: consumerId,
-        quantity,
-        status: 'completed', // Assuming immediate completion for consumer transfers
-        blockchainTx: blockchainTxHash,
-        fromUserType: 'retailer', // Add this line
-        toUserType: 'consumer', // Add this line
-        transferDetails: `Sale of ${quantity} units to consumer`,
-        price: product.price * quantity // Assuming product has a price field
-      });
-  
-      // Save the transfer
-      await transfer.save();
-  
-      // Update product quantity
+router.post('/createTransferRecord', [
+  body('productId').isMongoId().withMessage('Invalid product ID'),
+  body('consumerId').isMongoId().withMessage('Invalid consumer ID'),
+  body('quantity').isInt({ min: 1 }).withMessage('Quantity must be a positive integer'),
+  body('blockchainTxHash').isString().notEmpty().withMessage('Blockchain transaction hash is required')
+], async (req, res) => {
+  try {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      logger.error('Validation errors in createTransferRecord:', errors.array());
+      return res.status(400).json({ errors: errors.array() });
+    }
+
+    const { productId, consumerId, quantity, blockchainTxHash } = req.body;
+    logger.info(`Creating transfer record. Product ID: ${productId}, Consumer ID: ${consumerId}, Quantity: ${quantity}, Tx Hash: ${blockchainTxHash}`);
+
+    // Create a new transfer record
+    const transfer = new Transfer({
+      product: productId,
+      fromUser: req.user.id,
+      toUser: consumerId,
+      quantity,
+      status: 'pending',
+      fromUserType: 'retailer',
+      toUserType: 'consumer',
+      transferDetails: `Initiated transfer of ${quantity} units to consumer`,
+      blockchainTx: blockchainTxHash
+    });
+
+    await transfer.save();
+    logger.info('Transfer record created in database:', transfer);
+
+    // Update product quantity
+    const product = await Product.findById(productId);
+    if (product) {
       product.quantity -= quantity;
       await product.save();
-  
-      console.log('Transfer initiated:', transfer._id);
-      res.json({ 
-        message: 'Transfer initiated successfully', 
-        transfer,
-        blockchainTx: blockchainTxHash
-      });
-    } catch (error) {
-      console.error('Error initiating transfer:', error);
-      res.status(500).json({ message: 'Error initiating transfer', error: error.message });
+      logger.info(`Product quantity updated. New quantity: ${product.quantity}`);
     }
-  });
 
+    res.json({
+      message: 'Transfer record created successfully',
+      transfer: transfer
+    });
+
+  } catch (error) {
+    logger.error('Error creating transfer record:', error);
+    res.status(500).json({ message: 'Error creating transfer record', error: error.message });
+  }
+});
+
+/**
+ * Route to get product information including farmer, distributor, and retailer details
+ * @route GET /api/retailer/products/:productId/fullInfo
+ */
+router.get('/products/:productId/fullInfo', [
+  param('productId').isMongoId().withMessage('Invalid product ID')
+], async (req, res) => {
+  try {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+    }
+
+    const { productId } = req.params;
+    const product = await Product.findOne({ _id: productId })
+      .populate('originalOwner', 'username location')
+      .populate('previousOwner', 'username location userType')
+      .populate('currentOwner', 'username location userType');
+
+    if (!product) {
+      return res.status(404).json({ message: 'Product not found' });
+    }
+
+    // Get the latest blockchain data
+    const blockchainData = await Web3Service.getProductFromBlockchain(product.blockchainId);
+    if (!blockchainData.success) {
+      throw new Error(blockchainData.error || 'Failed to get product data from blockchain');
+    }
+
+    // Merge database and blockchain data
+    const productWithFullInfo = {
+      product: {
+        _id: product._id,
+        type: product.type,
+        batchNumber: product.batchNumber,
+        origin: product.origin,
+        productionDate: product.productionDate,
+        status: product.status,
+        quantity: product.quantity,
+        price: product.price,
+        blockchainId: product.blockchainId,
+        storageConditions: product.storageConditions || 'N/A',
+        transportationMode: product.transportationMode || 'N/A',
+        transportationDetails: product.transportationDetails || 'N/A',
+        estimatedDeliveryDate: product.estimatedDeliveryDate,
+        certifications: product.certifications || []
+      },
+      farmer: product.originalOwner,
+      distributor: product.previousOwner,
+      currentOwner: product.currentOwner,
+      blockchainStatus: blockchainData.product.status,
+      blockchainQuantity: blockchainData.product.quantity,
+      ownershipHistory: product.ownershipHistory
+    };
+
+    console.log('Product with full info fetched:', product._id);
+    res.json(productWithFullInfo);
+  } catch (error) {
+    console.error('Error fetching product with full info:', error);
+    res.status(500).json({ message: 'Error fetching product with full info', error: error.message });
+  }
+});
 /**
  * Route to get pending transfers for the retailer
  * @route GET /api/retailer/pendingTransfers

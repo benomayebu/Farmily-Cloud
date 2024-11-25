@@ -69,6 +69,22 @@ const productSchema = new mongoose.Schema({
     ref: 'User',
     comment: 'Previous owner of the product (reference to User model)'
   },
+  distributor: {
+    type: Schema.Types.ObjectId,
+    ref: 'User',
+    comment: 'Distributor of the product (reference to User model)'
+  },
+  retailer: {
+    type: Schema.Types.ObjectId,
+    ref: 'User',
+    comment: 'Retailer of the product (reference to User model)'
+  },
+
+  // field for QR code data
+  qrCodeData: {
+    type: String,
+    comment: 'Encoded QR code data for the product'
+  },
   status: {
     type: String,
     enum: [
@@ -260,6 +276,44 @@ productSchema.methods.updateBlockchainInfo = function(blockchainId, txHash) {
   this.blockchainTxHash = txHash;
   this.blockchainStatus = 'Registered';
   return this.save();
+};
+
+/**
+ * Method to generate QR code data
+ * This method creates a JSON string containing essential product information
+ */
+productSchema.methods.generateQRCodeData = function() {
+  const qrData = {
+    productId: this._id,
+    type: this.type,
+    batchNumber: this.batchNumber,
+    origin: this.origin,
+    productionDate: this.productionDate,
+    status: this.status,
+    originalOwner: this.originalOwner,
+    currentOwner: this.currentOwner,
+    distributor: this.distributor,
+    retailer: this.retailer
+  };
+  this.qrCodeData = JSON.stringify(qrData);
+};
+
+// Ensure QR code data is generated before saving
+productSchema.pre('save', function(next) {
+  if (this.isModified('status') || !this.qrCodeData) {
+    this.generateQRCodeData();
+  }
+  next();
+});
+
+/**
+ * Method to update product status and QR code
+ * @param {String} newStatus - New status of the product
+ * @returns {Promise} - Promise resolving to the updated product
+ */
+productSchema.methods.updateStatusAndQR = function(newStatus) {
+  this.status = newStatus;
+  return this.generateQRCodeData();
 };
 
 module.exports = mongoose.model('Product', productSchema);

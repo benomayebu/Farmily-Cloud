@@ -86,7 +86,11 @@ transferSchema.pre('save', function(next) {
   next();
 });
 
-// Static method to create a new transfer
+/**
+ * Static method to create a new transfer
+ * @param {Object} transferData - The data for the new transfer
+ * @returns {Promise<Transfer>} A promise that resolves with the created transfer
+ */
 transferSchema.statics.createTransfer = async function(transferData) {
   const transfer = new this(transferData);
   await transfer.save();

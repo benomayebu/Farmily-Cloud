@@ -8,7 +8,16 @@ const transactionSchema = new mongoose.Schema({
   transactionType: {
     type: String,
     required: true,
-    enum: ['Received from Farmer', 'Transferred to Retailer', 'Transferred to Distributor', 'Transfer Initiated', 'Transfer Accepted', 'Transfer Cancelled', 'Sold to Consumer']
+    enum: [
+      'Received from Farmer',
+      'Transferred to Retailer',
+      'Transferred to Distributor',
+      'Transfer Initiated',
+      'Transfer Accepted',
+      'Transfer Cancelled',
+      'Sold to Consumer',
+      'RetailerToConsumer'
+    ]
   },
   transactionDate: { type: Date, default: Date.now },
   status: {
@@ -21,6 +30,7 @@ const transactionSchema = new mongoose.Schema({
   price: { type: Number, min: 0 },
   transferId: { type: mongoose.Schema.Types.ObjectId, ref: 'Transfer' }
 }, { timestamps: true });
+
 // Indexes for efficient querying
 transactionSchema.index({ productId: 1, fromId: 1, toId: 1 });
 

@@ -1009,9 +1009,6 @@ async function acceptTransferAsRetailer(transferId, retailerAddress) {
  * @returns {Promise<Object>} A promise that resolves with the update result
  */
 async function updateProductInfoAsRetailer(productId, updatedInfo) {
-  // Use the account set up for the backend instead of currentAccount
-  const fromAddress = account.address;
-
   try {
     logger.info(`Retailer updating product info: ${productId}`, updatedInfo);
     
@@ -1023,45 +1020,33 @@ async function updateProductInfoAsRetailer(productId, updatedInfo) {
     const formattedProductId = convertToBytes32(productId);
     const details = JSON.stringify(updatedInfo);
 
-    // Estimate gas with a higher limit
-    const gasEstimate = await contract.methods.updateProductInfo(formattedProductId, details).estimateGas({
-      from: fromAddress,
+    // Return the transaction object and gas estimate instead of sending the transaction
+    const txObject = contract.methods.updateProductInfo(formattedProductId, details);
+    const gasEstimate = await txObject.estimateGas({
+      from: account.address,
       gas: 5000000 // Set a high gas limit for estimation
     });
     
     logger.info('Estimated gas:', gasEstimate);
 
-    // Prepare the transaction object
-    const txObject = contract.methods.updateProductInfo(formattedProductId, details);
-
-    // Send the transaction using the sendTransaction helper function
-    const receipt = await sendTransaction(txObject, 0, Math.floor(gasEstimate * 1.5));
-
-    logger.info('Product info updated by retailer. Transaction receipt:', receipt);
+    // Return the transaction data for the frontend to use
     return { 
       success: true, 
-      txHash: receipt.transactionHash,
-      message: 'Product information updated successfully on the blockchain.'
+      txObject: txObject,
+      gasEstimate: Math.floor(gasEstimate * 1.5), // 50% buffer
+      message: 'Transaction prepared for frontend execution.'
     };
   } catch (error) {
-    logger.error('Error updating product info as retailer:', error);
-    
-    let errorMessage = 'An error occurred during the blockchain transaction';
-    if (error.message.includes('gas required exceeds allowance')) {
-      errorMessage = 'Transaction failed due to insufficient gas. Please try again with a higher gas limit.';
-    } else if (error.message) {
-      errorMessage = error.message;
-    }
-    
+    logger.error('Error preparing update product info transaction:', error);
     return { 
       success: false, 
-      error: errorMessage
+      error: error.message || 'An error occurred while preparing the transaction'
     };
   }
 }
 
 /**
- * Initiate a transfer from retailer to consumer
+ * Initiate a transfer from retailer to consumer on the blockchain
  * @param {string} productId - The blockchain ID of the product
  * @param {string} consumerId - The consumer's unique identifier
  * @param {number} quantity - The quantity to transfer
@@ -1081,9 +1066,25 @@ async function initiateRetailerToConsumerTransfer(productId, consumerId, quantit
     const receipt = await sendTransaction(txObject, 0, Math.floor(gasEstimate * 1.2));
 
     logger.info('Transfer to consumer initiated successfully by retailer. Transaction receipt:', receipt);
+    
+    // Create a new transfer record in the database
+    const transfer = await Transfer.createTransfer({
+      product: productId,
+      fromUser: account.address, // Assuming the account is the retailer
+      toUser: consumerId,
+      quantity: quantity,
+      fromUserType: 'retailer',
+      toUserType: 'consumer',
+      status: 'pending',
+      blockchainTx: receipt.transactionHash,
+      blockchainStatus: 'confirmed',
+      transferDetails: `Initiated transfer of ${quantity} units to consumer`
+    });
+
     return { 
       success: true, 
       txHash: receipt.transactionHash,
+      transferId: transfer._id,
       message: 'Transfer to consumer initiated successfully by retailer on the blockchain.'
     };
   } catch (error) {
@@ -1228,6 +1229,43 @@ async function getRetailerProductQualityMetrics(productId) {
  */
 
 /**
+ * Check the status of a transfer on the blockchain
+ * @param {string} txHash - The transaction hash of the transfer
+ * @returns {Promise<string>} The status of the transfer
+ */
+async function checkTransferStatus(txHash) {
+  try {
+    logger.info(`Checking transfer status for transaction: ${txHash}`);
+    // Check if txHash is valid
+    if (!web3.utils.isHexStrict(txHash)) {
+      logger.warn(`Invalid transaction hash: ${txHash}`);
+      return 'invalid';
+    }
+    const receipt = await web3.eth.getTransactionReceipt(txHash);
+    if (!receipt) {
+      return 'pending';
+    }
+    // Check if the transaction was successful
+    if (receipt.status) {
+      // You might want to emit an event in your smart contract for transfers and check for that event here
+      const transferEvent = receipt.logs.find(log => 
+        log.topics[0] === web3.utils.sha3("TransferInitiated(bytes32,address,address,uint256)") ||
+        log.topics[0] === web3.utils.sha3("TransferAccepted(bytes32,address,address,uint256)")
+      );
+      if (transferEvent) {
+        const eventName = web3.utils.sha3("TransferAccepted(bytes32,address,address,uint256)");
+        return transferEvent.topics[0] === eventName ? 'completed' : 'pending_acceptance';
+      }
+      return 'completed'; // The transaction was successful, but no transfer event was found
+    }
+    return 'failed'; // The transaction failed
+  } catch (error) {
+    logger.error('Error checking transfer status on blockchain:', error);
+    return 'error';
+  }
+}
+
+/**
  * Verify a product's authenticity on the blockchain
  * @param {string} productId - The blockchain ID of the product to verify
  * @returns {Promise<Object>} A promise that resolves with the verification result
@@ -1238,17 +1276,24 @@ async function verifyProductOnBlockchain(productId) {
 
     const formattedProductId = convertToBytes32(productId);
     
-    // Call the smart contract method to verify the product
-    const result = await contract.methods.verifyProduct(formattedProductId).call();
+    // Call the smart contract method to get the product
+    const product = await contract.methods.getProduct(formattedProductId).call();
 
-    logger.info(`Product verification result for ${productId}:`, result);
+    const isAuthentic = product[5] !== '0x0000000000000000000000000000000000000000'; // Check if currentOwner is not zero address
+
+    logger.info(`Product verification result for ${productId}:`, { isAuthentic });
     return {
       success: true,
       data: {
-        isAuthentic: result.isAuthentic,
-        origin: result.origin,
-        productionDate: new Date(parseInt(result.productionDate) * 1000).toISOString(),
-        currentOwner: result.currentOwner
+        isAuthentic: isAuthentic,
+        details: isAuthentic ? {
+          batchNumber: product[0],
+          productType: product[1],
+          origin: product[2],
+          productionDate: new Date(parseInt(product[3]) * 1000).toISOString(),
+          currentOwner: product[5],
+          status: getStatusString(parseInt(product[6]))
+        } : null
       },
       message: 'Product verification completed.'
     };
@@ -1262,87 +1307,119 @@ async function verifyProductOnBlockchain(productId) {
 }
 
 /**
- * Get the full journey of a product from the blockchain
- * @param {string} productId - The blockchain ID of the product
- * @returns {Promise<Object>} A promise that resolves with the product's journey
+ * Get the string representation of a status code
+ * @param {number} statusCode - The status code
+ * @returns {string} The status string
  */
-async function getProductJourneyFromBlockchain(productId) {
+function getStatusString(statusCode) {
+  const statuses = ['Registered', 'Planted', 'Growing', 'Harvested', 'Processed', 'Packaged', 'InTransit', 'Delivered'];
+  return statuses[statusCode] || 'Unknown';
+}
+
+/**
+ * Check if a transfer exists on the blockchain
+ * @param {string} transferId - The blockchain transaction hash of the transfer
+ * @returns {Promise<boolean>} - Resolves with true if the transfer exists, false otherwise
+ */
+async function checkTransferExistsOnBlockchain(transferId) {
   try {
-    logger.info(`Fetching product journey from blockchain. Product ID: ${productId}`);
-
-    const formattedProductId = convertToBytes32(productId);
-    
-    // Call the smart contract method to get the product journey
-    const journey = await contract.methods.getProductJourney(formattedProductId).call();
-
-    const formattedJourney = journey.map(step => ({
-      timestamp: new Date(parseInt(step.timestamp) * 1000).toISOString(),
-      actor: step.actor,
-      action: step.action,
-      details: step.details
-    }));
-
-    logger.info(`Product journey fetched for ${productId}. Steps: ${formattedJourney.length}`);
-    return {
-      success: true,
-      journey: formattedJourney,
-      message: 'Product journey retrieved successfully.'
-    };
+    const formattedTransferId = web3.utils.padLeft(web3.utils.toHex(transferId), 64);
+    const transferData = await contract.methods.pendingTransfers(formattedTransferId).call();
+    // Check if the transfer exists (you may need to adjust this condition based on your smart contract implementation)
+    return transferData.quantity !== '0';
   } catch (error) {
-    logger.error('Error fetching product journey from blockchain:', error);
-    return {
-      success: false,
-      error: error.message || 'An error occurred while retrieving the product journey from the blockchain'
-    };
+    console.error('Error checking transfer on blockchain:', error);
+    return false;
   }
 }
 
 /**
- * Accept a transfer of ownership for a product (consumer operation)
- * @param {string} transferId - The ID of the transfer to accept
- * @param {string} consumerAddress - The Ethereum address of the consumer
- * @returns {Promise<Object>} A promise that resolves with the acceptance result
+ * Accept a transfer as a consumer on the blockchain
+ * @param {string} transferId - The blockchain transaction hash of the transfer to accept
+ * @param {string} consumerAddress - The Ethereum address of the consumer accepting the transfer
+ * @returns {Promise<Object>} - Resolves with the transaction result
  */
 async function acceptTransferAsConsumer(transferId, consumerAddress) {
   try {
-    logger.info(`Consumer accepting transfer. Transfer ID: ${transferId}, Consumer Address: ${consumerAddress}`);
+    console.log(`Consumer accepting transfer on blockchain. Transfer ID: ${transferId}, Consumer Address: ${consumerAddress}`);
 
-    const formattedTransferId = web3.utils.isHexStrict(transferId) ? transferId : web3.utils.sha3(transferId);
+    const formattedTransferId = web3.utils.padLeft(web3.utils.toHex(transferId), 64);
+    console.log(`Formatted Transfer ID: ${formattedTransferId}`);
 
-    // Check if the transfer exists and is pending
-    const transferExists = await contract.methods.pendingTransfers(formattedTransferId).call();
-    if (!transferExists || transferExists.quantity === '0') {
-      logger.warn(`No pending transfer found for ID: ${formattedTransferId}`);
-      return {
-        success: false,
-        error: 'No pending transfer found on the blockchain'
-      };
+    // Check if the transfer exists on the blockchain
+    const transferExists = await checkTransferExistsOnBlockchain(transferId);
+    if (!transferExists) {
+      console.log('No pending transfer found on the blockchain');
+      return { success: false, error: 'No pending transfer found on the blockchain', notFound: true };
     }
 
-    // Estimate gas for the transaction
+    // If transfer exists, proceed with acceptance
     const gasEstimate = await contract.methods.acceptTransfer(formattedTransferId).estimateGas({ from: consumerAddress });
-    logger.info(`Estimated gas for consumer transfer acceptance: ${gasEstimate}`);
+    console.log(`Estimated gas for consumer transfer acceptance: ${gasEstimate}`);
 
-    // Send the transaction
     const result = await contract.methods.acceptTransfer(formattedTransferId).send({
       from: consumerAddress,
       gas: Math.floor(gasEstimate * 1.2) // Add 20% buffer
     });
 
-    logger.info('Transfer accepted successfully by consumer. Transaction receipt:', result);
+    console.log('Transfer accepted successfully by consumer. Transaction receipt:', result);
     return {
       success: true,
       txHash: result.transactionHash,
       message: 'Transfer accepted successfully by consumer on the blockchain.'
     };
   } catch (error) {
-    logger.error('Error in consumer accepting transfer on blockchain:', error);
+    console.error('Error in consumer accepting transfer on blockchain:', error);
     return {
       success: false,
       error: error.message || 'An error occurred during the consumer blockchain transaction'
     };
   }
 }
+
+/**
+ * Cancel a transfer on the blockchain
+ * @param {string} transferId - The blockchain transaction hash of the transfer to cancel
+ * @param {string} consumerAddress - The Ethereum address of the consumer cancelling the transfer
+ * @returns {Promise<Object>} - Resolves with the transaction result
+ */
+async function cancelTransferOnBlockchain(transferId, consumerAddress) {
+  try {
+    console.log(`Cancelling transfer on blockchain. Transfer ID: ${transferId}, Consumer Address: ${consumerAddress}`);
+
+    const formattedTransferId = web3.utils.padLeft(web3.utils.toHex(transferId), 64);
+
+    // Check if the transfer exists on the blockchain
+    const transferExists = await checkTransferExistsOnBlockchain(transferId);
+    if (!transferExists) {
+      console.log('No pending transfer found on the blockchain');
+      return { success: false, error: 'No pending transfer found on the blockchain', notFound: true };
+    }
+
+    // If transfer exists, proceed with cancellation
+    const gasEstimate = await contract.methods.cancelTransfer(formattedTransferId).estimateGas({ from: consumerAddress });
+    console.log(`Estimated gas for cancelling transfer: ${gasEstimate}`);
+
+    const result = await contract.methods.cancelTransfer(formattedTransferId).send({
+      from: consumerAddress,
+      gas: Math.floor(gasEstimate * 1.2) // Add 20% buffer
+    });
+
+    console.log('Transfer cancelled successfully on blockchain. Transaction receipt:', result);
+    return {
+      success: true,
+      txHash: result.transactionHash,
+      message: 'Transfer cancelled successfully on the blockchain.'
+    };
+  } catch (error) {
+    console.error('Error cancelling transfer on blockchain:', error);
+    return {
+      success: false,
+      error: error.message || 'An error occurred during the blockchain transaction'
+    };
+  }
+}
+
 
 /**
  * Submit feedback for a product on the blockchain
@@ -1382,6 +1459,76 @@ async function submitProductFeedbackOnBlockchain(productId, consumerAddress, rat
     return {
       success: false,
       error: error.message || 'An error occurred while submitting feedback on the blockchain'
+    };
+  }
+}
+
+/**
+ * Get the product journey from blockchain events
+ * @param {string} productId - The blockchain ID of the product
+ * @returns {Promise<Array>} A promise that resolves with the product's journey
+ */
+async function getProductJourneyFromBlockchain(productId) {
+  try {
+    logger.info(`Fetching product journey from blockchain. Product ID: ${productId}`);
+
+    const formattedProductId = convertToBytes32(productId);
+    
+    // Get all relevant events for this product
+    const [createdEvents, statusEvents, transferEvents] = await Promise.all([
+      contract.getPastEvents('ProductCreated', { filter: { productId: formattedProductId }, fromBlock: 0 }),
+      contract.getPastEvents('StatusUpdated', { filter: { productId: formattedProductId }, fromBlock: 0 }),
+      contract.getPastEvents('OwnershipTransferred', { filter: { productId: formattedProductId }, fromBlock: 0 })
+    ]);
+
+    const journey = [];
+
+    // Add creation event
+    if (createdEvents.length > 0) {
+      const createEvent = createdEvents[0];
+      journey.push({
+        action: 'Created',
+        timestamp: new Date(createEvent.returnValues.timestamp * 1000),
+        actor: createEvent.returnValues.owner
+      });
+    }
+
+    // Add status updates
+    statusEvents.forEach(event => {
+      journey.push({
+        action: 'Status Updated',
+        timestamp: new Date(event.returnValues.timestamp * 1000),
+        actor: event.returnValues.updatedBy,
+        oldStatus: getStatusString(event.returnValues.oldStatus),
+        newStatus: getStatusString(event.returnValues.newStatus)
+      });
+    });
+
+    // Add ownership transfers
+    transferEvents.forEach(event => {
+      journey.push({
+        action: 'Ownership Transferred',
+        timestamp: new Date(event.returnValues.timestamp * 1000),
+        from: event.returnValues.previousOwner,
+        to: event.returnValues.newOwner,
+        quantity: event.returnValues.quantity
+      });
+    });
+
+    // Sort journey by timestamp
+    journey.sort((a, b) => a.timestamp - b.timestamp);
+
+    logger.info(`Product journey fetched for ${productId}. Steps: ${journey.length}`);
+    return {
+      success: true,
+      journey: journey,
+      message: 'Product journey retrieved successfully.'
+    };
+  } catch (error) {
+    logger.error('Error fetching product journey from blockchain:', error);
+    return {
+      success: false,
+      error: error.message || 'An error occurred while retrieving the product journey from the blockchain'
     };
   }
 }
@@ -1470,7 +1617,9 @@ web3.eth.net.isListening()
     getRetailerInventory,
     getRetailerProductQualityMetrics,
     // consumer functions
+    checkTransferStatus,
     verifyProductOnBlockchain,
+    getStatusString,
     getProductJourneyFromBlockchain,
     acceptTransferAsConsumer,
     submitProductFeedbackOnBlockchain,

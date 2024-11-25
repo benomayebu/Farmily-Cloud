@@ -219,6 +219,8 @@ router.get('/products/:productId/fullInfo', async (req, res) => {
       return res.status(404).json({ message: 'Product not found' });
     }
 
+    console.log('Product found:', product);
+
     // Get blockchain data
     console.log(`Fetching blockchain data for product: ${product.blockchainId}`);
     const blockchainData = await Web3Service.getProductFromBlockchain(product.blockchainId);
@@ -268,6 +270,7 @@ router.get('/products/:productId/fullInfo', async (req, res) => {
     res.status(500).json({ message: 'Error fetching full product info', error: error.message });
   }
 });
+
 
 /**
  * Route to update product information
@@ -549,11 +552,12 @@ router.get('/productWithFarmerInfo/:productId', [
       return res.status(400).json({ errors: errors.array() });
     }
 
-    const product = await Product.findOne({ _id: req.params.productId, currentOwner: req.user.id })
-      .populate('originalOwner', 'username location');
+    const product = await Product.findOne({ _id: req.params.productId })
+      .populate('originalOwner', 'username location')
+      .populate('currentOwner', 'username location userType');
 
     if (!product) {
-      return res.status(404).json({ message: 'Product not found or not owned by you' });
+      return res.status(404).json({ message: 'Product not found' });
     }
 
     // Get the latest blockchain data
@@ -566,6 +570,7 @@ router.get('/productWithFarmerInfo/:productId', [
     const productWithFarmerInfo = {
       ...product.toObject(),
       farmer: product.originalOwner,
+      currentOwner: product.currentOwner,
       blockchainStatus: blockchainData.product.status,
       blockchainQuantity: blockchainData.product.quantity
     };

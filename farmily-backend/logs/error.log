@@ -49,3 +49,24 @@
 2024-09-23 01:02:11:211 [31merror[39m: [31mError syncing product with blockchain: Invalid product object. Missing required fields.[39m
 2024-09-23 02:00:50:050 [31merror[39m: [31mError syncing product with blockchain: Invalid product object. Missing required fields.[39m
 2024-09-23 02:14:30:1430 [31merror[39m: [31mError syncing product with blockchain: Invalid product object. Missing required fields.[39m
+2024-10-01 23:52:33:5233 [31merror[39m: [31mError rejecting transfer on blockchain: contract.methods.rejectTransfer is not a function[39m
+2024-10-02 00:12:28:1228 [31merror[39m: [31mError rejecting transfer on blockchain: contract.methods.rejectTransfer is not a function[39m
+2024-10-03 04:12:47:1247 [31merror[39m: [31mError in retailer initiating transfer to consumer: Transaction was not mined within 750 seconds, please make sure your transaction was properly sent. Be aware that it might still be mined![39m
+2024-10-03 04:12:47:1247 [31merror[39m: [31mBlockchain transfer initiation failed:[39m
+2024-10-03 21:48:13:4813 [31merror[39m: [31mError checking transfer status on blockchain: Returned error: data types must start with 0x[39m
+2024-10-03 21:48:42:4842 [31merror[39m: [31mError checking transfer status on blockchain: Returned error: data types must start with 0x[39m
+2024-10-03 21:49:12:4912 [31merror[39m: [31mError checking transfer status on blockchain: Returned error: data types must start with 0x[39m
+2024-10-03 21:49:44:4944 [31merror[39m: [31mError checking transfer status on blockchain: Returned error: data types must start with 0x[39m
+2024-10-03 21:50:14:5014 [31merror[39m: [31mError checking transfer status on blockchain: Returned error: data types must start with 0x[39m
+2024-10-03 21:51:28:5128 [31merror[39m: [31mError checking transfer status on blockchain: Returned error: data types must start with 0x[39m
+2024-10-03 21:52:28:5228 [31merror[39m: [31mError checking transfer status on blockchain: Returned error: data types must start with 0x[39m
+2024-10-03 21:53:28:5328 [31merror[39m: [31mError checking transfer status on blockchain: Returned error: data types must start with 0x[39m
+2024-10-03 21:59:12:5912 [31merror[39m: [31mError checking transfer status on blockchain: Returned error: data types must start with 0x[39m
+2024-10-03 21:59:41:5941 [31merror[39m: [31mError checking transfer status on blockchain: Returned error: data types must start with 0x[39m
+2024-10-03 22:00:11:011 [31merror[39m: [31mError checking transfer status on blockchain: Returned error: data types must start with 0x[39m
+2024-10-03 22:00:41:041 [31merror[39m: [31mError checking transfer status on blockchain: Returned error: data types must start with 0x[39m
+2024-10-03 22:01:11:111 [31merror[39m: [31mError checking transfer status on blockchain: Returned error: data types must start with 0x[39m
+2024-10-03 22:02:28:228 [31merror[39m: [31mError checking transfer status on blockchain: Returned error: data types must start with 0x[39m
+2024-10-04 00:49:10:4910 [31merror[39m: [31mError submitting product feedback on blockchain: contract.methods.submitFeedback is not a function[39m
+2024-10-04 01:02:30:230 [31merror[39m: [31mError submitting product feedback on blockchain: contract.methods.submitFeedback is not a function[39m
+2024-10-04 16:06:28:628 [31merror[39m: [31mError fetching product journey from blockchain: contract.methods.getProductJourney is not a function[39m

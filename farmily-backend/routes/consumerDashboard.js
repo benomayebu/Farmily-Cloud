@@ -2,7 +2,7 @@
  * Consumer Dashboard Routes
  * 
  * This module defines the API routes for the consumer dashboard in the food traceability platform.
- * It handles product viewing, QR code scanning, product authentication, and transfer acceptance.
+ * It handles product viewing, transfer acceptance, and various consumer-specific operations.
  */
 
 const express = require('express');
@@ -43,90 +43,24 @@ const handleError = (error, res) => {
 
 /**
  * Route to get all products owned by the consumer
- * @route GET /api/consumer/myProducts
+ * @route GET /api/consumer/products
  */
-router.get('/myProducts', async (req, res) => {
-    try {
-      const products = await Product.find({ currentOwner: req.user.id });
-      console.log('Products fetched for consumer:', products.length);
-      res.json(products);
-    } catch (error) {
-      console.error('Error fetching products:', error);
-      handleError(error, res);
-    }
-  });
-
-/**
- * Route to get product details by scanning QR code
- * @route POST /api/consumer/scanProduct
- */
-router.post('/scanProduct', [
-  body('qrCodeData').isString().notEmpty().withMessage('QR code data is required')
-], async (req, res) => {
+router.get('/products', async (req, res) => {
   try {
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-      return res.status(400).json({ errors: errors.array() });
-    }
-
-    const { qrCodeData } = req.body;
-    // Assuming QR code contains the product ID
-    const productId = qrCodeData;
-
-    const product = await Product.findById(productId)
-      .populate('currentOwner', 'username')
-      .populate('originalOwner', 'username');
-    
-    if (!product) {
-      return res.status(404).json({ message: 'Product not found' });
-    }
-    
-    console.log('Product details fetched from QR code:', product._id);
-    res.json(product);
+    const products = await Product.find({ currentOwner: req.user.id });
+    console.log('Products fetched for consumer:', products.length);
+    res.json(products);
   } catch (error) {
-    console.error('Error fetching product details from QR code:', error);
+    console.error('Error fetching products:', error);
     handleError(error, res);
   }
 });
 
 /**
- * Route to verify product authenticity
- * @route POST /api/consumer/verifyProduct
+ * Route to get product details including full traceability information
+ * @route GET /api/consumer/products/:productId/details
  */
-router.post('/verifyProduct', [
-  body('productId').isMongoId().withMessage('Invalid product ID')
-], async (req, res) => {
-  try {
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-      return res.status(400).json({ errors: errors.array() });
-    }
-
-    const { productId } = req.body;
-    const product = await Product.findById(productId);
-
-    if (!product) {
-      return res.status(404).json({ message: 'Product not found' });
-    }
-
-    const verificationResult = await Web3Service.verifyProductOnBlockchain(product.blockchainId);
-    
-    res.json({
-      verified: verificationResult.success,
-      message: verificationResult.success ? 'Product verified successfully' : 'Product verification failed',
-      blockchainData: verificationResult.data
-    });
-  } catch (error) {
-    console.error('Error verifying product:', error);
-    handleError(error, res);
-  }
-});
-
-/**
- * Route to get product journey
- * @route GET /api/consumer/productJourney/:productId
- */
-router.get('/productJourney/:productId', [
+router.get('/products/:productId/details', [
   param('productId').isMongoId().withMessage('Invalid product ID')
 ], async (req, res) => {
   try {
@@ -136,41 +70,62 @@ router.get('/productJourney/:productId', [
     }
 
     const { productId } = req.params;
-    const product = await Product.findById(productId);
+    const product = await Product.findOne({ _id: productId, currentOwner: req.user.id })
+      .populate('originalOwner', 'username location')
+      .populate('previousOwner', 'username location userType')
+      .populate('currentOwner', 'username location userType');
 
     if (!product) {
-      return res.status(404).json({ message: 'Product not found' });
+      return res.status(404).json({ message: 'Product not found or not owned by you' });
     }
 
-    const transactions = await Transaction.find({ product: productId })
+    // Get the latest blockchain data
+    const blockchainData = await Web3Service.getProductFromBlockchain(product.blockchainId);
+    if (!blockchainData.success) {
+      throw new Error(blockchainData.error || 'Failed to get product data from blockchain');
+    }
+
+    // Fetch transaction history
+    const transactions = await Transaction.find({ product: product._id })
       .populate('fromUser', 'username userType')
       .populate('toUser', 'username userType')
       .sort({ createdAt: 1 });
 
-    const journey = transactions.map(tx => ({
-      date: tx.createdAt,
-      from: {
-        username: tx.fromUser.username,
-        userType: tx.fromUser.userType
-      },
-      to: {
-        username: tx.toUser.username,
-        userType: tx.toUser.userType
-      },
-      quantity: tx.quantity,
-      type: tx.transactionType
-    }));
-
-    res.json({
+    const productDetails = {
       product: {
-        id: product._id,
+        _id: product._id,
         type: product.type,
-        batchNumber: product.batchNumber
+        batchNumber: product.batchNumber,
+        origin: product.origin,
+        productionDate: product.productionDate,
+        status: product.status,
+        quantity: product.quantity,
+        price: product.price,
+        blockchainId: product.blockchainId,
+        storageConditions: product.storageConditions,
+        transportationMode: product.transportationMode,
+        transportationDetails: product.transportationDetails,
+        estimatedDeliveryDate: product.estimatedDeliveryDate,
+        certifications: product.certifications
       },
-      journey
-    });
+      farmer: product.originalOwner,
+      distributor: product.previousOwner,
+      retailer: product.currentOwner,
+      blockchainStatus: blockchainData.product.status,
+      blockchainQuantity: blockchainData.product.quantity,
+      transactionHistory: transactions.map(tx => ({
+        date: tx.createdAt,
+        from: { username: tx.fromUser.username, type: tx.fromUser.userType },
+        to: { username: tx.toUser.username, type: tx.toUser.userType },
+        quantity: tx.quantity,
+        type: tx.transactionType
+      }))
+    };
+
+    console.log('Product details fetched:', product._id);
+    res.json(productDetails);
   } catch (error) {
-    console.error('Error fetching product journey:', error);
+    console.error('Error fetching product details:', error);
     handleError(error, res);
   }
 });
@@ -180,74 +135,132 @@ router.get('/productJourney/:productId', [
  * @route POST /api/consumer/acceptTransfer/:transferId
  */
 router.post('/acceptTransfer/:transferId', [
-    param('transferId').isMongoId().withMessage('Invalid transfer ID')
-  ], async (req, res) => {
-    try {
-      const errors = validationResult(req);
-      if (!errors.isEmpty()) {
-        return res.status(400).json({ errors: errors.array() });
-      }
-  
-      const { transferId } = req.params;
-      const transfer = await Transfer.findOne({ _id: transferId, toUser: req.user.id, status: 'pending' });
-  
-      if (!transfer) {
-        return res.status(404).json({ message: 'Transfer not found or already processed' });
-      }
-  
-      // Update transfer status
+  param('transferId').isMongoId().withMessage('Invalid transfer ID'),
+  body('ethereumAddress').isEthereumAddress().withMessage('Invalid Ethereum address')
+], async (req, res) => {
+  try {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+    }
+
+    const { transferId } = req.params;
+    const { ethereumAddress } = req.body;
+
+    console.log(`Accepting transfer: ${transferId} for address: ${ethereumAddress}`);
+
+    const transfer = await Transfer.findOne({ _id: transferId, toUser: req.user.id, status: 'pending' });
+    if (!transfer) {
+      return res.status(404).json({ message: 'Transfer not found or already processed' });
+    }
+
+    // Check transfer status on blockchain
+    const transferStatus = await Web3Service.checkTransferStatus(transfer.blockchainTx);
+    console.log(`Blockchain transfer status: ${transferStatus}`);
+
+    if (transferStatus === 'completed') {
       transfer.status = 'completed';
       await transfer.save();
-  
-      // Update product ownership
+      
       const product = await Product.findById(transfer.product);
       if (product) {
         product.currentOwner = req.user.id;
         product.quantity = transfer.quantity;
         await product.save();
       }
-  
-      // Create transaction record
-      const transaction = new Transaction({
-        product: transfer.product,
-        fromUser: transfer.fromUser,
-        toUser: req.user.id,
-        quantity: transfer.quantity,
-        transactionType: 'Purchase by Consumer',
-        status: 'Completed',
-        blockchainTxHash: transfer.blockchainTx
+      
+      return res.status(200).json({ 
+        message: 'Transfer is already completed on the blockchain. Database updated.',
+        status: 'completed',
+        transfer: transfer
       });
-      await transaction.save();
-  
-      // Update blockchain status
-      await Web3Service.updateTransferStatusOnBlockchain(transfer.blockchainTx, 'completed');
-  
-      console.log('Transfer accepted:', transfer._id);
-      res.json({ message: 'Transfer accepted successfully', transfer });
-    } catch (error) {
-      console.error('Error accepting transfer:', error);
-      handleError(error, res);
     }
-  });
-  
+
+    if (transferStatus === 'failed') {
+      transfer.status = 'failed';
+      await transfer.save();
+      return res.status(400).json({ 
+        message: 'Transfer failed on the blockchain.',
+        status: 'failed',
+        transfer: transfer
+      });
+    }
+
+    // Proceed with accepting the transfer
+    const blockchainResult = await Web3Service.acceptTransferAsConsumer(transfer.blockchainTx, ethereumAddress);
+    if (!blockchainResult.success) {
+      return res.status(500).json({ message: 'Blockchain transfer acceptance failed', error: blockchainResult.error });
+    }
+
+    transfer.status = 'completed';
+    await transfer.save();
+
+    const product = await Product.findById(transfer.product);
+    if (product) {
+      product.currentOwner = req.user.id;
+      product.quantity = transfer.quantity;
+      await product.save();
+    }
+
+    const transaction = new Transaction({
+      product: product._id,
+      fromUser: transfer.fromUser,
+      toUser: req.user.id,
+      quantity: transfer.quantity,
+      transactionType: 'Received from Retailer',
+      status: 'Completed',
+      blockchainTxHash: blockchainResult.txHash
+    });
+    await transaction.save();
+
+    res.json({ 
+      message: 'Transfer accepted successfully', 
+      transfer, 
+      blockchainTx: blockchainResult.txHash 
+    });
+  } catch (error) {
+    console.error('Error in acceptTransfer:', error);
+    handleError(error, res);
+  }
+});
 
 /**
  * Route to get pending transfers for the consumer
  * @route GET /api/consumer/pendingTransfers
  */
 router.get('/pendingTransfers', async (req, res) => {
-    try {
-      const pendingTransfers = await Transfer.find({ 
-        toUser: req.user.id,
-        status: 'pending'
-      }).populate('product').populate('fromUser', 'username');
-      console.log('Pending transfers found:', pendingTransfers.length);
-      res.json(pendingTransfers);
-    } catch (error) {
-      console.error('Error fetching pending transfers:', error);
-      handleError(error, res);
-    }
-  });
+  try {
+    const pendingTransfers = await Transfer.find({ 
+      toUser: req.user.id,
+      status: 'pending'
+    }).populate('product').populate('fromUser', 'username');
+    console.log('Pending transfers found:', pendingTransfers.length);
+    res.json(pendingTransfers);
+  } catch (error) {
+    console.error('Error fetching pending transfers:', error);
+    handleError(error, res);
+  }
+});
+
+/**
+ * Route to get transaction history for the consumer
+ * @route GET /api/consumer/transactionHistory
+ */
+router.get('/transactionHistory', async (req, res) => {
+  try {
+    const transactions = await Transaction.find({ toUser: req.user.id })
+      .populate('product')
+      .populate('fromUser', 'username userType')
+      .populate('toUser', 'username userType')
+      .sort({ createdAt: -1 });
+    
+    console.log('Fetched transactions:', transactions.length);
+    res.json(transactions);
+  } catch (error) {
+    console.error('Error fetching transaction history:', error);
+    handleError(error, res);
+  }
+});
 
 /**
  * Route to submit feedback for a product
@@ -267,13 +280,13 @@ router.post('/submitFeedback/:productId', [
     const { productId } = req.params;
     const { rating, comment } = req.body;
 
-    const product = await Product.findById(productId);
+    const product = await Product.findOne({ _id: productId, currentOwner: req.user.id });
     if (!product) {
-      return res.status(404).json({ message: 'Product not found' });
+      return res.status(404).json({ message: 'Product not found or not owned by you' });
     }
 
     const feedback = {
-      consumer: req.user.id,
+      user: req.user.id,
       rating,
       comment,
       date: new Date()
@@ -292,44 +305,10 @@ router.post('/submitFeedback/:productId', [
 });
 
 /**
- * Route to get product history for a consumer
- * @route GET /api/consumer/productHistory
+ * Route to get full product information including farmer, distributor, and retailer details
+ * @route GET /api/consumer/products/:productId/fullInfo
  */
-router.get('/productHistory', async (req, res) => {
-  try {
-    const transactions = await Transaction.find({ toUser: req.user.id })
-      .populate('product', 'type batchNumber')
-      .populate('fromUser', 'username userType')
-      .sort({ createdAt: -1 });
-
-    const history = transactions.map(tx => ({
-      date: tx.createdAt,
-      product: {
-        id: tx.product._id,
-        type: tx.product.type,
-        batchNumber: tx.product.batchNumber
-      },
-      fromUser: {
-        username: tx.fromUser.username,
-        userType: tx.fromUser.userType
-      },
-      quantity: tx.quantity,
-      transactionType: tx.transactionType
-    }));
-
-    console.log('Product history fetched for consumer:', history.length, 'items');
-    res.json(history);
-  } catch (error) {
-    console.error('Error fetching product history:', error);
-    handleError(error, res);
-  }
-});
-
-/**
- * Route to get detailed product information
- * @route GET /api/consumer/productDetails/:productId
- */
-router.get('/productDetails/:productId', [
+router.get('/products/:productId/fullInfo', [
   param('productId').isMongoId().withMessage('Invalid product ID')
 ], async (req, res) => {
   try {
@@ -339,39 +318,298 @@ router.get('/productDetails/:productId', [
     }
 
     const { productId } = req.params;
-    const product = await Product.findById(productId)
+    const product = await Product.findOne({ _id: productId })
       .populate('originalOwner', 'username location')
-      .populate('currentOwner', 'username userType');
+      .populate('currentOwner', 'username location userType')
+      .populate({
+        path: 'ownershipHistory.owner',
+        select: 'username location userType'
+      });
 
     if (!product) {
       return res.status(404).json({ message: 'Product not found' });
     }
 
+    // Get the latest blockchain data
     const blockchainData = await Web3Service.getProductFromBlockchain(product.blockchainId);
-    
-    const productDetails = {
-      _id: product._id,
-      type: product.type,
-      batchNumber: product.batchNumber,
-      origin: product.origin,
-      productionDate: product.productionDate,
-      quantity: product.quantity,
-      status: product.status,
-      originalOwner: {
+    if (!blockchainData.success) {
+      throw new Error(blockchainData.error || 'Failed to get product data from blockchain');
+    }
+
+    const farmer = product.originalOwner;
+    const distributor = product.ownershipHistory.find(h => h.owner.userType === 'distributor');
+    const retailer = product.currentOwner.userType === 'retailer' ? product.currentOwner : null;
+    const consumer = product.currentOwner.userType === 'consumer' ? product.currentOwner : null;
+
+    const fullProductInfo = {
+      product: {
+        _id: product._id,
+        type: product.type,
+        batchNumber: product.batchNumber,
+        origin: product.origin,
+        productionDate: product.productionDate,
+        status: product.status,
+        quantity: product.quantity,
+        price: product.price,
+        blockchainId: product.blockchainId,
+        storageConditions: product.storageConditions,
+        transportationMode: product.transportationMode,
+        transportationDetails: product.transportationDetails,
+        estimatedDeliveryDate: product.estimatedDeliveryDate,
+        certifications: product.certifications
+      },
+      farmer: farmer ? {
+        username: farmer.username,
+        location: farmer.location
+      } : null,
+      distributor: distributor ? {
+        username: distributor.owner.username,
+        location: distributor.owner.location
+      } : null,
+      currentOwner: retailer ? {
+        username: retailer.username,
+        location: retailer.location
+      } : null,
+      consumer: consumer ? {
+        username: consumer.username,
+        location: consumer.location
+      } : null,
+      blockchainStatus: blockchainData.product.status,
+      blockchainQuantity: blockchainData.product.quantity,
+      ownershipHistory: product.ownershipHistory.map(entry => ({
+        username: entry.owner.username,
+        userType: entry.owner.userType,
+        timestamp: entry.timestamp
+      }))
+    };
+
+    console.log('Full product info fetched:', product._id);
+    res.json(fullProductInfo);
+  } catch (error) {
+    console.error('Error fetching full product info:', error);
+    res.status(500).json({ message: 'Error fetching product information', error: error.message });
+  }
+});
+
+/**
+ * Route to verify product authenticity on the blockchain
+ * @route GET /api/consumer/verifyProduct/:productId
+ */
+router.get('/verifyProduct/:productId', [
+  param('productId').isMongoId().withMessage('Invalid product ID')
+], async (req, res) => {
+  try {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+    }
+
+    const { productId } = req.params;
+    const product = await Product.findOne({ _id: productId, currentOwner: req.user.id });
+
+    if (!product) {
+      return res.status(404).json({ message: 'Product not found or not owned by you' });
+    }
+
+    const verificationResult = await Web3Service.verifyProductOnBlockchain(product.blockchainId);
+
+    console.log('Product verification result:', verificationResult);
+    res.json(verificationResult);
+  } catch (error) {
+    console.error('Error verifying product:', error);
+    handleError(error, res);
+  }
+});
+
+/**
+ * Route to get product history
+ * @route GET /api/consumer/products/:productId/history
+ */
+router.get('/products/:productId/history', [
+  param('productId').isMongoId().withMessage('Invalid product ID')
+], async (req, res) => {
+  try {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+    }
+
+    const { productId } = req.params;
+    const product = await Product.findOne({ _id: productId, currentOwner: req.user.id });
+
+    if (!product) {
+      return res.status(404).json({ message: 'Product not found or not owned by you' });
+    }
+
+    const transactions = await Transaction.find({ product: productId })
+      .populate('fromUser', 'username userType')
+      .populate('toUser', 'username userType')
+      .sort({ createdAt: 1 });
+
+    const history = transactions.map(tx => ({
+      date: tx.createdAt,
+      from: {
+        username: tx.fromUser.username,
+        userType: tx.fromUser.userType
+      },
+      to: {
+        username: tx.toUser.username,
+        userType: tx.toUser.userType
+      },
+      quantity: tx.quantity,
+      type: tx.transactionType,
+      status: tx.status
+    }));
+
+    console.log('Product history fetched:', productId);
+    res.json(history);
+  } catch (error) {
+    console.error('Error fetching product history:', error);
+    handleError(error, res);
+  }
+});
+
+/**
+ * Route to get product information from a QR code
+ * @route POST /api/consumer/getProductFromQR
+ */
+router.post('/getProductFromQR', async (req, res) => {
+  try {
+    const { qrData } = req.body;
+    const productData = JSON.parse(qrData);
+
+    const product = await Product.findById(productData.productId)
+      .populate('originalOwner', 'username location')
+      .populate('previousOwner', 'username location userType')
+      .populate('currentOwner', 'username location userType');
+
+    if (!product) {
+      return res.status(404).json({ message: 'Product not found' });
+    }
+
+    // Get blockchain data
+    const blockchainData = await Web3Service.getProductFromBlockchain(product.blockchainId);
+
+    const productInfo = {
+      product: {
+        _id: product._id,
+        type: product.type,
+        batchNumber: product.batchNumber,
+        origin: product.origin,
+        productionDate: product.productionDate,
+        status: product.status,
+        quantity: product.quantity,
+        blockchainId: product.blockchainId
+      },
+      farmer: {
         username: product.originalOwner.username,
         location: product.originalOwner.location
       },
-      currentOwner: {
+      distributor: product.previousOwner.userType === 'distributor' ? {
+        username: product.previousOwner.username,
+        location: product.previousOwner.location
+      } : null,
+      retailer: product.currentOwner.userType === 'retailer' ? {
         username: product.currentOwner.username,
-        userType: product.currentOwner.userType
-      },
-      blockchainData: blockchainData.success ? blockchainData.data : null
+        location: product.currentOwner.location
+      } : null,
+      blockchainStatus: blockchainData.product.status,
+      blockchainQuantity: blockchainData.product.quantity
     };
 
-    console.log('Detailed product information fetched:', productId);
-    res.json(productDetails);
+    res.json(productInfo);
   } catch (error) {
-    console.error('Error fetching detailed product information:', error);
+    console.error('Error getting product from QR:', error);
+    res.status(500).json({ message: 'Error fetching product information', error: error.message });
+  }
+});
+
+/**
+ * Route to update consumer's Ethereum address
+ * @route PUT /api/consumer/updateEthereumAddress
+ */
+router.put('/updateEthereumAddress', [
+  body('ethereumAddress').isEthereumAddress().withMessage('Invalid Ethereum address')
+], async (req, res) => {
+  try {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+    }
+
+    const { ethereumAddress } = req.body;
+
+    const user = await User.findByIdAndUpdate(
+      req.user.id,
+      { ethereumAddress },
+      { new: true }
+    );
+
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    console.log('Ethereum address updated for user:', user._id);
+    res.json({ message: 'Ethereum address updated successfully', user });
+  } catch (error) {
+    console.error('Error updating Ethereum address:', error);
+    handleError(error, res);
+  }
+});
+
+/**
+ * Route to get consumer's purchase history
+ * @route GET /api/consumer/purchaseHistory
+ */
+router.get('/purchaseHistory', async (req, res) => {
+  try {
+    const purchases = await Transaction.find({ toUser: req.user.id, transactionType: 'Received from Retailer' })
+      .populate('product', 'type batchNumber price')
+      .populate('fromUser', 'username')
+      .sort({ createdAt: -1 });
+
+    const purchaseHistory = purchases.map(purchase => ({
+      date: purchase.createdAt,
+      productType: purchase.product.type,
+      batchNumber: purchase.product.batchNumber,
+      quantity: purchase.quantity,
+      price: purchase.product.price,
+      totalCost: purchase.quantity * purchase.product.price,
+      retailer: purchase.fromUser.username
+    }));
+
+    console.log('Purchase history fetched for consumer:', req.user.id);
+    res.json(purchaseHistory);
+  } catch (error) {
+    console.error('Error fetching purchase history:', error);
+    handleError(error, res);
+  }
+});
+
+/**
+ * Route to get product certifications
+ * @route GET /api/consumer/products/:productId/certifications
+ */
+router.get('/products/:productId/certifications', [
+  param('productId').isMongoId().withMessage('Invalid product ID')
+], async (req, res) => {
+  try {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+    }
+
+    const { productId } = req.params;
+    const product = await Product.findOne({ _id: productId, currentOwner: req.user.id });
+
+    if (!product) {
+      return res.status(404).json({ message: 'Product not found or not owned by you' });
+    }
+
+    console.log('Certifications fetched for product:', productId);
+    res.json(product.certifications || []);
+  } catch (error) {
+    console.error('Error fetching product certifications:', error);
     handleError(error, res);
   }
 });
