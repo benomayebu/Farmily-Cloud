@@ -1,0 +1,773 @@
+2024-09-14 02:32:33:3233 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-14 02:50:36:5036 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-14 02:56:11:5611 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-14 02:57:53:5753 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-14 03:06:18:618 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-14 03:14:34:1434 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-14 03:18:40:1840 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-14 03:23:06:236 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-14 03:23:59:2359 [32minfo[39m: [32mTransaction receipt retrieved:[39m
+2024-09-14 03:30:17:3017 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-14 03:37:27:3727 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-14 03:43:04:434 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-14 03:51:15:5115 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-14 03:55:53:5553 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-14 04:00:00:00 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-14 04:11:18:1118 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-14 04:28:48:2848 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-14 17:13:15:1315 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-14 17:30:09:309 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-14 17:38:01:381 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-14 17:42:55:4255 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-14 17:54:21:5421 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-14 18:02:23:223 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-14 18:09:12:912 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-14 18:13:06:136 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-14 18:16:35:1635 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-14 18:25:06:256 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-14 18:30:10:3010 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-14 18:34:24:3424 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-14 18:41:47:4147 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-14 18:51:39:5139 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-14 18:55:46:5546 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-14 19:02:08:28 [32minfo[39m: [32mTransaction receipt retrieved:[39m
+2024-09-14 19:06:41:641 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-14 19:08:22:822 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-14 19:19:56:1956 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-14 19:30:09:309 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-14 19:31:52:3152 [32minfo[39m: [32mTransaction receipt retrieved:[39m
+2024-09-14 19:43:44:4344 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-14 19:45:13:4513 [32minfo[39m: [32mTransaction receipt retrieved:[39m
+2024-09-14 19:51:50:5150 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-14 19:53:05:535 [32minfo[39m: [32mTransaction receipt retrieved:[39m
+2024-09-14 19:54:43:5443 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-14 19:55:48:5548 [32minfo[39m: [32mTransaction receipt retrieved:[39m
+2024-09-14 20:00:42:042 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-14 20:02:02:22 [32minfo[39m: [32mTransaction receipt retrieved:[39m
+2024-09-14 22:25:35:2535 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-14 22:27:31:2731 [32minfo[39m: [32mTransaction receipt retrieved:[39m
+2024-09-14 22:36:03:363 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-14 22:43:04:434 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-14 22:44:18:4418 [32minfo[39m: [32mTransaction receipt retrieved:[39m
+2024-09-14 22:48:40:4840 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-14 22:50:18:5018 [32minfo[39m: [32mTransaction receipt retrieved:[39m
+2024-09-14 23:19:39:1939 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-14 23:21:05:215 [32minfo[39m: [32mTransaction receipt retrieved:[39m
+2024-09-14 23:30:19:3019 [32minfo[39m: [32mTransaction receipt retrieved:[39m
+2024-09-15 00:18:52:1852 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-15 00:30:23:3023 [32minfo[39m: [32mTransaction receipt retrieved:[39m
+2024-09-15 00:33:16:3316 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-15 00:42:39:4239 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-15 00:52:40:5240 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-15 00:59:11:5911 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-15 01:07:20:720 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-15 01:14:02:142 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-15 01:24:55:2455 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-15 01:28:30:2830 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-15 01:31:34:3134 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-15 01:43:21:4321 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-15 01:43:54:4354 [32minfo[39m: [32mInitiating transfer on blockchain. Product ID: 0x0000000000000000000000000000000000000000000000000000000000000013, Recipient: undefined, Quantity: 40[39m
+2024-09-15 01:43:54:4354 [31merror[39m: [31mError in estimateGas:[39m
+2024-09-15 01:43:54:4354 [31merror[39m: [31mError initiating transfer on blockchain: invalid address (argument="address", value=undefined, code=INVALID_ARGUMENT, version=address/5.7.0) (argument="_to", value=undefined, code=INVALID_ARGUMENT, version=abi/5.7.0)[39m
+2024-09-15 01:46:32:4632 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-15 01:47:01:471 [32minfo[39m: [32mInitiating transfer on blockchain. Product ID: 0x0000000000000000000000000000000000000000000000000000000000000013, Recipient: undefined, Quantity: 40[39m
+2024-09-15 01:47:01:471 [31merror[39m: [31mError in estimateGas:[39m
+2024-09-15 01:47:01:471 [31merror[39m: [31mError initiating transfer on blockchain: invalid address (argument="address", value=undefined, code=INVALID_ARGUMENT, version=address/5.7.0) (argument="_to", value=undefined, code=INVALID_ARGUMENT, version=abi/5.7.0)[39m
+2024-09-15 01:52:52:5252 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-15 02:02:18:218 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-15 02:06:43:643 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-15 02:07:08:78 [32minfo[39m: [32mInitiating transfer on blockchain. Product ID: 0x0000000000000000000000000000000000000000000000000000000000000013, Recipient Identifier: UID_66c28f3b44707e0a68970f26, Quantity: 40[39m
+2024-09-15 02:07:08:78 [32minfo[39m: [32mFormatted Product ID: 0x0000000000000000000000000000000000000000000000000000000000000013[39m
+2024-09-15 02:07:08:78 [31merror[39m: [31mError in estimateGas:[39m
+2024-09-15 02:07:08:78 [31merror[39m: [31mError initiating transfer on blockchain: invalid address (argument="address", value="UID_66c28f3b44707e0a68970f26", code=INVALID_ARGUMENT, version=address/5.7.0) (argument="_to", value="UID_66c28f3b44707e0a68970f26", code=INVALID_ARGUMENT, version=abi/5.7.0)[39m
+2024-09-15 02:32:04:324 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-15 02:33:04:334 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-15 02:35:01:351 [32minfo[39m: [32mInitiating transfer on blockchain. Product ID: 0x0000000000000000000000000000000000000000000000000000000000000013, Recipient Identifier: UID_66c28f3b44707e0a68970f26, Quantity: 40[39m
+2024-09-15 02:35:01:351 [32minfo[39m: [32mFormatted Product ID: 0x0000000000000000000000000000000000000000000000000000000000000013[39m
+2024-09-15 02:35:02:352 [31merror[39m: [31mError in estimateGas:[39m
+2024-09-15 02:35:02:352 [31merror[39m: [31mError initiating transfer on blockchain: Returned error: execution reverted: Only the current owner can initiate transfer[39m
+2024-09-15 02:47:11:4711 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-15 17:26:12:2612 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-15 17:40:39:4039 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-15 17:48:50:4850 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-15 17:59:27:5927 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-15 18:00:36:036 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-15 18:12:40:1240 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-15 18:16:04:164 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-15 18:29:13:2913 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-15 19:06:56:656 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-15 19:11:23:1123 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-15 19:36:13:3613 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-15 20:01:53:153 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-15 20:11:10:1110 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-15 20:14:52:1452 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-15 20:19:45:1945 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-15 20:25:06:256 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-15 20:30:02:302 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-15 21:46:53:4653 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-15 22:10:57:1057 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-15 22:16:26:1626 [32minfo[39m: [32mTransaction receipt retrieved:[39m
+2024-09-15 22:18:28:1828 [32minfo[39m: [32mTransaction receipt retrieved:[39m
+2024-09-15 22:24:02:242 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-15 22:33:43:3343 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-15 22:37:51:3751 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-15 22:42:09:429 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-15 22:48:25:4825 [32minfo[39m: [32mTransaction receipt retrieved:[39m
+2024-09-15 22:51:45:5145 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-15 22:54:41:5441 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-15 22:57:07:577 [32minfo[39m: [32mTransaction receipt retrieved:[39m
+2024-09-15 23:02:44:244 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-15 23:17:40:1740 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-15 23:25:51:2551 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-15 23:45:03:453 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-15 23:55:25:5525 [32minfo[39m: [32mInitiating transfer on blockchain. Product ID: 0x0000000000000000000000000000000000000000000000000000000000000012, Recipient Identifier: UID_66c28f3b44707e0a68970f26, Quantity: 500[39m
+2024-09-15 23:55:25:5525 [32minfo[39m: [32mFormatted Product ID: 0x0000000000000000000000000000000000000000000000000000000000000012[39m
+2024-09-15 23:55:25:5525 [31merror[39m: [31mError in estimateGas:[39m
+2024-09-15 23:55:25:5525 [31merror[39m: [31mError initiating transfer on blockchain: Returned error: execution reverted: Recipient not registered[39m
+2024-09-16 00:02:17:217 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-16 00:07:27:727 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-16 00:07:49:749 [32minfo[39m: [32mRegistering user on blockchain. User Identifier: UID_66c28f3b44707e0a68970f26[39m
+2024-09-16 00:08:01:81 [32minfo[39m: [32mTransaction sent. Receipt:[39m
+2024-09-16 00:08:01:81 [32minfo[39m: [32mUser registered successfully on blockchain. Transaction receipt:[39m
+2024-09-16 00:08:01:81 [32minfo[39m: [32mInitiating transfer on blockchain. Product ID: 0x0000000000000000000000000000000000000000000000000000000000000012, Recipient Identifier: UID_66c28f3b44707e0a68970f26, Quantity: 500[39m
+2024-09-16 00:08:01:81 [32minfo[39m: [32mFormatted Product ID: 0x0000000000000000000000000000000000000000000000000000000000000012[39m
+2024-09-16 00:08:37:837 [32minfo[39m: [32mTransaction sent. Receipt:[39m
+2024-09-16 00:08:37:837 [32minfo[39m: [32mTransfer initiated successfully on blockchain. Transaction receipt:[39m
+2024-09-16 00:12:41:1241 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-16 00:13:46:1346 [32minfo[39m: [32mInitiating transfer on blockchain. Product ID: 0x0000000000000000000000000000000000000000000000000000000000000012, Recipient Identifier: UID_66c28f3b44707e0a68970f26, Quantity: 200[39m
+2024-09-16 00:13:46:1346 [32minfo[39m: [32mFormatted Product ID: 0x0000000000000000000000000000000000000000000000000000000000000012[39m
+2024-09-16 00:14:13:1413 [32minfo[39m: [32mTransaction sent. Receipt:[39m
+2024-09-16 00:14:13:1413 [32minfo[39m: [32mTransfer initiated successfully on blockchain. Transaction receipt:[39m
+2024-09-16 00:18:00:180 [32minfo[39m: [32mInitiating transfer on blockchain. Product ID: 0x0000000000000000000000000000000000000000000000000000000000000010, Recipient Identifier: UID_66c28f3b44707e0a68970f26, Quantity: 25[39m
+2024-09-16 00:18:00:180 [32minfo[39m: [32mFormatted Product ID: 0x0000000000000000000000000000000000000000000000000000000000000010[39m
+2024-09-16 00:18:12:1812 [32minfo[39m: [32mTransaction sent. Receipt:[39m
+2024-09-16 00:18:12:1812 [32minfo[39m: [32mTransfer initiated successfully on blockchain. Transaction receipt:[39m
+2024-09-16 19:20:44:2044 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-16 19:23:14:2314 [32minfo[39m: [32mTransaction receipt retrieved:[39m
+2024-09-16 19:23:27:2327 [32minfo[39m: [32mInitiating transfer on blockchain. Product ID: 0x0000000000000000000000000000000000000000000000000000000000000013, Recipient Identifier: UID_66c28f3b44707e0a68970f26, Quantity: 300[39m
+2024-09-16 19:23:27:2327 [32minfo[39m: [32mFormatted Product ID: 0x0000000000000000000000000000000000000000000000000000000000000013[39m
+2024-09-16 19:23:37:2337 [32minfo[39m: [32mTransaction sent. Receipt:[39m
+2024-09-16 19:23:37:2337 [32minfo[39m: [32mTransfer initiated successfully on blockchain. Transaction receipt:[39m
+2024-09-17 02:24:56:2456 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-17 02:36:57:3657 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-17 02:37:11:3711 [32minfo[39m: [32mCancelling transfer on blockchain. Product ID: undefined[39m
+2024-09-17 02:37:11:3711 [31merror[39m: [31mError cancelling transfer on blockchain: Cannot read properties of undefined (reading 'toString')[39m
+2024-09-17 02:41:46:4146 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-17 02:41:59:4159 [32minfo[39m: [32mCancelling transfer on blockchain. Product ID: undefined[39m
+2024-09-17 02:41:59:4159 [31merror[39m: [31mError cancelling transfer on blockchain: Cannot read properties of undefined (reading 'toString')[39m
+2024-09-17 02:42:10:4210 [32minfo[39m: [32mCancelling transfer on blockchain. Product ID: undefined[39m
+2024-09-17 02:42:10:4210 [31merror[39m: [31mError cancelling transfer on blockchain: Cannot read properties of undefined (reading 'toString')[39m
+2024-09-17 02:45:04:454 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-17 02:45:15:4515 [32minfo[39m: [32mCancelling transfer on blockchain. Product ID: undefined[39m
+2024-09-17 02:45:15:4515 [31merror[39m: [31mError cancelling transfer on blockchain: Cannot read properties of undefined (reading 'toString')[39m
+2024-09-17 02:45:28:4528 [32minfo[39m: [32mCancelling transfer on blockchain. Product ID: undefined[39m
+2024-09-17 02:45:28:4528 [31merror[39m: [31mError cancelling transfer on blockchain: Cannot read properties of undefined (reading 'toString')[39m
+2024-09-17 02:50:01:501 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-17 02:56:14:5614 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-17 02:59:29:5929 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-17 03:06:01:61 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-17 03:15:48:1548 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-17 03:23:32:2332 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-17 03:23:42:2342 [31merror[39m: [31mError in estimateGas:[39m
+2024-09-17 03:23:45:2345 [31merror[39m: [31mError in estimateGas:[39m
+2024-09-17 03:29:17:2917 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-17 03:29:36:2936 [31merror[39m: [31mError in estimateGas:[39m
+2024-09-17 03:40:02:402 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-17 03:40:35:4035 [31merror[39m: [31mError in estimateGas:[39m
+2024-09-17 03:45:31:4531 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-17 03:45:44:4544 [31merror[39m: [31mError in estimateGas:[39m
+2024-09-17 03:55:17:5517 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-17 03:56:10:5610 [31merror[39m: [31mError in estimateGas:[39m
+2024-09-17 03:59:57:5957 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-17 04:34:56:3456 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-17 04:41:21:4121 [32minfo[39m: [32mTransaction receipt retrieved:[39m
+2024-09-17 04:47:46:4746 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-17 05:06:57:657 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-17 05:14:06:146 [31merror[39m: [31mError in estimateGas:[39m
+2024-09-17 05:19:06:196 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-17 05:20:38:2038 [31merror[39m: [31mError in estimateGas:[39m
+2024-09-17 05:27:33:2733 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-17 14:11:54:1154 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-17 14:21:37:2137 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-17 14:25:56:2556 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-17 14:31:00:310 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-17 14:36:21:3621 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-17 14:44:35:4435 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-17 14:45:37:4537 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-17 14:47:22:4722 [32minfo[39m: [32mTransaction receipt retrieved:[39m
+2024-09-17 15:02:00:20 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-17 15:08:30:830 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-17 15:25:31:2531 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-17 15:26:28:2628 [32minfo[39m: [32mRegistering user on blockchain. User Identifier: UID_66c28f3b44707e0a68970f26[39m
+2024-09-17 15:27:13:2713 [32minfo[39m: [32mTransaction sent. Receipt:[39m
+2024-09-17 15:27:13:2713 [32minfo[39m: [32mUser registered successfully on blockchain. Transaction receipt:[39m
+2024-09-17 15:27:13:2713 [32minfo[39m: [32mInitiating transfer on blockchain. Product ID: 0x0000000000000000000000000000000000000000000000000000000000000014, Recipient Identifier: UID_66c28f3b44707e0a68970f26, Quantity: 40[39m
+2024-09-17 15:27:13:2713 [32minfo[39m: [32mFormatted Product ID: 0x0000000000000000000000000000000000000000000000000000000000000014[39m
+2024-09-17 15:27:13:2713 [31merror[39m: [31mError estimating gas: Returned error: execution reverted: Only the current owner can initiate transfer[39m
+2024-09-17 15:27:13:2713 [31merror[39m: [31mError initiating transfer on blockchain: Failed to estimate gas. Please check the transaction details.[39m
+2024-09-17 15:28:17:2817 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-17 15:28:56:2856 [32minfo[39m: [32mInitiating transfer on blockchain. Product ID: 0x0000000000000000000000000000000000000000000000000000000000000014, Recipient Identifier: UID_66c28f3b44707e0a68970f26, Quantity: 40[39m
+2024-09-17 15:28:56:2856 [32minfo[39m: [32mFormatted Product ID: 0x0000000000000000000000000000000000000000000000000000000000000014[39m
+2024-09-17 15:28:56:2856 [31merror[39m: [31mError in estimateGas:[39m
+2024-09-17 15:28:56:2856 [31merror[39m: [31mError initiating transfer on blockchain: Returned error: execution reverted: Only the current owner can initiate transfer[39m
+2024-09-17 15:34:00:340 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-17 15:34:42:3442 [32minfo[39m: [32mInitiating transfer on blockchain. Product ID: 0x0000000000000000000000000000000000000000000000000000000000000014, Recipient Identifier: UID_66c28f3b44707e0a68970f26, Quantity: 40[39m
+2024-09-17 15:34:42:3442 [32minfo[39m: [32mFormatted Product ID: 0x0000000000000000000000000000000000000000000000000000000000000014[39m
+2024-09-17 15:34:42:3442 [31merror[39m: [31mError in estimateGas:[39m
+2024-09-17 15:34:42:3442 [31merror[39m: [31mError initiating transfer on blockchain: Returned error: execution reverted: Only the current owner can initiate transfer[39m
+2024-09-17 15:38:19:3819 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-17 15:41:40:4140 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-17 15:42:18:4218 [32minfo[39m: [32mInitiating transfer on blockchain. Product ID: 0x0000000000000000000000000000000000000000000000000000000000000014, Recipient Identifier: UID_66c28f3b44707e0a68970f26, Quantity: 40[39m
+2024-09-17 15:42:18:4218 [32minfo[39m: [32mFormatted Product ID: 0x0000000000000000000000000000000000000000000000000000000000000014[39m
+2024-09-17 15:42:18:4218 [31merror[39m: [31mError in estimateGas:[39m
+2024-09-17 15:42:18:4218 [31merror[39m: [31mError initiating transfer on blockchain: Returned error: execution reverted: Only the current owner can initiate transfer[39m
+2024-09-17 15:43:08:438 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-17 15:43:52:4352 [32minfo[39m: [32mInitiating transfer on blockchain. Product ID: 0x0000000000000000000000000000000000000000000000000000000000000002, Recipient Identifier: UID_66c28f3b44707e0a68970f26, Quantity: 400[39m
+2024-09-17 15:43:52:4352 [32minfo[39m: [32mFormatted Product ID: 0x0000000000000000000000000000000000000000000000000000000000000002[39m
+2024-09-17 15:46:36:4636 [32minfo[39m: [32mTransaction sent. Receipt:[39m
+2024-09-17 15:46:36:4636 [32minfo[39m: [32mTransfer initiated successfully on blockchain. Transaction receipt:[39m
+2024-09-17 15:47:00:470 [32minfo[39m: [32mInitiating transfer on blockchain. Product ID: 0x0000000000000000000000000000000000000000000000000000000000000014, Recipient Identifier: UID_66c28f3b44707e0a68970f26, Quantity: 40[39m
+2024-09-17 15:47:00:470 [32minfo[39m: [32mFormatted Product ID: 0x0000000000000000000000000000000000000000000000000000000000000014[39m
+2024-09-17 15:47:00:470 [31merror[39m: [31mError in estimateGas:[39m
+2024-09-17 15:47:00:470 [31merror[39m: [31mError initiating transfer on blockchain: Returned error: execution reverted: Only the current owner can initiate transfer[39m
+2024-09-17 15:50:28:5028 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-17 15:55:24:5524 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-17 16:02:53:253 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-17 16:07:27:727 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-17 16:12:42:1242 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-17 16:14:54:1454 [32minfo[39m: [32mTransaction receipt retrieved:[39m
+2024-09-17 16:16:49:1649 [32minfo[39m: [32mTransaction receipt retrieved:[39m
+2024-09-17 16:21:13:2113 [32minfo[39m: [32mTransaction receipt retrieved:[39m
+2024-09-17 16:21:44:2144 [32minfo[39m: [32mTransaction receipt retrieved:[39m
+2024-09-17 16:27:11:2711 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-17 16:28:25:2825 [32minfo[39m: [32mTransaction receipt retrieved:[39m
+2024-09-17 16:37:10:3710 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-17 16:57:59:5759 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-17 17:17:12:1712 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-17 17:25:21:2521 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-17 17:31:19:3119 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-17 17:40:36:4036 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-17 17:45:37:4537 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-17 17:56:56:5656 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-17 18:01:56:156 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-17 18:13:55:1355 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-17 18:28:14:2814 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-17 18:31:52:3152 [32minfo[39m: [32mTransaction receipt retrieved:[39m
+2024-09-17 18:38:21:3821 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-17 18:45:41:4541 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-17 18:52:09:529 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-17 18:59:18:5918 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-17 19:02:57:257 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-17 20:09:30:930 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-17 23:04:28:428 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-17 23:10:04:104 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-17 23:15:26:1526 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-17 23:22:30:2230 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-17 23:30:12:3012 [32minfo[39m: [32mTransaction receipt retrieved:[39m
+2024-09-17 23:46:21:4621 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-17 23:56:32:5632 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-18 00:08:30:830 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-18 00:16:21:1621 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-18 00:18:14:1814 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-18 00:23:04:234 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-18 00:27:23:2723 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-18 00:28:51:2851 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-18 00:57:57:5757 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-18 01:05:29:529 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-18 01:21:48:2148 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-18 01:27:10:2710 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-18 01:34:56:3456 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-18 15:49:42:4942 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-18 15:57:55:5755 [32minfo[39m: [32mTransaction receipt retrieved:[39m
+2024-09-18 15:58:46:5846 [32minfo[39m: [32mTransaction receipt retrieved:[39m
+2024-09-18 16:02:30:230 [32minfo[39m: [32mTransaction receipt retrieved:[39m
+2024-09-18 22:39:43:3943 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-19 00:01:37:137 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-19 00:31:41:3141 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-19 00:45:53:4553 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-19 01:06:56:656 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-19 01:19:25:1925 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-19 01:23:14:2314 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-19 01:31:10:3110 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-19 02:56:24:5624 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-19 03:15:26:1526 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-19 03:18:19:1819 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-19 03:36:28:3628 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-19 03:44:26:4426 [32minfo[39m: [32mTransaction receipt retrieved:[39m
+2024-09-19 03:47:22:4722 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-19 03:59:05:595 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-19 04:01:30:130 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-19 04:07:49:749 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-19 18:55:57:5557 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-19 22:43:14:4314 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-19 22:55:13:5513 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-19 23:01:45:145 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-19 23:07:59:759 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-19 23:13:49:1349 [32minfo[39m: [32mTransaction receipt retrieved:[39m
+2024-09-19 23:32:56:3256 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-20 00:38:26:3826 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-20 00:39:00:390 [32minfo[39m: [32mAccepting transfer on blockchain. Transfer ID: 0xb43b33acd2305df66a3f29f7e207e2c685064e26a4726617bcbeefccff856f43[39m
+2024-09-20 00:39:00:390 [31merror[39m: [31mError in estimateGas:[39m
+2024-09-20 00:39:00:390 [31merror[39m: [31mError in sendTransaction:[39m
+2024-09-20 00:39:00:390 [31merror[39m: [31mError accepting transfer on blockchain: Returned error: execution reverted: Only the intended recipient can accept the transfer[39m
+2024-09-20 00:41:28:4128 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-20 00:45:21:4521 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-20 00:45:42:4542 [32minfo[39m: [32mAccepting transfer on blockchain. Transfer ID: 66ea031babd5ff6204610346[39m
+2024-09-20 00:45:42:4542 [31merror[39m: [31mError in estimateGas:[39m
+2024-09-20 00:45:42:4542 [31merror[39m: [31mError in sendTransaction:[39m
+2024-09-20 00:45:42:4542 [31merror[39m: [31mError accepting transfer on blockchain: invalid arrayify value (argument="value", value="66ea031babd5ff62046103460000000000000000000000000000000000000000", code=INVALID_ARGUMENT, version=bytes/5.7.0)[39m
+2024-09-20 00:50:54:5054 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-20 00:51:21:5121 [32minfo[39m: [32mAccepting transfer on blockchain. Transfer ID: 66ea031babd5ff6204610346[39m
+2024-09-20 00:51:21:5121 [31merror[39m: [31mError in estimateGas:[39m
+2024-09-20 00:51:21:5121 [31merror[39m: [31mError in sendTransaction:[39m
+2024-09-20 00:51:21:5121 [31merror[39m: [31mError accepting transfer on blockchain: invalid arrayify value (argument="value", value="66ea031babd5ff62046103460000000000000000000000000000000000000000", code=INVALID_ARGUMENT, version=bytes/5.7.0)[39m
+2024-09-20 01:03:26:326 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-20 01:04:28:428 [32minfo[39m: [32mAccepting transfer on blockchain. Transfer ID: 0xb43b33acd2305df66a3f29f7e207e2c685064e26a4726617bcbeefccff856f43, Distributor Address: 0xc57aa0e3253d506d1bbe6897a4b45f4a431927fa[39m
+2024-09-20 01:04:28:428 [32minfo[39m: [32mFormatted Transfer ID: 0xb43b33acd2305df66a3f29f7e207e2c685064e26a4726617bcbeefccff856f43[39m
+2024-09-20 01:04:28:428 [31merror[39m: [31mError accepting transfer on blockchain: Returned error: execution reverted: Only the intended recipient can accept the transfer[39m
+2024-09-20 01:34:37:3437 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-20 01:35:03:353 [32minfo[39m: [32mAccepting transfer on blockchain. Transfer ID: 0xb43b33acd2305df66a3f29f7e207e2c685064e26a4726617bcbeefccff856f43, Distributor Address: 0xc57aa0e3253d506d1bbe6897a4b45f4a431927fa[39m
+2024-09-20 01:35:03:353 [32minfo[39m: [32mFormatted Transfer ID: 0xb43b33acd2305df66a3f29f7e207e2c685064e26a4726617bcbeefccff856f43[39m
+2024-09-20 01:35:04:354 [31merror[39m: [31mError accepting transfer on blockchain: Returned error: execution reverted: No pending transfer for this transfer ID[39m
+2024-09-20 01:46:14:4614 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-20 01:46:43:4643 [32minfo[39m: [32mAccepting transfer on blockchain. Transfer ID: 0xb43b33acd2305df66a3f29f7e207e2c685064e26a4726617bcbeefccff856f43, Distributor Address: 0xc57aa0e3253d506d1bbe6897a4b45f4a431927fa[39m
+2024-09-20 01:46:43:4643 [32minfo[39m: [32mFormatted Transfer ID: 0xb43b33acd2305df66a3f29f7e207e2c685064e26a4726617bcbeefccff856f43[39m
+2024-09-20 01:46:43:4643 [31merror[39m: [31mError accepting transfer on blockchain: Returned error: execution reverted: No pending transfer for this transfer ID[39m
+2024-09-20 02:25:20:2520 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-20 02:25:45:2545 [32minfo[39m: [32mAccepting transfer on blockchain. Transfer ID: 0xb43b33acd2305df66a3f29f7e207e2c685064e26a4726617bcbeefccff856f43, Distributor Address: 0xc57aa0e3253d506d1bbe6897a4b45f4a431927fa[39m
+2024-09-20 02:25:45:2545 [32minfo[39m: [32mFormatted Transfer ID: 0xb43b33acd2305df66a3f29f7e207e2c685064e26a4726617bcbeefccff856f43[39m
+2024-09-20 02:25:45:2545 [33mwarn[39m: [33mNo pending transfer found for ID: 0xb43b33acd2305df66a3f29f7e207e2c685064e26a4726617bcbeefccff856f43[39m
+2024-09-20 02:33:43:3343 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-20 02:34:14:3414 [32minfo[39m: [32mAccepting transfer on blockchain. Transfer ID: 0x14107ee67a506c5f8663b4dd0e02e347f880b6e91c2daf124dfc5af001c7b7b7, Distributor Address: 0xc57aa0e3253d506d1bbe6897a4b45f4a431927fa[39m
+2024-09-20 02:34:14:3414 [32minfo[39m: [32mFormatted Transfer ID: 0x14107ee67a506c5f8663b4dd0e02e347f880b6e91c2daf124dfc5af001c7b7b7[39m
+2024-09-20 02:34:14:3414 [33mwarn[39m: [33mNo pending transfer found for ID: 0x14107ee67a506c5f8663b4dd0e02e347f880b6e91c2daf124dfc5af001c7b7b7[39m
+2024-09-20 15:42:06:426 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-20 15:46:55:4655 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-20 15:53:42:5342 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-20 15:55:59:5559 [32minfo[39m: [32mTransaction receipt retrieved:[39m
+2024-09-20 16:01:20:120 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-20 16:06:46:646 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-20 16:11:32:1132 [32minfo[39m: [32mTransaction receipt retrieved:[39m
+2024-09-20 16:17:20:1720 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-20 16:44:52:4452 [32minfo[39m: [32mTransaction receipt retrieved:[39m
+2024-09-20 16:46:29:4629 [32minfo[39m: [32mAccepting transfer on blockchain. Transfer ID: 0xf28e577ea7b6f25b35e20185b8be24493876b99b86111ef7b3c0a689fd630478, Distributor Address: 0xc57aa0e3253d506d1bbe6897a4b45f4a431927fa[39m
+2024-09-20 16:46:29:4629 [32minfo[39m: [32mFormatted Transfer ID: 0xf28e577ea7b6f25b35e20185b8be24493876b99b86111ef7b3c0a689fd630478[39m
+2024-09-20 16:46:29:4629 [33mwarn[39m: [33mNo pending transfer found for ID: 0xf28e577ea7b6f25b35e20185b8be24493876b99b86111ef7b3c0a689fd630478[39m
+2024-09-20 17:13:58:1358 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-20 17:14:43:1443 [32minfo[39m: [32mAccepting transfer on blockchain. Transfer ID: 0xab58ee6164672f8dfe069f169758baa65fd5192b9c5d4c0e239af4cdf34ad7af, Distributor Address: 0xc57aa0e3253d506d1bbe6897a4b45f4a431927fa[39m
+2024-09-20 17:14:43:1443 [32minfo[39m: [32mFormatted Transfer ID: 0xab58ee6164672f8dfe069f169758baa65fd5192b9c5d4c0e239af4cdf34ad7af[39m
+2024-09-20 17:14:43:1443 [33mwarn[39m: [33mNo pending transfer found for ID: 0xab58ee6164672f8dfe069f169758baa65fd5192b9c5d4c0e239af4cdf34ad7af[39m
+2024-09-21 03:37:14:3714 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-21 03:41:37:4137 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-21 03:42:09:429 [32minfo[39m: [32mAccepting transfer on blockchain. Transfer ID: 0x667fdecb510e5a82c785e3e78eae9dc9439a0781590aef1170606e1836f876cf, Distributor Address: 0xc57aa0e3253d506d1bbe6897a4b45f4a431927fa[39m
+2024-09-21 03:42:09:429 [32minfo[39m: [32mFormatted Transfer ID: 0x667fdecb510e5a82c785e3e78eae9dc9439a0781590aef1170606e1836f876cf[39m
+2024-09-21 03:42:09:429 [33mwarn[39m: [33mNo pending transfer found for ID: 0x667fdecb510e5a82c785e3e78eae9dc9439a0781590aef1170606e1836f876cf[39m
+2024-09-21 03:42:12:4212 [32minfo[39m: [32mAccepting transfer on blockchain. Transfer ID: 0x939c10b2fe7ff6782d591f437ab7a203cd80e8d651a256a7e76b21a41932c3c6, Distributor Address: 0xc57aa0e3253d506d1bbe6897a4b45f4a431927fa[39m
+2024-09-21 03:42:12:4212 [32minfo[39m: [32mFormatted Transfer ID: 0x939c10b2fe7ff6782d591f437ab7a203cd80e8d651a256a7e76b21a41932c3c6[39m
+2024-09-21 03:42:12:4212 [33mwarn[39m: [33mNo pending transfer found for ID: 0x939c10b2fe7ff6782d591f437ab7a203cd80e8d651a256a7e76b21a41932c3c6[39m
+2024-09-21 03:42:13:4213 [32minfo[39m: [32mAccepting transfer on blockchain. Transfer ID: 0x5c93a99df0cff93dc2c2b8403039d11fb012f769d301fd89af1c0f9e02d3b84a, Distributor Address: 0xc57aa0e3253d506d1bbe6897a4b45f4a431927fa[39m
+2024-09-21 03:42:13:4213 [32minfo[39m: [32mFormatted Transfer ID: 0x5c93a99df0cff93dc2c2b8403039d11fb012f769d301fd89af1c0f9e02d3b84a[39m
+2024-09-21 03:42:13:4213 [33mwarn[39m: [33mNo pending transfer found for ID: 0x5c93a99df0cff93dc2c2b8403039d11fb012f769d301fd89af1c0f9e02d3b84a[39m
+2024-09-21 04:03:13:313 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-21 04:06:37:637 [32minfo[39m: [32mTransaction receipt retrieved:[39m
+2024-09-21 04:09:17:917 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-21 04:12:44:1244 [32minfo[39m: [32mChecking transfer status for transaction: 0xff60fe525ef8312585b6c4e705ed457d800c9d49e10892a510ac68c5fb24aadb[39m
+2024-09-21 04:12:44:1244 [31merror[39m: [31mError checking transfer status on blockchain: contract.methods.getTransfer is not a function[39m
+2024-09-21 04:21:21:2121 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-21 04:22:22:2222 [32minfo[39m: [32mAccepting transfer on blockchain. Transfer ID: 0xff60fe525ef8312585b6c4e705ed457d800c9d49e10892a510ac68c5fb24aadb, Distributor Address: 0xc57aa0e3253d506d1bbe6897a4b45f4a431927fa[39m
+2024-09-21 04:22:22:2222 [32minfo[39m: [32mChecking transfer status for transaction: 0xff60fe525ef8312585b6c4e705ed457d800c9d49e10892a510ac68c5fb24aadb[39m
+2024-09-21 04:22:22:2222 [33mwarn[39m: [33mTransfer is not in pending acceptance state. Current status: completed[39m
+2024-09-21 04:37:04:374 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-21 04:37:37:3737 [32minfo[39m: [32mAccepting transfer on blockchain. Transfer ID: 0xff60fe525ef8312585b6c4e705ed457d800c9d49e10892a510ac68c5fb24aadb, Distributor Address: 0xc57aa0e3253d506d1bbe6897a4b45f4a431927fa[39m
+2024-09-21 04:37:37:3737 [32minfo[39m: [32mChecking transfer status for transaction: 0xff60fe525ef8312585b6c4e705ed457d800c9d49e10892a510ac68c5fb24aadb[39m
+2024-09-21 04:37:37:3737 [33mwarn[39m: [33mTransfer is not in pending acceptance state. Current status: completed[39m
+2024-09-21 05:03:33:333 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-21 05:04:33:433 [32minfo[39m: [32mAccepting transfer on blockchain. Transfer ID: 0xff60fe525ef8312585b6c4e705ed457d800c9d49e10892a510ac68c5fb24aadb, Distributor Address: 0xc57aa0e3253d506d1bbe6897a4b45f4a431927fa[39m
+2024-09-21 05:04:33:433 [32minfo[39m: [32mChecking transfer status for transaction: 0xff60fe525ef8312585b6c4e705ed457d800c9d49e10892a510ac68c5fb24aadb[39m
+2024-09-21 05:04:33:433 [33mwarn[39m: [33mTransfer is not in pending acceptance state. Current status: completed[39m
+2024-09-21 05:04:47:447 [32minfo[39m: [32mAccepting transfer on blockchain. Transfer ID: 0xbd1f6122ffe949f68635aee589838920ad905865a1ce7455c121c25be7200845, Distributor Address: 0xc57aa0e3253d506d1bbe6897a4b45f4a431927fa[39m
+2024-09-21 05:04:47:447 [32minfo[39m: [32mChecking transfer status for transaction: 0xbd1f6122ffe949f68635aee589838920ad905865a1ce7455c121c25be7200845[39m
+2024-09-21 05:04:47:447 [33mwarn[39m: [33mTransfer is not in pending acceptance state. Current status: completed[39m
+2024-09-21 05:04:50:450 [32minfo[39m: [32mAccepting transfer on blockchain. Transfer ID: 0x9f9552fb78ab13a933c1f07bf935642ef651e71a4c5aeb413fa6b19c90e900b2, Distributor Address: 0xc57aa0e3253d506d1bbe6897a4b45f4a431927fa[39m
+2024-09-21 05:04:50:450 [32minfo[39m: [32mChecking transfer status for transaction: 0x9f9552fb78ab13a933c1f07bf935642ef651e71a4c5aeb413fa6b19c90e900b2[39m
+2024-09-21 05:04:50:450 [33mwarn[39m: [33mTransfer is not in pending acceptance state. Current status: completed[39m
+2024-09-21 05:07:55:755 [32minfo[39m: [32mAccepting transfer on blockchain. Transfer ID: 0x76a11426d9aad158fa0fcd2f071d48aa4dbce9b87e5925bde4e34c77be165c6a, Distributor Address: 0xc57aa0e3253d506d1bbe6897a4b45f4a431927fa[39m
+2024-09-21 05:07:55:755 [32minfo[39m: [32mChecking transfer status for transaction: 0x76a11426d9aad158fa0fcd2f071d48aa4dbce9b87e5925bde4e34c77be165c6a[39m
+2024-09-21 05:07:55:755 [33mwarn[39m: [33mTransfer is not in pending acceptance state. Current status: completed[39m
+2024-09-21 05:10:27:1027 [32minfo[39m: [32mAccepting transfer on blockchain. Transfer ID: 0x79bc3280386faf87a86df3801dad170292d3b4945490291e39a4e0a64904be86, Distributor Address: 0xc57aa0e3253d506d1bbe6897a4b45f4a431927fa[39m
+2024-09-21 05:10:27:1027 [32minfo[39m: [32mChecking transfer status for transaction: 0x79bc3280386faf87a86df3801dad170292d3b4945490291e39a4e0a64904be86[39m
+2024-09-21 05:10:27:1027 [33mwarn[39m: [33mTransfer is not in pending acceptance state. Current status: completed[39m
+2024-09-21 17:33:34:3334 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-21 17:39:10:3910 [32minfo[39m: [32mAccepting transfer on blockchain. Transfer ID: 0x3dbcddb82713e82aeb38a1789ae0b6f6701dff1a2475a6f80d477688acdad354, Distributor Address: 0xc57aa0e3253d506d1bbe6897a4b45f4a431927fa[39m
+2024-09-21 17:39:10:3910 [32minfo[39m: [32mChecking transfer status for transaction: 0x3dbcddb82713e82aeb38a1789ae0b6f6701dff1a2475a6f80d477688acdad354[39m
+2024-09-21 17:39:10:3910 [32minfo[39m: [32mTransfer 0x3dbcddb82713e82aeb38a1789ae0b6f6701dff1a2475a6f80d477688acdad354 has already been accepted on the blockchain[39m
+2024-09-21 18:37:58:3758 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-21 18:42:54:4254 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-21 18:58:21:5821 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-21 18:59:44:5944 [32minfo[39m: [32mAccepting transfer on blockchain. Transfer ID: 0xc32f9eb2db19272908e8e13bf4fb42b237a82452d25b13bbe577f85d0b24c9f8, Distributor Address: 0xc57aa0e3253d506d1bbe6897a4b45f4a431927fa[39m
+2024-09-21 18:59:44:5944 [32minfo[39m: [32mChecking transfer status for transaction: 0xc32f9eb2db19272908e8e13bf4fb42b237a82452d25b13bbe577f85d0b24c9f8[39m
+2024-09-21 18:59:44:5944 [32minfo[39m: [32mTransfer 0xc32f9eb2db19272908e8e13bf4fb42b237a82452d25b13bbe577f85d0b24c9f8 has already been accepted on the blockchain[39m
+2024-09-21 19:19:12:1912 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-21 19:35:23:3523 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-21 19:37:28:3728 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-21 22:46:13:4613 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-21 22:54:49:5449 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-21 23:10:55:1055 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-21 23:29:40:2940 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-21 23:45:06:456 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-21 23:49:58:4958 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-21 23:56:15:5615 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-21 23:58:53:5853 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-22 00:33:21:3321 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-22 00:42:00:420 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-22 01:12:22:1222 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-22 01:17:28:1728 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-22 01:52:20:5220 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-22 02:04:15:415 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-22 03:40:47:4047 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-22 03:51:34:5134 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-22 03:55:24:5524 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-22 04:00:24:024 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-22 04:08:45:845 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-22 04:10:40:1040 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-22 04:15:15:1515 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-22 04:18:47:1847 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-22 04:21:26:2126 [32minfo[39m: [32mTransaction receipt retrieved:[39m
+2024-09-22 04:26:17:2617 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-22 04:36:24:3624 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-22 04:55:24:5524 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-22 15:17:13:1713 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-22 15:18:13:1813 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-22 15:19:26:1926 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-22 15:57:24:5724 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-22 16:14:42:1442 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-22 21:57:20:5720 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-22 21:58:38:5838 [32minfo[39m: [32mAccepting transfer on blockchain. Transfer ID: 0xac178c677c3cfadb8064ead2998ff40894a50039517906a0283bbd9bfff0c6fe, Distributor Address: 0xc57aa0e3253d506d1bbe6897a4b45f4a431927fa[39m
+2024-09-22 21:58:38:5838 [33mwarn[39m: [33mNo pending transfer found for ID: 0xac178c677c3cfadb8064ead2998ff40894a50039517906a0283bbd9bfff0c6fe[39m
+2024-09-22 22:28:14:2814 [32minfo[39m: [32mGetting product from blockchain. Product ID: 0x0000000000000000000000000000000000000000000000000000000000000007[39m
+2024-09-22 22:28:14:2814 [32minfo[39m: [32mProduct details:[39m
+2024-09-22 22:29:13:2913 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-22 22:41:23:4123 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-22 22:51:08:518 [32minfo[39m: [32mGetting product from blockchain. Product ID: 0x0000000000000000000000000000000000000000000000000000000000000007[39m
+2024-09-22 22:51:08:518 [32minfo[39m: [32mProduct details:[39m
+2024-09-22 22:54:56:5456 [32minfo[39m: [32mGetting product from blockchain. Product ID: 0x0000000000000000000000000000000000000000000000000000000000000007[39m
+2024-09-22 22:54:56:5456 [32minfo[39m: [32mProduct details:[39m
+2024-09-22 22:55:02:552 [32minfo[39m: [32mGetting product from blockchain. Product ID: 0x0000000000000000000000000000000000000000000000000000000000000007[39m
+2024-09-22 22:55:02:552 [32minfo[39m: [32mProduct details:[39m
+2024-09-22 23:10:50:1050 [32minfo[39m: [32mGetting product from blockchain. Product ID: 0x0000000000000000000000000000000000000000000000000000000000000007[39m
+2024-09-22 23:10:50:1050 [32minfo[39m: [32mProduct details:[39m
+2024-09-22 23:15:40:1540 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-22 23:17:35:1735 [32minfo[39m: [32mTransaction receipt retrieved:[39m
+2024-09-22 23:18:58:1858 [32minfo[39m: [32mGetting product from blockchain. Product ID: 0x0000000000000000000000000000000000000000000000000000000000000007[39m
+2024-09-22 23:18:58:1858 [32minfo[39m: [32mProduct details:[39m
+2024-09-22 23:37:56:3756 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-22 23:42:33:4233 [32minfo[39m: [32mAccepting transfer on blockchain. Transfer ID: 0xaf2d64af30b2587c59d927d83920718a6e6633ad58a75dc18b4b6bb323ba8391, Distributor Address: 0xc57aa0e3253d506d1bbe6897a4b45f4a431927fa[39m
+2024-09-22 23:42:33:4233 [33mwarn[39m: [33mNo pending transfer found for ID: 0xaf2d64af30b2587c59d927d83920718a6e6633ad58a75dc18b4b6bb323ba8391[39m
+2024-09-22 23:42:36:4236 [32minfo[39m: [32mAccepting transfer on blockchain. Transfer ID: 0xaf2d64af30b2587c59d927d83920718a6e6633ad58a75dc18b4b6bb323ba8391, Distributor Address: 0xc57aa0e3253d506d1bbe6897a4b45f4a431927fa[39m
+2024-09-22 23:42:36:4236 [33mwarn[39m: [33mNo pending transfer found for ID: 0xaf2d64af30b2587c59d927d83920718a6e6633ad58a75dc18b4b6bb323ba8391[39m
+2024-09-22 23:48:14:4814 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-22 23:52:03:523 [32minfo[39m: [32mAccepting transfer on blockchain. Transfer ID: 0xac178c677c3cfadb8064ead2998ff40894a50039517906a0283bbd9bfff0c6fe, Distributor Address: 0xc57aa0e3253d506d1bbe6897a4b45f4a431927fa[39m
+2024-09-22 23:52:04:524 [33mwarn[39m: [33mNo pending transfer found for ID: 0xac178c677c3cfadb8064ead2998ff40894a50039517906a0283bbd9bfff0c6fe[39m
+2024-09-23 00:05:26:526 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-23 00:06:46:646 [32minfo[39m: [32mSyncing product with blockchain:[39m
+2024-09-23 00:06:46:646 [31merror[39m: [31mError syncing product with blockchain: Invalid product object. Missing required fields.[39m
+2024-09-23 00:07:13:713 [32minfo[39m: [32mAccepting transfer on blockchain. Transfer ID: 0xac178c677c3cfadb8064ead2998ff40894a50039517906a0283bbd9bfff0c6fe, Distributor Address: 0xc57aa0e3253d506d1bbe6897a4b45f4a431927fa[39m
+2024-09-23 00:07:13:713 [32minfo[39m: [32mFormatted Transfer ID: 0xac178c677c3cfadb8064ead2998ff40894a50039517906a0283bbd9bfff0c6fe[39m
+2024-09-23 00:07:13:713 [33mwarn[39m: [33mNo pending transfer found for ID: 0xac178c677c3cfadb8064ead2998ff40894a50039517906a0283bbd9bfff0c6fe[39m
+2024-09-23 00:26:25:2625 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-23 00:28:46:2846 [32minfo[39m: [32mAccepting transfer on blockchain. Transfer ID: 0xac178c677c3cfadb8064ead2998ff40894a50039517906a0283bbd9bfff0c6fe, Distributor Address: 0xc57aa0e3253d506d1bbe6897a4b45f4a431927fa[39m
+2024-09-23 00:28:46:2846 [32minfo[39m: [32mFormatted Transfer ID: 0xac178c677c3cfadb8064ead2998ff40894a50039517906a0283bbd9bfff0c6fe[39m
+2024-09-23 00:28:46:2846 [33mwarn[39m: [33mNo pending transfer found for ID: 0xac178c677c3cfadb8064ead2998ff40894a50039517906a0283bbd9bfff0c6fe[39m
+2024-09-23 00:42:04:424 [32minfo[39m: [32mAccepting transfer on blockchain. Transfer ID: 0xac178c677c3cfadb8064ead2998ff40894a50039517906a0283bbd9bfff0c6fe, Distributor Address: 0xc57aa0e3253d506d1bbe6897a4b45f4a431927fa[39m
+2024-09-23 00:42:04:424 [32minfo[39m: [32mFormatted Transfer ID: 0xac178c677c3cfadb8064ead2998ff40894a50039517906a0283bbd9bfff0c6fe[39m
+2024-09-23 00:42:04:424 [33mwarn[39m: [33mNo pending transfer found for ID: 0xac178c677c3cfadb8064ead2998ff40894a50039517906a0283bbd9bfff0c6fe[39m
+2024-09-23 00:58:52:5852 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-23 00:59:42:5942 [32minfo[39m: [32mChecking transfer status for transaction: 0xaf2d64af30b2587c59d927d83920718a6e6633ad58a75dc18b4b6bb323ba8391[39m
+2024-09-23 01:00:23:023 [32minfo[39m: [32mChecking transfer status for transaction: 0xaf2d64af30b2587c59d927d83920718a6e6633ad58a75dc18b4b6bb323ba8391[39m
+2024-09-23 01:01:22:122 [32minfo[39m: [32mGetting product from blockchain. Product ID: 0x0000000000000000000000000000000000000000000000000000000000000007[39m
+2024-09-23 01:01:22:122 [32minfo[39m: [32mProduct details:[39m
+2024-09-23 01:01:28:128 [32minfo[39m: [32mSyncing product with blockchain:[39m
+2024-09-23 01:01:28:128 [31merror[39m: [31mError syncing product with blockchain: Invalid product object. Missing required fields.[39m
+2024-09-23 01:02:11:211 [32minfo[39m: [32mSyncing product with blockchain:[39m
+2024-09-23 01:02:11:211 [31merror[39m: [31mError syncing product with blockchain: Invalid product object. Missing required fields.[39m
+2024-09-23 01:21:30:2130 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-23 01:21:57:2157 [32minfo[39m: [32mChecking transfer status for transaction: 0xaf2d64af30b2587c59d927d83920718a6e6633ad58a75dc18b4b6bb323ba8391[39m
+2024-09-23 01:27:25:2725 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-23 01:28:10:2810 [32minfo[39m: [32mChecking transfer status for transaction: 0xaf2d64af30b2587c59d927d83920718a6e6633ad58a75dc18b4b6bb323ba8391[39m
+2024-09-23 01:48:50:4850 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-23 01:49:42:4942 [32minfo[39m: [32mChecking transfer status for transaction: 0xe32bc54f4a277b6a8edb37d9d52c2841f35c44651469cf767a633097b1dfaa42[39m
+2024-09-23 01:49:48:4948 [32minfo[39m: [32mChecking transfer status for transaction: 0xac178c677c3cfadb8064ead2998ff40894a50039517906a0283bbd9bfff0c6fe[39m
+2024-09-23 01:59:26:5926 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-23 02:00:25:025 [32minfo[39m: [32mUpdating product info on blockchain. Product ID: 0x0000000000000000000000000000000000000000000000000000000000000008[39m
+2024-09-23 02:00:25:025 [32minfo[39m: [32mEstimated gas: 27718[39m
+2024-09-23 02:00:50:050 [32minfo[39m: [32mSyncing product with blockchain:[39m
+2024-09-23 02:00:50:050 [31merror[39m: [31mError syncing product with blockchain: Invalid product object. Missing required fields.[39m
+2024-09-23 02:07:10:710 [32minfo[39m: [32mUpdating product info on blockchain. Product ID: 0x000000000000000000000000000000000000000000000000000000000000000c[39m
+2024-09-23 02:07:10:710 [32minfo[39m: [32mEstimated gas: 27718[39m
+2024-09-23 02:12:12:1212 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-23 02:14:30:1430 [32minfo[39m: [32mSyncing product with blockchain:[39m
+2024-09-23 02:14:30:1430 [31merror[39m: [31mError syncing product with blockchain: Invalid product object. Missing required fields.[39m
+2024-09-23 02:16:45:1645 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-23 02:19:24:1924 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-23 02:23:01:231 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-23 02:27:00:270 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-23 02:36:28:3628 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-23 03:59:59:5959 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-23 04:50:33:5033 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-23 19:43:51:4351 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-23 20:33:16:3316 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-23 22:31:16:3116 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-23 22:35:13:3513 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-23 23:01:45:145 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-23 23:23:55:2355 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-23 23:25:10:2510 [32minfo[39m: [32mTransaction receipt retrieved:[39m
+2024-09-23 23:28:15:2815 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-23 23:31:05:315 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-23 23:34:55:3455 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-23 23:59:39:5939 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-24 00:41:06:416 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-24 00:47:27:4727 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-24 00:58:08:588 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-24 01:06:06:66 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-24 01:08:27:827 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-24 01:13:08:138 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-24 01:26:05:265 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-24 01:39:26:3926 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-24 01:48:44:4844 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-24 02:03:29:329 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-24 02:16:02:162 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-24 02:24:18:2418 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-24 02:34:40:3440 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-24 02:46:28:4628 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-24 02:46:47:4647 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-24 03:19:31:1931 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-24 03:22:32:2232 [32minfo[39m: [32mTransaction receipt retrieved:[39m
+2024-09-24 03:46:54:4654 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-24 06:23:23:2323 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-24 06:32:17:3217 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-24 06:32:37:3237 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-24 06:38:01:381 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-24 06:46:35:4635 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-24 06:50:58:5058 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-24 06:59:17:5917 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-24 07:10:49:1049 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-24 07:13:55:1355 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-24 16:54:44:5444 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-24 17:04:20:420 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-24 17:13:40:1340 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-24 17:23:40:2340 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-24 17:29:43:2943 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-24 17:38:11:3811 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-24 17:52:44:5244 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-24 18:05:25:525 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-24 21:16:26:1626 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-24 21:33:37:3337 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-24 22:41:24:4124 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-24 22:53:13:5313 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-24 23:11:48:1148 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-25 02:07:05:75 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-25 02:14:14:1414 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-25 02:31:14:3114 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-25 02:33:37:3337 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-25 02:40:40:4040 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-25 02:52:16:5216 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-25 02:57:21:5721 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-25 03:02:34:234 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-25 03:06:59:659 [32minfo[39m: [32mChecking transfer status for transaction: 0xbca1a580e9600b40a2f16f7b2b7d14c869317ddee35f1147d0d6c557a321d7e1[39m
+2024-09-25 03:07:05:75 [32minfo[39m: [32mChecking transfer status for transaction: 0x85dde9cd419f3cf67fbc7f2ec30dd392aea25c36864e6993e58d7569cd8aa292[39m
+2024-09-25 03:07:06:76 [32minfo[39m: [32mChecking transfer status for transaction: 0x7cd13ec55eb099ed968a206c6447997a8a685594c6a29d47ef30373ebc765628[39m
+2024-09-25 03:08:24:824 [32minfo[39m: [32mGetting product from blockchain. Product ID: 0x0000000000000000000000000000000000000000000000000000000000000002[39m
+2024-09-25 03:08:24:824 [32minfo[39m: [32mFormatted Product ID: 0x0000000000000000000000000000000000000000000000000000000000000002[39m
+2024-09-25 03:08:25:825 [32minfo[39m: [32mRaw product data from blockchain:[39m
+2024-09-25 03:08:25:825 [32minfo[39m: [32mFormatted product details:[39m
+2024-09-25 03:40:34:4034 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-25 03:46:28:4628 [32minfo[39m: [32mGetting product from blockchain. Product ID: 0x0000000000000000000000000000000000000000000000000000000000000002[39m
+2024-09-25 03:46:28:4628 [32minfo[39m: [32mFormatted Product ID: 0x0000000000000000000000000000000000000000000000000000000000000002[39m
+2024-09-25 03:46:29:4629 [32minfo[39m: [32mRaw product data from blockchain:[39m
+2024-09-25 03:46:29:4629 [32minfo[39m: [32mFormatted product details:[39m
+2024-09-25 04:31:22:3122 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-25 04:36:19:3619 [32minfo[39m: [32mChecking transfer status for transaction: 0xe421beb09ebeb41f0c57be49ce486aac39ec347486c832683d418e9c28847bad[39m
+2024-09-25 04:36:21:3621 [32minfo[39m: [32mChecking transfer status for transaction: 0xe421beb09ebeb41f0c57be49ce486aac39ec347486c832683d418e9c28847bad[39m
+2024-09-25 04:36:29:3629 [32minfo[39m: [32mChecking transfer status for transaction: 0x4c00cc460d745dd32fefcfa7fb2457d61ca3fdb5c471a7c7a74e06f7859ef1b4[39m
+2024-09-25 04:36:30:3630 [32minfo[39m: [32mChecking transfer status for transaction: 0x1e37a55f357502f0c274c97ffbff738fb981b24c51be10fc3607e6a80c8f0b54[39m
+2024-09-25 04:36:43:3643 [32minfo[39m: [32mGetting product from blockchain. Product ID: 0x0000000000000000000000000000000000000000000000000000000000000011[39m
+2024-09-25 04:36:43:3643 [32minfo[39m: [32mFormatted Product ID: 0x0000000000000000000000000000000000000000000000000000000000000011[39m
+2024-09-25 04:36:43:3643 [32minfo[39m: [32mRaw product data from blockchain:[39m
+2024-09-25 04:36:43:3643 [32minfo[39m: [32mFormatted product details:[39m
+2024-09-25 04:37:30:3730 [32minfo[39m: [32mChecking transfer status for transaction: 0xb3488f6a0c56e75a44b89e558b9ea8d880e85194ede2e8f4d453120eb7cccbeb[39m
+2024-09-25 04:37:56:3756 [32minfo[39m: [32mChecking transfer status for transaction: 0x2df0069ec52beb7024319966ea0c8460b605d9ece660468173799897dea67907[39m
+2024-09-25 04:43:03:433 [32minfo[39m: [32mGetting product from blockchain. Product ID: 0x0000000000000000000000000000000000000000000000000000000000000011[39m
+2024-09-25 04:43:03:433 [32minfo[39m: [32mFormatted Product ID: 0x0000000000000000000000000000000000000000000000000000000000000011[39m
+2024-09-25 04:43:03:433 [32minfo[39m: [32mRaw product data from blockchain:[39m
+2024-09-25 04:43:03:433 [32minfo[39m: [32mFormatted product details:[39m
+2024-09-25 05:06:59:659 [32minfo[39m: [32mGetting product from blockchain. Product ID: 0x0000000000000000000000000000000000000000000000000000000000000011[39m
+2024-09-25 05:06:59:659 [32minfo[39m: [32mFormatted Product ID: 0x0000000000000000000000000000000000000000000000000000000000000011[39m
+2024-09-25 05:06:59:659 [32minfo[39m: [32mRaw product data from blockchain:[39m
+2024-09-25 05:06:59:659 [32minfo[39m: [32mFormatted product details:[39m
+2024-09-25 13:16:30:1630 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-25 13:17:01:171 [32minfo[39m: [32mChecking transfer status for transaction: 0xca1c9bc0a07d3492ab2cd8c5b128028d72eb999c8a68337c463de4dd6743a9c2[39m
+2024-09-25 13:19:04:194 [32minfo[39m: [32mGetting product from blockchain. Product ID: 0x0000000000000000000000000000000000000000000000000000000000000002[39m
+2024-09-25 13:19:04:194 [32minfo[39m: [32mFormatted Product ID: 0x0000000000000000000000000000000000000000000000000000000000000002[39m
+2024-09-25 13:19:04:194 [32minfo[39m: [32mRaw product data from blockchain:[39m
+2024-09-25 13:19:04:194 [32minfo[39m: [32mFormatted product details:[39m
+2024-09-25 13:28:06:286 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-25 13:28:43:2843 [32minfo[39m: [32mGetting product from blockchain. Product ID: 0x0000000000000000000000000000000000000000000000000000000000000011[39m
+2024-09-25 13:28:43:2843 [32minfo[39m: [32mFormatted Product ID: 0x0000000000000000000000000000000000000000000000000000000000000011[39m
+2024-09-25 13:28:43:2843 [32minfo[39m: [32mRaw product data from blockchain:[39m
+2024-09-25 13:28:43:2843 [32minfo[39m: [32mFormatted product details:[39m
+2024-09-25 13:45:34:4534 [32minfo[39m: [32mGetting product from blockchain. Product ID: 0x0000000000000000000000000000000000000000000000000000000000000011[39m
+2024-09-25 13:45:34:4534 [32minfo[39m: [32mFormatted Product ID: 0x0000000000000000000000000000000000000000000000000000000000000011[39m
+2024-09-25 13:45:34:4534 [32minfo[39m: [32mRaw product data from blockchain:[39m
+2024-09-25 13:45:34:4534 [32minfo[39m: [32mFormatted product details:[39m
+2024-09-25 13:57:04:574 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-25 14:03:21:321 [32minfo[39m: [32mGetting product from blockchain. Product ID: 0x0000000000000000000000000000000000000000000000000000000000000011[39m
+2024-09-25 14:03:21:321 [32minfo[39m: [32mFormatted Product ID: 0x0000000000000000000000000000000000000000000000000000000000000011[39m
+2024-09-25 14:03:22:322 [32minfo[39m: [32mRaw product data from blockchain:[39m
+2024-09-25 14:03:22:322 [32minfo[39m: [32mFormatted product details:[39m
+2024-09-25 14:29:54:2954 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-25 14:47:34:4734 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-25 15:06:34:634 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-25 16:23:53:2353 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-25 16:51:40:5140 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-25 17:34:56:3456 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-25 17:52:31:5231 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-25 18:20:57:2057 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-26 00:15:32:1532 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-26 00:21:36:2136 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-26 00:33:56:3356 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-26 00:44:56:4456 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-26 00:55:16:5516 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-26 02:37:34:3734 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-26 02:50:51:5051 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-26 02:59:40:5940 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-26 03:10:57:1057 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-26 03:12:04:124 [32minfo[39m: [32mUpdating product info on blockchain. Product ID: 0x0000000000000000000000000000000000000000000000000000000000000011[39m
+2024-09-26 03:12:04:124 [32minfo[39m: [32mEstimated gas: 31397[39m
+2024-09-26 03:13:01:131 [32minfo[39m: [32mTransaction sent. Receipt:[39m
+2024-09-26 03:13:01:131 [32minfo[39m: [32mProduct info updated successfully on blockchain. Transaction receipt:[39m
+2024-09-26 04:20:30:2030 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-26 04:22:50:2250 [32minfo[39m: [32mUpdating product info on blockchain. Product ID: 0x000000000000000000000000000000000000000000000000000000000000000e[39m
+2024-09-26 04:22:50:2250 [32minfo[39m: [32mEstimated gas: 32263[39m
+2024-09-26 04:25:36:2536 [32minfo[39m: [32mTransaction sent. Receipt:[39m
+2024-09-26 04:25:36:2536 [32minfo[39m: [32mProduct info updated successfully on blockchain. Transaction receipt:[39m
+2024-09-26 04:42:41:4241 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-26 04:44:19:4419 [32minfo[39m: [32mUpdating product info on blockchain. Product ID: 0x0000000000000000000000000000000000000000000000000000000000000009[39m
+2024-09-26 04:44:19:4419 [32minfo[39m: [32mEstimated gas: 31457[39m
+2024-09-26 04:44:48:4448 [32minfo[39m: [32mTransaction sent. Receipt:[39m
+2024-09-26 04:44:48:4448 [32minfo[39m: [32mProduct info updated successfully on blockchain. Transaction receipt:[39m
+2024-09-26 05:14:46:1446 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-26 05:16:31:1631 [32minfo[39m: [32mUpdating product info on blockchain. Product ID: 0x000000000000000000000000000000000000000000000000000000000000000d[39m
+2024-09-26 05:16:31:1631 [32minfo[39m: [32mEstimated gas: 32191[39m
+2024-09-26 05:18:24:1824 [32minfo[39m: [32mTransaction sent. Receipt:[39m
+2024-09-26 05:18:24:1824 [32minfo[39m: [32mProduct info updated successfully on blockchain. Transaction receipt:[39m
+2024-09-26 05:44:00:440 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-26 06:07:53:753 [32minfo[39m: [32mUpdating product info on blockchain. Product ID: 0x000000000000000000000000000000000000000000000000000000000000000c[39m
+2024-09-26 06:07:53:753 [32minfo[39m: [32mEstimated gas: 32299[39m
+2024-09-26 06:07:59:759 [32minfo[39m: [32mTransaction sent. Receipt:[39m
+2024-09-26 06:07:59:759 [32minfo[39m: [32mProduct info updated successfully on blockchain. Transaction receipt:[39m
+2024-09-26 06:54:01:541 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-26 07:04:14:414 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-26 07:28:04:284 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-26 07:29:42:2942 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-26 18:20:35:2035 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-26 18:22:58:2258 [32minfo[39m: [32mUpdating product info on blockchain. Product ID: 0x0000000000000000000000000000000000000000000000000000000000000008[39m
+2024-09-26 18:22:58:2258 [32minfo[39m: [32mEstimated gas: 32239[39m
+2024-09-26 18:23:25:2325 [32minfo[39m: [32mTransaction sent. Receipt:[39m
+2024-09-26 18:23:25:2325 [32minfo[39m: [32mProduct info updated successfully on blockchain. Transaction receipt:[39m
+2024-09-26 18:37:36:3736 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-26 18:48:44:4844 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-26 19:36:59:3659 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-26 20:23:24:2324 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-26 20:54:15:5415 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-26 23:55:49:5549 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-27 00:28:59:2859 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-27 00:45:48:4548 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-27 00:55:03:553 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-27 03:03:59:359 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-27 05:13:34:1334 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-27 06:55:34:5534 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-27 07:03:18:318 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-27 07:08:07:87 [32minfo[39m: [32mChecking transfer status for transaction: 0xe0581b671ad6cd6362418bb2ee1a2e66ec9dc93cbc585b012a78079615349a0d[39m
+2024-09-27 07:47:52:4752 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-27 16:43:19:4319 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-27 16:58:43:5843 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-27 17:03:48:348 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-27 17:15:31:1531 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-27 17:41:19:4119 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-27 17:57:20:5720 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-27 17:58:12:5812 [32minfo[39m: [32mRetailer updating product info on blockchain. Product ID: 0x0000000000000000000000000000000000000000000000000000000000000011[39m
+2024-09-27 17:58:12:5812 [32minfo[39m: [32mEstimated gas for retailer product update: 32011[39m
+2024-09-27 17:58:26:5826 [32minfo[39m: [32mRetailer updating product info on blockchain. Product ID: 0x0000000000000000000000000000000000000000000000000000000000000011[39m
+2024-09-27 17:58:26:5826 [32minfo[39m: [32mEstimated gas for retailer product update: 32011[39m
+2024-09-27 17:58:36:5836 [32minfo[39m: [32mTransaction sent. Receipt:[39m
+2024-09-27 17:58:36:5836 [32minfo[39m: [32mProduct info updated successfully by retailer on blockchain. Transaction receipt:[39m
+2024-09-27 17:58:37:5837 [32minfo[39m: [32mTransaction sent. Receipt:[39m
+2024-09-27 17:58:37:5837 [32minfo[39m: [32mProduct info updated successfully by retailer on blockchain. Transaction receipt:[39m
+2024-09-27 18:12:40:1240 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-27 18:13:43:1343 [32minfo[39m: [32mRetailer updating product info on blockchain. Product ID: 0x0000000000000000000000000000000000000000000000000000000000000011[39m
+2024-09-27 18:13:44:1344 [32minfo[39m: [32mEstimated gas for retailer product update: 32023[39m
+2024-09-27 18:14:37:1437 [32minfo[39m: [32mTransaction sent. Receipt:[39m
+2024-09-27 18:14:37:1437 [32minfo[39m: [32mProduct info updated successfully by retailer on blockchain. Transaction receipt:[39m
+2024-09-27 18:21:34:2134 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-27 18:30:32:3032 [32minfo[39m: [32mUpdating product info on blockchain. Product ID: 0x0000000000000000000000000000000000000000000000000000000000000002[39m
+2024-09-27 18:30:32:3032 [32minfo[39m: [32mEstimated gas: 32035[39m
+2024-09-27 18:30:37:3037 [32minfo[39m: [32mTransaction sent. Receipt:[39m
+2024-09-27 18:30:37:3037 [32minfo[39m: [32mProduct info updated successfully on blockchain. Transaction receipt:[39m
+2024-09-27 18:34:53:3453 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-27 18:35:35:3535 [32minfo[39m: [32mRetailer updating product info on blockchain. Product ID: 0x0000000000000000000000000000000000000000000000000000000000000011[39m
+2024-09-27 18:35:35:3535 [32minfo[39m: [32mEstimated gas for retailer product update: 31998[39m
+2024-09-27 18:35:38:3538 [32minfo[39m: [32mTransaction sent. Receipt:[39m
+2024-09-27 18:35:38:3538 [32minfo[39m: [32mProduct info updated successfully by retailer on blockchain. Transaction receipt:[39m
+2024-09-27 18:41:16:4116 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-27 18:42:12:4212 [32minfo[39m: [32mChecking transfer status for transaction: 0xd02e1716fbbfca147a7724c1c018b84f1c55421d46a03416ef36f71eff9c6413[39m
+2024-09-27 18:43:10:4310 [32minfo[39m: [32mRetailer updating product info on blockchain. Product ID: 0x0000000000000000000000000000000000000000000000000000000000000002[39m
+2024-09-27 18:43:10:4310 [32minfo[39m: [32mEstimated gas for retailer product update: 32131[39m
+2024-09-27 18:43:25:4325 [32minfo[39m: [32mTransaction sent. Receipt:[39m
+2024-09-27 18:43:25:4325 [32minfo[39m: [32mProduct info updated successfully by retailer on blockchain. Transaction receipt:[39m
+2024-09-27 22:27:08:278 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-27 22:50:18:5018 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-27 22:58:55:5855 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-27 23:01:48:148 [32minfo[39m: [32mRetailer updating product info on blockchain. Product ID: 0x0000000000000000000000000000000000000000000000000000000000000011[39m
+2024-09-27 23:01:48:148 [32minfo[39m: [32mEstimated gas for retailer product update: 31349[39m
+2024-09-27 23:02:13:213 [32minfo[39m: [32mTransaction sent. Receipt:[39m
+2024-09-27 23:02:13:213 [32minfo[39m: [32mProduct info updated successfully by retailer on blockchain. Transaction receipt:[39m
+2024-09-27 23:10:40:1040 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-27 23:16:46:1646 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-27 23:18:08:188 [32minfo[39m: [32mRetailer updating product info: 0x0000000000000000000000000000000000000000000000000000000000000011[39m
+2024-09-27 23:18:08:188 [32minfo[39m: [32mEstimated gas:[39m
+2024-09-27 23:18:25:1825 [32minfo[39m: [32mTransaction sent. Receipt:[39m
+2024-09-27 23:18:25:1825 [32minfo[39m: [32mProduct info updated by retailer. Transaction receipt:[39m
+2024-09-27 23:24:21:2421 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-27 23:25:29:2529 [32minfo[39m: [32mRetailer updating product info: 0x0000000000000000000000000000000000000000000000000000000000000011[39m
+2024-09-27 23:25:29:2529 [32minfo[39m: [32mEstimated gas:[39m
+2024-09-27 23:25:49:2549 [32minfo[39m: [32mTransaction sent. Receipt:[39m
+2024-09-27 23:25:49:2549 [32minfo[39m: [32mProduct info updated by retailer. Transaction receipt:[39m
+2024-09-27 23:27:59:2759 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-27 23:42:45:4245 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-27 23:44:31:4431 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-27 23:50:02:502 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-27 23:54:20:5420 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-27 23:58:04:584 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-28 00:02:57:257 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-28 00:07:28:728 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-28 00:15:30:1530 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-28 00:28:23:2823 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-28 00:36:29:3629 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-28 00:41:14:4114 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-28 01:53:21:5321 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-28 02:14:23:1423 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-28 02:23:50:2350 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-28 02:41:36:4136 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-28 02:51:49:5149 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-28 03:00:57:057 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-28 03:02:42:242 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-28 03:16:52:1652 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-28 03:28:00:280 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-28 03:51:58:5158 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-28 03:56:21:5621 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-28 04:22:23:2223 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-28 04:24:17:2417 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-30 05:46:10:4610 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-30 06:37:07:377 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-30 07:08:55:855 [32minfo[39m: [32mConnected to blockchain node[39m
+2024-09-30 07:33:54:3354 [32minfo[39m: [32mConnected to blockchain node[39m

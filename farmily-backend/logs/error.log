@@ -1,0 +1,51 @@
+2024-09-15 01:43:54:4354 [31merror[39m: [31mError in estimateGas:[39m
+2024-09-15 01:43:54:4354 [31merror[39m: [31mError initiating transfer on blockchain: invalid address (argument="address", value=undefined, code=INVALID_ARGUMENT, version=address/5.7.0) (argument="_to", value=undefined, code=INVALID_ARGUMENT, version=abi/5.7.0)[39m
+2024-09-15 01:47:01:471 [31merror[39m: [31mError in estimateGas:[39m
+2024-09-15 01:47:01:471 [31merror[39m: [31mError initiating transfer on blockchain: invalid address (argument="address", value=undefined, code=INVALID_ARGUMENT, version=address/5.7.0) (argument="_to", value=undefined, code=INVALID_ARGUMENT, version=abi/5.7.0)[39m
+2024-09-15 02:07:08:78 [31merror[39m: [31mError in estimateGas:[39m
+2024-09-15 02:07:08:78 [31merror[39m: [31mError initiating transfer on blockchain: invalid address (argument="address", value="UID_66c28f3b44707e0a68970f26", code=INVALID_ARGUMENT, version=address/5.7.0) (argument="_to", value="UID_66c28f3b44707e0a68970f26", code=INVALID_ARGUMENT, version=abi/5.7.0)[39m
+2024-09-15 02:35:02:352 [31merror[39m: [31mError in estimateGas:[39m
+2024-09-15 02:35:02:352 [31merror[39m: [31mError initiating transfer on blockchain: Returned error: execution reverted: Only the current owner can initiate transfer[39m
+2024-09-15 23:55:25:5525 [31merror[39m: [31mError in estimateGas:[39m
+2024-09-15 23:55:25:5525 [31merror[39m: [31mError initiating transfer on blockchain: Returned error: execution reverted: Recipient not registered[39m
+2024-09-17 02:37:11:3711 [31merror[39m: [31mError cancelling transfer on blockchain: Cannot read properties of undefined (reading 'toString')[39m
+2024-09-17 02:41:59:4159 [31merror[39m: [31mError cancelling transfer on blockchain: Cannot read properties of undefined (reading 'toString')[39m
+2024-09-17 02:42:10:4210 [31merror[39m: [31mError cancelling transfer on blockchain: Cannot read properties of undefined (reading 'toString')[39m
+2024-09-17 02:45:15:4515 [31merror[39m: [31mError cancelling transfer on blockchain: Cannot read properties of undefined (reading 'toString')[39m
+2024-09-17 02:45:28:4528 [31merror[39m: [31mError cancelling transfer on blockchain: Cannot read properties of undefined (reading 'toString')[39m
+2024-09-17 03:23:42:2342 [31merror[39m: [31mError in estimateGas:[39m
+2024-09-17 03:23:45:2345 [31merror[39m: [31mError in estimateGas:[39m
+2024-09-17 03:29:36:2936 [31merror[39m: [31mError in estimateGas:[39m
+2024-09-17 03:40:35:4035 [31merror[39m: [31mError in estimateGas:[39m
+2024-09-17 03:45:44:4544 [31merror[39m: [31mError in estimateGas:[39m
+2024-09-17 03:56:10:5610 [31merror[39m: [31mError in estimateGas:[39m
+2024-09-17 05:14:06:146 [31merror[39m: [31mError in estimateGas:[39m
+2024-09-17 05:20:38:2038 [31merror[39m: [31mError in estimateGas:[39m
+2024-09-17 15:27:13:2713 [31merror[39m: [31mError estimating gas: Returned error: execution reverted: Only the current owner can initiate transfer[39m
+2024-09-17 15:27:13:2713 [31merror[39m: [31mError initiating transfer on blockchain: Failed to estimate gas. Please check the transaction details.[39m
+2024-09-17 15:28:56:2856 [31merror[39m: [31mError in estimateGas:[39m
+2024-09-17 15:28:56:2856 [31merror[39m: [31mError initiating transfer on blockchain: Returned error: execution reverted: Only the current owner can initiate transfer[39m
+2024-09-17 15:34:42:3442 [31merror[39m: [31mError in estimateGas:[39m
+2024-09-17 15:34:42:3442 [31merror[39m: [31mError initiating transfer on blockchain: Returned error: execution reverted: Only the current owner can initiate transfer[39m
+2024-09-17 15:42:18:4218 [31merror[39m: [31mError in estimateGas:[39m
+2024-09-17 15:42:18:4218 [31merror[39m: [31mError initiating transfer on blockchain: Returned error: execution reverted: Only the current owner can initiate transfer[39m
+2024-09-17 15:47:00:470 [31merror[39m: [31mError in estimateGas:[39m
+2024-09-17 15:47:00:470 [31merror[39m: [31mError initiating transfer on blockchain: Returned error: execution reverted: Only the current owner can initiate transfer[39m
+2024-09-20 00:39:00:390 [31merror[39m: [31mError in estimateGas:[39m
+2024-09-20 00:39:00:390 [31merror[39m: [31mError in sendTransaction:[39m
+2024-09-20 00:39:00:390 [31merror[39m: [31mError accepting transfer on blockchain: Returned error: execution reverted: Only the intended recipient can accept the transfer[39m
+2024-09-20 00:45:42:4542 [31merror[39m: [31mError in estimateGas:[39m
+2024-09-20 00:45:42:4542 [31merror[39m: [31mError in sendTransaction:[39m
+2024-09-20 00:45:42:4542 [31merror[39m: [31mError accepting transfer on blockchain: invalid arrayify value (argument="value", value="66ea031babd5ff62046103460000000000000000000000000000000000000000", code=INVALID_ARGUMENT, version=bytes/5.7.0)[39m
+2024-09-20 00:51:21:5121 [31merror[39m: [31mError in estimateGas:[39m
+2024-09-20 00:51:21:5121 [31merror[39m: [31mError in sendTransaction:[39m
+2024-09-20 00:51:21:5121 [31merror[39m: [31mError accepting transfer on blockchain: invalid arrayify value (argument="value", value="66ea031babd5ff62046103460000000000000000000000000000000000000000", code=INVALID_ARGUMENT, version=bytes/5.7.0)[39m
+2024-09-20 01:04:28:428 [31merror[39m: [31mError accepting transfer on blockchain: Returned error: execution reverted: Only the intended recipient can accept the transfer[39m
+2024-09-20 01:35:04:354 [31merror[39m: [31mError accepting transfer on blockchain: Returned error: execution reverted: No pending transfer for this transfer ID[39m
+2024-09-20 01:46:43:4643 [31merror[39m: [31mError accepting transfer on blockchain: Returned error: execution reverted: No pending transfer for this transfer ID[39m
+2024-09-21 04:12:44:1244 [31merror[39m: [31mError checking transfer status on blockchain: contract.methods.getTransfer is not a function[39m
+2024-09-23 00:06:46:646 [31merror[39m: [31mError syncing product with blockchain: Invalid product object. Missing required fields.[39m
+2024-09-23 01:01:28:128 [31merror[39m: [31mError syncing product with blockchain: Invalid product object. Missing required fields.[39m
+2024-09-23 01:02:11:211 [31merror[39m: [31mError syncing product with blockchain: Invalid product object. Missing required fields.[39m
+2024-09-23 02:00:50:050 [31merror[39m: [31mError syncing product with blockchain: Invalid product object. Missing required fields.[39m
+2024-09-23 02:14:30:1430 [31merror[39m: [31mError syncing product with blockchain: Invalid product object. Missing required fields.[39m
